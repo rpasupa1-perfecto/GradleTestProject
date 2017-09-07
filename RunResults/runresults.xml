@@ -1,0 +1,119 @@
+<Results>
+    <GeneralInfo>
+        <Name/>
+        <RunStartTime>2017-03-06 12:02:00</RunStartTime>
+        <Timezone>Eastern Standard Time</Timezone>
+        <OrchestrationToolName>JUnit</OrchestrationToolName>
+        <OrchestrationToolVersion/>
+        <ReportTitle>LeanFT Report</ReportTitle>
+    </GeneralInfo>
+    <ReportNode type="Run">
+        <Data>
+            <Name>Run Results</Name>
+            <Description><![CDATA[ ]]></Description>
+            <StartTime>2017-03-06 12:02:00</StartTime>
+            <Result>Passed</Result>
+            <Links/>
+            <Duration>38</Duration>
+            <Extension>
+                <Any>
+                    <IconKey>Run</IconKey>
+                    <IsHtmlErrorText>true</IsHtmlErrorText>
+                </Any>
+            </Extension>
+            <Environment>
+                <OSInfo><![CDATA[Microsoft Windows NT 6.2.9200.0]]></OSInfo>
+                <HostName><![CDATA[DESKTOP-REEGCHG]]></HostName>
+                <NumberOfCores>2</NumberOfCores>
+                <CpuInfo/>
+                <TotalMemory>6047</TotalMemory>
+                <Locale><![CDATA[en-US]]></Locale>
+                <Timezone>Eastern Standard Time</Timezone>
+                <User>Raj</User>
+            </Environment>
+            <TestedApplication/>
+            <ToolName>LeanFT</ToolName>
+            <ToolVersion><![CDATA[14.0]]></ToolVersion>
+        </Data>
+        <ReportNode type="Suite">
+            <Data>
+                <Name>LeanFTDemo</Name>
+                <Description/>
+                <StartTime>2017-03-06 12:02:00</StartTime>
+                <Result>Passed</Result>
+                <Links/>
+                <Duration>38</Duration>
+                <Extension>
+                    <Any>
+                        <IconKey>Suite</IconKey>
+                        <IsHtmlErrorText>true</IsHtmlErrorText>
+                    </Any>
+                </Extension>
+            </Data>
+            <ReportNode type="TestContainer">
+                <Data>
+                    <Name><![CDATA[Rewards - iPhone 6]]></Name>
+                    <Description/>
+                    <StartTime>2017-03-06 12:02:00</StartTime>
+                    <Result>Passed</Result>
+                    <Links/>
+                    <Duration>38</Duration>
+                    <Extension>
+                        <Any>
+                            <IconKey>TestContainer</IconKey>
+                            <IsHtmlErrorText>true</IsHtmlErrorText>
+                        </Any>
+                    </Extension>
+                </Data>
+                <ReportNode type="Package">
+                    <Data>
+                        <Name><![CDATA[org.mobile.leanft.tests]]></Name>
+                        <Description><![CDATA[Version: N/A]]></Description>
+                        <StartTime>2017-03-06 12:02:00</StartTime>
+                        <Result>Passed</Result>
+                        <Links/>
+                        <Duration>38</Duration>
+                        <Extension>
+                            <Any>
+                                <IconKey>Package</IconKey>
+                                <IsHtmlErrorText>true</IsHtmlErrorText>
+                            </Any>
+                        </Extension>
+                    </Data>
+                    <ReportNode type="Class">
+                        <Data>
+                            <Name><![CDATA[org.mobile.leanft.tests.LeanFtTest]]></Name>
+                            <Description/>
+                            <StartTime>2017-03-06 12:02:00</StartTime>
+                            <Result>Passed</Result>
+                            <Links/>
+                            <Duration>38</Duration>
+                            <Extension>
+                                <Any>
+                                    <IconKey>Class</IconKey>
+                                    <IsHtmlErrorText>true</IsHtmlErrorText>
+                                </Any>
+                            </Extension>
+                        </Data>
+                        <ReportNode type="Test">
+                            <Data>
+                                <Name>test</Name>
+                                <Description/>
+                                <StartTime>2017-03-06 12:02:35</StartTime>
+                                <Result>Passed</Result>
+                                <Links/>
+                                <Duration>3</Duration>
+                                <Extension>
+                                    <Any>
+                                        <IconKey>Test</IconKey>
+                                        <IsHtmlErrorText>true</IsHtmlErrorText>
+                                    </Any>
+                                </Extension>
+                            </Data>
+                        </ReportNode>
+                    </ReportNode>
+                </ReportNode>
+            </ReportNode>
+        </ReportNode>
+    </ReportNode>
+</Results>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="testList" parallel="tests" thread-count="1">	
+
+	<!-- Global Parameters -->	
+	<parameter name="URL"  value="ps.perfectomobile.com"/>	
+	<parameter name="user" value="rajp@perfectomobile.com"/>
+	<parameter name="pass" value="Perfecto123"/>
+	<parameter name="iOS_XpathPropfile" value="src/test/resources/iOS_Xpath.properties"/>
+	
+	<!-- Automation & Debug -->
+	<parameter name="RunMode"  value="Debug"/>   
+	<parameter name="enableLogs"  value="Enable"/>   	
+	<parameter name="installApp"  value="false"/>   
+
+
+
+
+	<test name="PerfectoReportiumExample">
+		<!--AppiumAndroid/AppiumIOS/RemoteWebDriver -->
+		<parameter name="deviceName" value="41EEF156EA10EDAB41632651F7AD2A4C4CB502ED"/>
+		<parameter name="driver"  value="AppiumIOS"/>     
+		<parameter name="bundleID"  value="com.kohls.enterprise.iphone"/> 			
+		<classes>
+			<class name="org.mobile.mobileAssureFramework.ReportiumTest" />
+		</classes>
+	</test>
+	
+
+</suite> 
+ 

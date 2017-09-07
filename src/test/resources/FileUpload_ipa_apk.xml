@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="testList" parallel="tests" thread-count="1">	
+
+	<!-- Global Parameters -->	
+	<parameter name="URL"  value="ps.perfectomobile.com"/>	
+	<parameter name="user" value="rajp@perfectomobile.com"/>
+	<parameter name="pass" value="Perfecto123"/>
+	<parameter name="iOS_XpathPropfile" value="src/test/resources/iOS_Xpath.properties"/>
+	
+	<!-- Automation & Debug -->
+	<parameter name="RunMode"  value="Debug"/>   
+	<parameter name="enableLogs"  value="Enable"/>   	
+	<parameter name="installApp"  value="false"/>   
+	
+	<!-- Uploading ipa/apk files to Perfecto -->
+	<parameter name="mediaRepo" value="PRIVATE:Raj/"/>
+
+	<test name="PerfectoReportiumExample">
+		
+		<!--AppiumAndroid/AppiumIOS/RemoteWebDriver -->
+		<parameter name="deviceName" value="3C596BAE91226273BD652CF7920466130F8A276A"/>
+		<parameter name="driver"  value="AppiumIOS"/> 
+		<!-- if not an app, you need to pass in null value  -->   
+	 	<parameter name="bundleID"  value=""/> 			
+		<classes>
+			<class name="org.mobile.mobileAssureFramework.ipaApkFileUpload" />
+		</classes>
+	</test>
+
+
+</suite> 
+ 

@@ -1,0 +1,153 @@
+/* The + sign grabs the latest version of  */
+String perfectoDriverVer = '9.+'
+String perfectoReportiumDriver = '1.1.5'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'distribution'
+
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+    /* Adds all java source file to the generated .jar file */
+    	//from sourceSets.main.allSource
+}
+
+repositories {
+	/* Maven Central Jars */
+    mavenCentral()
+    
+    /* Perfecto Central Jars */
+    maven {url "http://repository-perfectomobile.forge.cloudbees.com/public/" }
+    
+    /* QMetry Automation Framework */
+    maven {url "https://qmetry.github.io/qaf/dist"}
+    
+    maven {url "http://repository.jboss.org/maven2/"}
+    
+}
+
+dependencies {
+	/* Types that extend and augment the Java Collections Framework. */
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+   
+    /* JUnit - JUnit is a unit testing framework for Java, created by Erich Gamma and Kent Beck. */
+    compile group: 'junit', name: 'junit', version: '4.+'
+   
+    /* TestNG - Testing Framework for Java */
+ 	compile 'org.testng:testng:' + '6.+'    
+ //	compile 'org.testng:testng:' + '6.9.10'
+  
+   
+    /* Perfecto Mobile Dependency */
+    compile 'com.perfectomobile:pm-webdriver:' + perfectoDriverVer
+    compile 'com.perfectomobile:http-client:' + perfectoDriverVer
+    
+    /*Perfecto Reportium Jar */
+     compile 'com.perfecto.reporting-sdk:reportium-testng:' + perfectoReportiumDriver
+    
+    /* Appium iOS/Android-Driver 4.0.0 - Release: Date May 2016 */
+	compile group: 'io.appium', name: 'java-client', version: '4.+'
+	
+    /* httpcore-4.+  & httpclient-4. */
+    compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.+'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.+'
+	
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.+'
+	compile group: 'commons-io', name: 'commons-io', version: '2.+'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
+	
+	/* Selenium automates browsers Testing. Next Version is 3.+ */
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '2.53.1'	
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '2.53.1'
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '2.53.1'
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '2.53.1'
+	
+	/* Logging Framework */
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.+'
+	
+	/* XML Processing */
+	compile group: 'dom4j', name: 'dom4j', version: '1.+'
+	
+	/* Json library */
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.+'
+	
+	/* Guava is a suite of core and expanded libraries that include utility classes, google's collections, io classes, and much much more. */
+	compile group: 'com.google.guava', name: 'guava', version: '19.0'
+	
+	/* Core annotations used for value types, used by Jackson data binding package. */
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.+'
+	/* Core Jackson abstractions, basic JSON streaming API implementation */
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.+'
+	/* General data-binding functionality for Jackson: works on core streaming API */
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.+'
+
+	/* Jaxen is a universal Java XPath engine. */
+	compile group: 'jaxen', name: 'jaxen', version: '1.+'
+
+	/* JCL 1.1.1 implemented over SLF4J */
+	compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.+'
+
+	/* JSON is a light-weight, language independent, data interchange format. See http://www.JSON.org/  */
+	compile group: 'org.json', name: 'json', version: '20160810'
+	
+	/* logback-core module */
+	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.+'
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+	
+	
+	/* QMetry Automation Framework Jar */
+	//compile group: 'com.qmetry', name: 'qaf', version: '2.+'
+	//compile group: 'com.qmetry', name: 'qaf-support', version: '2.+'
+//	compile group: 'javax.media', name: 'jai_core', version: '1.+'
+	compile group: 'com.sun.media', name: 'jai-codec', version: '1.+'
+
+	/* Extra Jars */
+////	compile group: 'org.apache.poi', name: 'poi', version: '3.7'
+//	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+//	compile 'org.seleniumhq.selenium:selenium-server:2.53.1'
+ //   compile 'com.codeborne:phantomjsdriver:1.+'
+ //   compile 'org.apache.poi:poi:3.14'
+ //   compile 'org.apache.poi:poi-ooxml:3.14'
+//    compile 'org.apache.poi:poi-ooxml-schemas:3.14'
+//    compile 'javax.mail:mail:1.4.7'
+//    compile 'org.apache.pdfbox:pdfbox:1.8.10'
+//    compile 'org.apache.xmlbeans:xmlbeans:2.6.0'
+//    compile 'org.ini4j:ini4j:0.5.4'
+    
+     /* local project jars */
+	compile fileTree(dir: 'libs', include: '*.jar')    
+}
+
+
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+test {
+	useTestNG() {
+    	useDefaultListeners = true
+    	suiteXmlFiles << new File("src/test/resources/ReportiumTest.xml")
+    	setSuiteXmlFiles (suiteXmlFiles) 
+    }
+}
+
+/* Verify all jar dependency */
+task listJars {
+	configurations.compile.each { 
+		File file -> println file.name 
+	}
+}
+
+
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.2.1'
+}

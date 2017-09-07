@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="10" name="LeanFTDemo" parallel="tests">
+	 
+	<test name="Rewards - iPhone 6">
+		<parameter name="targetEnvironment" value="iPhone 6" />
+		<classes>
+			<class name="org.mobile.leanft.tests.LeanFtTest"/>
+		</classes>
+	</test>
+
+ 
+<!-- 	<test name="Rewards - Galaxy S6">
+		<parameter name="targetEnvironment" value="Galaxy S6" />
+		<classes>
+			<class name="com.perfecto.leanftdemo.LeanFtTest"/>
+		</classes>
+	</test> -->
+
+
+</suite> 

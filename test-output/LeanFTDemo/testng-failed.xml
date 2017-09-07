@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="10" guice-stage="DEVELOPMENT" name="Failed suite [LeanFTDemo]" parallel="tests">
+  <test name="Rewards - iPhone 6(failed)" parallel="tests">
+    <parameter name="targetEnvironment" value="iPhone 6"/>
+    <classes>
+      <class name="org.mobile.leanft.tests.LeanFtTest">
+        <methods>
+          <include name="baseAfterClass"/>
+          <include name="baseBeforeClass"/>
+          <include name="baseAfterMethod"/>
+          <include name="baseBeforeMethod"/>
+          <include name="baseAfterSuite"/>
+          <include name="baseBeforeSuite"/>
+          <include name="test"/>
+        </methods>
+      </class> <!-- org.mobile.leanft.tests.LeanFtTest -->
+    </classes>
+  </test> <!-- Rewards - iPhone 6(failed) -->
+</suite> <!-- Failed suite [LeanFTDemo] -->
