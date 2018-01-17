@@ -1,6 +1,6 @@
 /* The + sign grabs the latest version of  */
-String perfectoDriverVer = '9.+'
-String perfectoReportiumDriver = '1.1.5'
+String perfectoDriverVer = '10.+'
+String perfectoReportiumDriver = '1.1.21'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
@@ -31,25 +31,22 @@ repositories {
 
 dependencies {
 	/* Types that extend and augment the Java Collections Framework. */
-    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2+'
    
     /* JUnit - JUnit is a unit testing framework for Java, created by Erich Gamma and Kent Beck. */
     compile group: 'junit', name: 'junit', version: '4.+'
    
     /* TestNG - Testing Framework for Java */
  	compile 'org.testng:testng:' + '6.+'    
- //	compile 'org.testng:testng:' + '6.9.10'
   
-   
     /* Perfecto Mobile Dependency */
     compile 'com.perfectomobile:pm-webdriver:' + perfectoDriverVer
     compile 'com.perfectomobile:http-client:' + perfectoDriverVer
-    
     /*Perfecto Reportium Jar */
      compile 'com.perfecto.reporting-sdk:reportium-testng:' + perfectoReportiumDriver
     
     /* Appium iOS/Android-Driver 4.0.0 - Release: Date May 2016 */
-	compile group: 'io.appium', name: 'java-client', version: '4.+'
+	compile group: 'io.appium', name: 'java-client', version: '4.1.2'
 	
     /* httpcore-4.+  & httpclient-4. */
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.+'
@@ -59,11 +56,11 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.+'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
 	
-	/* Selenium automates browsers Testing. Next Version is 3.+ */
-	compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '2.53.1'	
-	compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '2.53.1'
-	compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '2.53.1'
-	compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '2.53.1'
+	/* Selenium automates browsers Testing. Next Version is 3.+ 2.53.1*/
+//	compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '3.+'	
+//	compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '3.+'
+//	compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.+'
+//	compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.+'
 	
 	/* Logging Framework */
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.+'
@@ -99,10 +96,10 @@ dependencies {
 	
 	
 	/* QMetry Automation Framework Jar */
-	//compile group: 'com.qmetry', name: 'qaf', version: '2.+'
-	//compile group: 'com.qmetry', name: 'qaf-support', version: '2.+'
-//	compile group: 'javax.media', name: 'jai_core', version: '1.+'
-	compile group: 'com.sun.media', name: 'jai-codec', version: '1.+'
+	compile group: 'com.qmetry', name: 'qaf', version: '2.+'
+	compile group: 'com.qmetry', name: 'qaf-support', version: '2.+'
+	//compile group: 'javax.media', name: 'jai_core', version: '1.+'
+//	compile group: 'com.sun.media', name: 'jai-codec', version: '1.+'
 
 	/* Extra Jars */
 ////	compile group: 'org.apache.poi', name: 'poi', version: '3.7'
@@ -141,9 +138,9 @@ test {
 
 /* Verify all jar dependency */
 task listJars {
-	configurations.compile.each { 
-		File file -> println file.name 
-	}
+//	configurations.compile.each { 
+//		File file -> println file.name 
+//	}
 }
 
 

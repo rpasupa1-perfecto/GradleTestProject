@@ -4,26 +4,16 @@
 <suite name="testList" parallel="tests" thread-count="1">	
 
 	<!-- Global Parameters -->	
-	<parameter name="URL"  value="ps.perfectomobile.com"/>	
+	<parameter name="URL"  value="panera.perfectomobile.com"/>	
 	<parameter name="user" value="rajp@perfectomobile.com"/>
-	<parameter name="pass" value="Perfecto123"/>
-	<parameter name="iOS_XpathPropfile" value="src/test/resources/iOS_Xpath.properties"/>
+	<parameter name="pass" value="Perfecto234"/>		
 	
-	<!-- Automation & Debug -->
-	<parameter name="RunMode"  value="Debug"/>   
-	<parameter name="enableLogs"  value="Enable"/>   	
-	<parameter name="installApp"  value="false"/>   
-	
-	<!-- Uploading ipa/apk files to Perfecto -->
-	<parameter name="mediaRepo" value="PRIVATE:Raj/"/>
-
 	<test name="PerfectoReportiumExample">
-		
-		<!--AppiumAndroid/AppiumIOS/RemoteWebDriver -->
-		<parameter name="deviceName" value="3C596BAE91226273BD652CF7920466130F8A276A"/>
-		<parameter name="driver"  value="AppiumIOS"/> 
-		<!-- if not an app, you need to pass in null value  -->   
-	 	<parameter name="bundleID"  value=""/> 			
+		<!-- Uploading ipa/apk files to Perfecto -->
+		<parameter name="fileType" value="ipa"/>
+		<parameter name="networkDirectory" value="C:/Users/Raj/Downloads/ipaFIle"/>
+	<!-- 	<parameter name="networkDirectory" value="//XX_BETA_XX/home/downloads/myChevroletCopy.ipa"/> -->
+		<parameter name="perfectoDirectory" value="PRIVATE:Raj/"/>	
 		<classes>
 			<class name="org.mobile.mobileAssureFramework.ipaApkFileUpload" />
 		</classes>

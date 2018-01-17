@@ -59,44 +59,43 @@ public class ReportiumTest extends BaseClass {
 	public void sampleTestCase(ITestContext context) throws MalformedURLException, IOException {
 		
 		try {
-		
-			reportiumClient.testStep("Verify Logo ");			
-			/* Verify Kohl's Logo  */
-			String logo = "//*[@label='kohls logo']";
-			try {
-				WebElement logoMainPage = findElementByXpath(logo, 1);
-				if (logoMainPage!=null) {
-					assertTrue("Logo Loaded !!!", true);
-					//sAssert.assertTrue(false, "Dealer Page NOT Loaded !!!"); 				
-				} else {
-					assertTrue("Logo Not Loaded !!!", false);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			reportiumClient.testStep("Verify Logo ");	
 			
 			
-			reportiumClient.testStep("Verify Menu");
-			/* Verify Menu  */
-			String menu = "//*[@label='icn menu']";
-			try {
-				WebElement menuMainPage = findElementByXpath(menu, 1);
-				if (menuMainPage!=null) {
-					assertTrue("Menu Loaded !!!", true);				
-				} else {
-					assertTrue("Menu Not Loaded !!!", false);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+			/* handle popups */
+//			//TODO move to Popup Handler() method
+//			try {
+//				findElementByXpath("//*[@text=\"mireya.qa1@gmail.com\"]", 30, "Handle Gmail Popup").click();
+//			} catch (Exception e) {
+//				System.out.println("Popup Gmail didn't show up");
+//			}
+//			try {
+//				findElementByXpath("//*[@resource-id=\"com.google.android.gms:id/close_button\"]", 30, "Handle Popup Close").click();
+//			} catch (Exception e) {
+//				System.out.println("Popup Close didn't show up");
+//			}
+//			
+//			
+//			/* Start Order */
+//			findElementByXpath("//*[@resource-id=\"com.panera.bread.qarc:id/start_order_button\"]",30,"Click Start Order").click();
+//			
+//			/* Verify Rapid Pick-up String */
+//			WebElement VerifyRapidString = findElementByXpath("//*[@resource-id=\"com.panera.bread.qarc:id/rapid_pick_up\"]", 7, "Verify Rapid Pick-up String");
+//			if (VerifyRapidString!=null) {			
+//				System.out.println("Verify Rapid Pick-up String String Found");		 
+//			} else {
+//				/* Add Asserts */
+//				System.out.println("Verify Rapid Pick-up String String NOT Found");		
+//			}
+//			
+//		
 			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 	}
 
-	@Test
+	//@Test
 	public void sampleTestCase2(ITestContext context) throws MalformedURLException, IOException {
 		
 		try {
@@ -160,8 +159,6 @@ public class ReportiumTest extends BaseClass {
 
 	@AfterMethod(alwaysRun = true)
 	public void destroy(ITestContext context, ITestResult result) throws Exception {
-		
-		
 			 if ( reportiumClient!= null )
                {
 					reportiumClient.testStop( result.getStatus() == ITestResult.SUCCESS ? TestResultFactory.createSuccess() : 

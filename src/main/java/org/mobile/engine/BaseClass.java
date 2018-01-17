@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -55,6 +56,7 @@ import com.perfecto.reportium.test.TestContext;
 import com.perfecto.reportium.test.result.TestResultFactory;
 import com.perfectomobile.selenium.util.EclipseConnector;
 
+import ch.qos.logback.core.util.Duration;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -76,20 +78,28 @@ public abstract class BaseClass  {
 	public Map<String, String> testParams;
 	private static int[][] CHAR_LIST = new int[][] { { 0, 9 }, { 11, 13 }, {128, 255 }, {38, 39 } };
 	/* Reportium Client */
-	protected ReportiumClient reportiumClient;
+	public ReportiumClient reportiumClient;
 	PerfectoExecutionContext perfectoExecutionContext = null;
 	public Map<String,String> swipeData;
 	String reportURL;
+	public DesiredCapabilities capabilitiesIOS = new DesiredCapabilities();
 	
+	public HashMap<Integer,Long> hm1 = new HashMap<Integer,Long>();
+	public HashMap<Integer,Long> hm2 = new HashMap<Integer,Long>();
+	public HashMap<Integer,Long> hm3 = new HashMap<Integer,Long>();
+	public Float sampleTest1 = 0f;
+	public Float sampleTest2 = 0f;
+	public Float sampleTest3 = 0f;
 	
+	long startTime=0;
+	long stopTime=0;
 	
 	@BeforeClass(alwaysRun = true)
     public void setUp(ITestContext context) throws Exception {	
 		engineSetup (context);		
 		driver = getDriver();
 		driverIOS = getDriverIOS();
-		driverAndroid = getDriverAndroid();
-			
+		driverAndroid = getDriverAndroid();		
 		createReportium(context);
 		
 	}
@@ -105,16 +115,12 @@ public abstract class BaseClass  {
 
 	@AfterMethod(alwaysRun = true)
 	public void destroy(ITestContext context, ITestResult result) throws Exception {
-		
-		
 			 if ( reportiumClient!= null )
                {
 					reportiumClient.testStop( result.getStatus() == ITestResult.SUCCESS ? TestResultFactory.createSuccess() : 
 						TestResultFactory.createFailure( result.getThrowable().getMessage(), result.getThrowable() ) );
 					
-					 // Print the report url to the console
-				   
-					
+					 // Print the report url to the console		
 //				int resultStatus = result.getStatus();
 //				switch(resultStatus) {
 //					case result.FAILURE:
@@ -130,11 +136,6 @@ public abstract class BaseClass  {
 				//	reportiumClient.testStop(TestResultFactory.createSuccess() : 
 				//		TestResultFactory.createFailure( result.getThrowable().getMessage(), result.getThrowable() ) );
                }
-					
-					
-
-		
-		
 	}
 	
 	@AfterClass(alwaysRun = true)
@@ -143,8 +144,7 @@ public abstract class BaseClass  {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyy_hh_mm_SSSa");
 		String formattedDate = sdf.format(date);
 		System.out.println(formattedDate); 
-		
-		
+			
 		try {
 			if(testParams.get("driver").equals("AppiumIOS")) {
 				driverIOS.closeApp();	
@@ -171,6 +171,7 @@ public abstract class BaseClass  {
 			
 		}
 		reportURL=reportiumClient.getReportUrl();
+		
 		System.out.println("\n\nPerfectoReportUrl = " + reportiumClient.getReportUrl());
 	}
 	
@@ -208,13 +209,16 @@ public abstract class BaseClass  {
 			        
 	        }  else if (testParams.get("driver").equals("AppiumIOS")) {  
 	        	
-	        		DesiredCapabilities capabilitiesIOS = new DesiredCapabilities();
+	        		//DesiredCapabilities capabilitiesIOS = new DesiredCapabilities();
 	        		capabilitiesIOS.setCapability("user", testParams.get("user"));
 	        		capabilitiesIOS.setCapability("password", testParams.get("pass"));
 	        		capabilitiesIOS.setCapability("deviceName", testParams.get("deviceName"));
 	        		capabilitiesIOS.setCapability("bundleId", testParams.get("bundleID"));
-	        		capabilitiesIOS.setCapability("automationName", "Appium");
-	        		
+	        		//capabilitiesIOS.setCapability("automationName", "XCUITest");
+	        		capabilitiesIOS.setCapability("automationInfrastructure", "XCUITest");
+	        //		capabilitiesIOS.setCapability("autoWebview", true);
+	        //		capabilitiesIOS.setCapability("automationName", "Appium");
+//	        		capabilitiesIOS.setCapability("autoLaunch", true);
 	        		
 	        		/* Install Application */
 					if (testParams.get("installApp").equals("true")) {
@@ -222,7 +226,7 @@ public abstract class BaseClass  {
 		        		//capabilitiesIOS.setCapability("app", "Kohls Media:Raj/iPhone-1320-b1320.ipa");
 		        		capabilitiesIOS.setCapability("autoInstrument", true);
 		        	//	capabilitiesIOS.setCapability("fullReset", true);
-		        	//	capabilitiesIOS.setCapability("autoLaunch", true);
+		        	
 					}
 	        		
 	        		/* Enable Debug Mode */
@@ -232,6 +236,14 @@ public abstract class BaseClass  {
 
 				//	int retry = 60;
 	  	       //     int interval = 1000;
+					
+
+					//Capabilities capabilities = driver.getCapabilities();
+					
+					//driverAndroid.getPlatformName().equals(SupportDevice)
+					
+					
+			//		driver = new RemoteWebDriver(new URL("https://" + testParams.get("URL") + "/nexperience/perfectomobile/wd/hub"), capabilitiesIOS);		
 	  	          driverIOS = new IOSDriver<WebElement>(new URL("https://" + testParams.get("URL") + "/nexperience/perfectomobile/wd/hub"), capabilitiesIOS); 
 	  	          
 //	  	            while(retry > 0 && driver==null) {
@@ -248,9 +260,9 @@ public abstract class BaseClass  {
 //		  					sleep(interval);
 //		  				}
 //	  	            }  
-	  	            driverIOS.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-	  	            driverIOS.manage().timeouts().pageLoadTimeout(0, TimeUnit.SECONDS);
-	  	            driverIOS.manage().timeouts().setScriptTimeout(0, TimeUnit.SECONDS);
+	  	    //        driverIOS.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  	    //        driverIOS.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+	  	    //        driverIOS.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
 	  	      	    
 	  	            
 	        } else if (testParams.get("driver").equals("AppiumAndroid")) {
@@ -266,6 +278,7 @@ public abstract class BaseClass  {
 						setExecutionIdCapability(capabilitiesAndroid, testParams.get("URL"));
 					}
 					
+					//capabilities.setCapability("autoWebview", true);
 					driverAndroid = new AndroidDriver<WebElement>(new URL("https://" + testParams.get("URL") + "/nexperience/perfectomobile/wd/hub"), capabilitiesAndroid);
 					driverAndroid.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 					driverAndroid.manage().timeouts().pageLoadTimeout(0, TimeUnit.SECONDS);
@@ -279,6 +292,50 @@ public abstract class BaseClass  {
 
 	}
 
+	public void startapp() {
+		Map<String, Object> params1 = new HashMap<>();
+		params1.put("identifier", "com.att.mobile.dfw");
+		Object result1 = driverIOS.executeScript("mobile:application:open", params1);
+	}
+	
+	public void closeApp() {
+		Map<String, Object> params2 = new HashMap<>();
+		params2.put("identifier", "com.att.mobile.dfw");
+		Object result2 = driverIOS.executeScript("mobile:application:close", params2);
+	}
+	
+	
+	public Float TotalSum(HashMap<Integer, Long> hm3) {	
+		for (Long val : hm3.values()){
+			sampleTest1 += val;
+		}
+		return sampleTest1;
+	}
+	public long startTime() {
+		startTime = System.currentTimeMillis();
+		return startTime;
+	}
+	public long stopTime() {
+		stopTime = System.currentTimeMillis();
+		return stopTime;
+	}
+	
+	public void StartVNetwork() throws InterruptedException {
+		reportiumClient.stepStart("StartVNetwork");
+		Map<String, Object> params1 = new HashMap<String, Object>();
+		params1.put("generateHarFile", "true");
+		Object result1 = driverIOS.executeScript("mobile:vnetwork:start", params1);
+		reportiumClient.stepEnd("StartVNetwork");
+	}
+	
+	public void StopVNetwork() {
+		reportiumClient.stepStart("StopVNetwork");
+		Map<String, Object> params3 = new HashMap<String, Object>();
+		params3.put("pcapFile", "true");
+		Object result3 = driverIOS.executeScript("mobile:vnetwork:stop", params3);	
+		reportiumClient.stepEnd("StopVNetwork");
+	}
+	
 	  /**
      * @param millis
      */
@@ -526,6 +583,9 @@ public abstract class BaseClass  {
 				  });
 				  return  webelement;
 		} catch (Exception e) {
+			System.out.println("\n\n****************** FLUENT Wait Failure Exception START **************************");
+			e.printStackTrace();
+			System.out.println("*************************************************************************************");
 			return null;
 		}	
 	  }
@@ -580,6 +640,8 @@ public abstract class BaseClass  {
 			}
 			
 			reportiumClient = new ReportiumClientFactory().createPerfectoReportiumClient(perfectoExecutionContext);
+			
+			//String executionId = (String) capabilitiesIOS.getCapability("executionId");
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -707,6 +769,115 @@ public abstract class BaseClass  {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * @param xpathExpression
+	 * @return
+	 * @throws Exception
+	 */
+	public WebElement findElementByXpath(String description, String xpathExpression, long timeOut) throws Exception {
+		long startTime = System.currentTimeMillis();
+		long stopTime=0;
+		long totalDuration=0;
+		long totalDurationSec=0;
+		
+		try {
+			reportiumClient.stepStart(description);
+			WebElement webElement = setFluentWaitMethod(By.xpath(xpathExpression), timeOut);
+			if (webElement!=null) {
+				System.out.println("-------------------------- ELEMENT FOUND -----------------------------");
+				System.out.println("XpathFound: " + xpathExpression);
+				stopTime = System.currentTimeMillis();
+				totalDuration = stopTime-startTime;
+			    totalDurationSec = (totalDuration)/100;
+				System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );	
+				//reportiumClient.stepEnd(description + ": " + totalDurationSec+"s");
+				reportiumClient.reportiumAssert(description + ": " + totalDurationSec+" s", true);
+				System.out.println("--------------------------------------------------------------------------");
+				return webElement;			
+			} else if (webElement==null) {		
+				System.out.println("------------------------ ELEMENT = Null START-------------------------");
+				stopTime = System.currentTimeMillis();
+				totalDuration = stopTime-startTime;
+			    totalDurationSec = (totalDuration)/100;
+			    System.out.println("Xpath Not found within allocated timeout!!!: " + xpathExpression);	
+				System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );	
+				reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");
+				reportiumClient.reportiumAssert("Xpath Not found within allocated timeout: " + xpathExpression, false);
+				System.out.println("--------------------------------------------------------------------------");
+			}		
+		} catch (Exception e) {
+			System.out.println("------------------------EXCEPTION STACK TRACE START---------------------");
+			System.out.println("---EXCEPTION on Xpath:  " + xpathExpression + "   With TimeOut: " + timeOut);
+			stopTime = System.currentTimeMillis();
+			totalDuration = stopTime-startTime;
+		    totalDurationSec = (totalDuration)/100;
+		    System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );		    
+			reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");			
+			e.printStackTrace();
+			System.out.println("------------------------------------------------------------------------------");
+		} finally {
+			//reportiumClient.stepEnd(description + " : " + totalDurationSec+"s");
+		}
+			return null;
+	}
+	
+	
+	
+	/**
+	 * @param xpathExpression
+	 * @return
+	 * @throws Exception
+	 */
+	public WebElement findElementByID(String description, String id, long timeOut) throws Exception {
+		long startTime = System.currentTimeMillis();
+		long stopTime=0;
+		long totalDuration=0;
+		long totalDurationSec=0;
+		
+		try {
+			reportiumClient.stepStart(description);
+			WebElement webElement = setFluentWaitMethod(By.id(id), timeOut);
+			if (webElement!=null) {
+				System.out.println("-------------------------- ELEMENT FOUND -----------------------------");
+				System.out.println("XpathFound: " + id);
+				stopTime = System.currentTimeMillis();
+				totalDuration = stopTime-startTime;
+			    totalDurationSec = (totalDuration)/100;
+				System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );	
+				//reportiumClient.stepEnd(description + ": " + totalDurationSec+"s");
+				reportiumClient.reportiumAssert(description + ": " + totalDurationSec+" s", true);
+				System.out.println("--------------------------------------------------------------------------");
+				return webElement;			
+			} else if (webElement==null) {		
+				System.out.println("------------------------ ELEMENT = Null START-------------------------");
+				stopTime = System.currentTimeMillis();
+				totalDuration = stopTime-startTime;
+			    totalDurationSec = (totalDuration)/100;
+			    System.out.println("Xpath Not found within allocated timeout!!!: " + id);	
+				System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );	
+				reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");
+				reportiumClient.reportiumAssert("Id Not found within allocated timeout: " + id, false);
+				System.out.println("--------------------------------------------------------------------------");
+			}		
+		} catch (Exception e) {
+			System.out.println("------------------------EXCEPTION STACK TRACE START---------------------");
+			System.out.println("---EXCEPTION on id:  " + id + "   With TimeOut: " + timeOut);
+			stopTime = System.currentTimeMillis();
+			totalDuration = stopTime-startTime;
+		    totalDurationSec = (totalDuration)/100;
+		    System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );		    
+			reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");			
+			e.printStackTrace();
+			System.out.println("------------------------------------------------------------------------------");
+		} finally {
+			//reportiumClient.stepEnd(description + " : " + totalDurationSec+"s");
+		}
+			return null;
+	}
+	
+	
 
 	/**
 	 * @param xpathExpression
@@ -818,6 +989,36 @@ public abstract class BaseClass  {
 		
 	}
 	
+	
+	
+	
+	
+	public void enableLogoutSwipe(String xpath) throws Exception {
+		WebElement elementLoc = findElementByXpath(xpath);
+		
+		String x = getLocationX(elementLoc);
+		String y = getLocationY(elementLoc);
+		
+	}
+
+	public String getLocationX(WebElement me) {
+		int x = me.getLocation().x;
+		int width = (Integer.parseInt(me.getAttribute("width")) / 2) + x; 
+		return width + "";
+	}
+	public String getLocationY(WebElement me) {
+		int y = me.getLocation().y;
+		int height = (Integer.parseInt(me.getAttribute("height")) / 2) + y;
+		return height + "";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public void enablePeekView (String xpath) throws Exception  {
 		WebElement elementLoc = findElementByXpath(xpath);	
 		SwipePeekView(elementLoc);
@@ -831,17 +1032,9 @@ public abstract class BaseClass  {
 		swipe2(x, y, true);	
 	}
 	
-	public String getLocationX(WebElement me) {
-		int x = me.getLocation().x;
-		int width = (Integer.parseInt(me.getAttribute("width")) / 2) + x; 
-		return width + "";
-	}
 
-	public String getLocationY(WebElement me) {
-		int y = me.getLocation().y;
-		int height = (Integer.parseInt(me.getAttribute("height")) / 2) + y;
-		return height + "";
-	}
+
+	
 	
 	public void scrollAndSearch(String value, WebElement me, Boolean direction) {
 		String x = getLocationX(me);

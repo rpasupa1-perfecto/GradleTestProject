@@ -431,7 +431,7 @@ public class TC_ParkedLocation_AddNote extends BaseClass {
 		int endY = (int) (size.height * tempx);          
 		
 		for (int i = 1; i <= count; i++) {
-			driverIOS.swipe(startX, startY, endX, endY, 1);
+			//driverIOS.swipe(startX, startY, endX, endY, 1);
 		}
 	}
 	
@@ -446,7 +446,7 @@ public class TC_ParkedLocation_AddNote extends BaseClass {
 		int endY = (int) (size.height * tempx);          
 		
 		for (int i = 1; i <= count; i++) {
-			driverIOS.swipe(startX, startY, endX, endY, 1);
+			//driverIOS.swipe(startX, startY, endX, endY, 1);
 			Thread.sleep(500);
 		}
 	}

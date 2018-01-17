@@ -17,6 +17,7 @@ import org.mobile.engine.BaseClass;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.ITestContext;
@@ -309,7 +310,7 @@ public class TC_WifiHotspot extends BaseClass {
 		int endY = (int) (size.height * tempx);          
 		
 		for (int i = 1; i <= count; i++) {
-			driverIOS.swipe(startX, startY, endX, endY, 1);
+			//driverIOS.swipe(startX, startY, endX, endY, 1);
 		}
 	}
 	
@@ -324,7 +325,8 @@ public class TC_WifiHotspot extends BaseClass {
 		int endY = (int) (size.height * tempx);          
 		
 		for (int i = 1; i <= count; i++) {
-			driverIOS.swipe(startX, startY, endX, endY, 1);
+			//new TouchActions(driverIOS).)
+		//	driverIOS.(startX, startY, endX, endY, 1);
 			Thread.sleep(1000);
 		}
 	}

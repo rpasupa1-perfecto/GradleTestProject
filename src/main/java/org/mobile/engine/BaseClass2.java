@@ -114,7 +114,7 @@ public class BaseClass2  {
 	        		if (testParams.get("bundleId") !=null && !testParams.get("bundleId").isEmpty()) {
 	        			capabilitiesIOS.setCapability("bundleId", testParams.get("bundleID"));
 	        		}        		
-	        		capabilitiesIOS.setCapability("automationName", "Appium");
+	        		capabilitiesIOS.setCapability("automationName", "XCUITest");
 	        		        		
 	        		/* Install Application */
 					if (testParams.get("installApp").equals("true")) {
@@ -196,7 +196,7 @@ public class BaseClass2  {
 		String host = context.getCurrentXmlTest().getParameter("URL");
 		String user = context.getCurrentXmlTest().getParameter("user");
 		String password = context.getCurrentXmlTest().getParameter("pass");
-		String mediaRepo = context.getCurrentXmlTest().getParameter("mediaRepo");
+		String mediaRepo = context.getCurrentXmlTest().getParameter("perfectoDirectory");
 			
 		/* Get the latest ipa/apk file in Folder C:/Users/Raj/Downloads/ipaFIle  */
      //   File iOSipa2 = getLastModifiedFile(fileLocationSourceDrive, fileExt);
