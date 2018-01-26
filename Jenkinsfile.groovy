@@ -8,7 +8,6 @@ def FAT_builds_iOS = "att/builds/iOS"
 def FAT_builds_Android = "att/builds/Android"
 
 def name = "dfw"
-def TOKEN = "f68ff2dabda541fc86ef870ea37d8499" //# f68ff2dabda541fc86ef870ea37d8499
 
 def VERSION_NUMBER_ANDROID
 def VERSION_NUMBER_IOS
