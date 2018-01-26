@@ -24,7 +24,7 @@ def startTime
 def endTime
 
 
-node(nodeName) {
+node() {
     try {
  
 		stages {
