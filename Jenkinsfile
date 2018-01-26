@@ -1,11 +1,11 @@
-import groovy.json.JsonSlurperClassic
+//import groovy.json.JsonSlurperClassic
 
-def nodeName = 'raj-test-groovy'
-def startTime
-def endTime
-def name = "dfw"
-def VERSION_NUMBER_IOS
-def VERSION_NUMBER_ANDROID
+//def nodeName = 'raj-test-groovy'
+//def startTime
+//def endTime
+//def name = "dfw"
+//def VERSION_NUMBER_IOS
+//def VERSION_NUMBER_ANDROID
 
 pipeline {
     
