@@ -7,7 +7,7 @@ def name = "dfw"
 def VERSION_NUMBER_IOS
 def VERSION_NUMBER_ANDROID
 
-pipeline {
+
     
 	node() {
 	    stages {
@@ -39,5 +39,5 @@ pipeline {
 //    }
 	
 	
-}
+
 
