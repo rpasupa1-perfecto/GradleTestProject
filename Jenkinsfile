@@ -24,7 +24,7 @@ def startTime
 def endTime
 
 
-node() {
+node {
     try {
  
 		stages {
@@ -32,7 +32,22 @@ node() {
 				sh 'mvn clean install'
 			}
 	
-			 
+			 stage('Test') {
+				sh 'mvn clean install'
+			}
+			
+			stage('Execute Test') {
+				sh 'mvn clean install'
+			}
+			
+			stage('Pre-Production') {
+				sh 'mvn clean install'
+			}
+			
+			stage('Production') {
+				sh 'mvn clean install'
+			}
+			
 		}
 		
 		
