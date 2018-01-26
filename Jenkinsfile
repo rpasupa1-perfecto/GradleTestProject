@@ -12,14 +12,14 @@ pipeline {
 	
 	stages {
 	
-		try {
+//		try {
 	        stage 'Build' {
 				//checkout scm
 	            sh 'mvn clean install'
 	        }
-		} catch (all) {
-			println all
-		}
+//		} catch (all) {
+//			println all
+//		}
 		 
     }
 
