@@ -26,11 +26,18 @@ def endTime
 
 node {
     try {
- 
-			stage('Build') {
-				echo 'building.....'
+    
+ 		try {
+			stage('Checkout') {
+				checkout scm
+				echo 'checking out.....'
 			}
-	
+		} catch (all) {
+			echo 'Stage Checkout FAILED.....'
+	        println all
+	    }
+	    
+	    
 			stage('Test') {
 				echo 'Test.....'
 			}
