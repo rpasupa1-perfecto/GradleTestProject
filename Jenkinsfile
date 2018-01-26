@@ -27,7 +27,6 @@ def endTime
 node {
     try {
  
-		stages {
 			stage('Build') {
 				sh 'mvn clean install'
 			}
@@ -48,7 +47,7 @@ node {
 				sh 'mvn clean install'
 			}
 			
-		}
+		
 		
 		
     } catch (all) {
