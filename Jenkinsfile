@@ -8,7 +8,7 @@ def VERSION_NUMBER_ANDROID
 
 pipeline {
     
-    stages {
+  //  stages {
         
         stage('build') {
 			checkout scm
@@ -16,7 +16,7 @@ pipeline {
         }
 
         
-    }
+ //   }
 
 	
 	
