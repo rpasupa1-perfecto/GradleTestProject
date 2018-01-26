@@ -1,0 +1,84 @@
+{
+  "methods": [
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "SetUp",
+        "name": "setUp",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1517006061802,
+      "duration": 2740,
+      "result": "pass",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "BeforeMethod",
+        "name": "beforeMethod",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1517006064580,
+      "duration": 2,
+      "result": "fail",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "test",
+      "args": [],
+      "metaData": {
+        "resultFileName": "SampleTestCase",
+        "name": "sampleTestCase",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1517006064630,
+      "duration": 0,
+      "result": "skip",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "Destroy",
+        "name": "destroy",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1517006064648,
+      "duration": 1,
+      "result": "pass",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "AfterClass",
+        "name": "afterClass",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1517006064669,
+      "duration": 2,
+      "result": "fail",
+      "passPer": 0.0
+    }
+  ]
+}

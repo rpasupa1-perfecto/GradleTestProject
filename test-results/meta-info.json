@@ -2,6 +2,11 @@
   "reports": [
     {
       "name": "testList",
+      "dir": "test-results/Fri26Jan18_0534PM",
+      "startTime": 1517006061711
+    },
+    {
+      "name": "testList",
       "dir": "test-results/Mon8Jan18_0345PM",
       "startTime": 1515444327197
     },

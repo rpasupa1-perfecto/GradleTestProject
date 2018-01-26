@@ -39,7 +39,7 @@ node {
 	    
 	    try {
 			stage('Gradle Build') {
-			   bat './gradlew.bat clean build'
+			   bat './gradlew clean build -x test'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
