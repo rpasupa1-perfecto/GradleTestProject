@@ -30,7 +30,6 @@ node {
  		try {
 			stage('Checkout') {
 				checkout scm
-				sh 'mvn clean install'
 				echo 'Checking Code out.....'
 			}
 		} catch (all) {
@@ -39,8 +38,8 @@ node {
 	    }
 	    
 	    try {
-			stage('Build') {
-			sh 'mvn clean install'
+			stage('Gradle Build') {
+			  sh './gradlew clean build'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
