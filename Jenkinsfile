@@ -50,6 +50,19 @@ node {
 	    	
 			stage('Execute Test') {
 				echo 'Execute Test.....'
+				steps {
+				    parallel(
+				    	a: {
+				    	    echo 'Branch a'
+				    	},
+						b: {
+				    	    echo 'Branch b'
+				    	}
+				    
+				    )
+				    
+				}
+
 			}
 			
 			stage('Pre-Production') {
@@ -60,7 +73,10 @@ node {
 				echo 'Production.....'
 			}
 			
+		parallel (
 		
+		
+		)
 		
 		
     } catch (all) {
