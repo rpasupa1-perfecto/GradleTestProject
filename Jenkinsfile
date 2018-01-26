@@ -7,13 +7,13 @@ def name = "dfw"
 def VERSION_NUMBER_IOS
 def VERSION_NUMBER_ANDROID
 
-
+pipeline {
     
 	node() {
 	    stages {
 			
 			try {
-		        stage('Build') {
+		        stage 'Build' {
 					//checkout scm
 		            sh 'mvn clean install'
 		        }
@@ -39,5 +39,5 @@ def VERSION_NUMBER_ANDROID
 //    }
 	
 	
-
+}
 
