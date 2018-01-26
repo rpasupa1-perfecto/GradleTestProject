@@ -30,18 +30,25 @@ node {
  		try {
 			stage('Checkout') {
 				checkout scm
-				echo 'checking out.....'
+				sh 'mvn clean install'
+				echo 'Checking Code out.....'
 			}
 		} catch (all) {
 			echo 'Stage Checkout FAILED.....'
 	        println all
 	    }
 	    
-	    
-			stage('Test') {
-				echo 'Test.....'
+	    try {
+			stage('Build') {
+			sh 'mvn clean install'
+				echo 'Building Project.....'
 			}
-			
+		} catch (all) {
+			echo 'Stage Building Project FAILED.....'
+	        println all
+	    }
+	    
+	    	
 			stage('Execute Test') {
 				echo 'Execute Test.....'
 			}
