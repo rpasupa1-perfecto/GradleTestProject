@@ -28,23 +28,23 @@ node {
     try {
  
 			stage('Build') {
-				sh 'mvn clean install'
+				echo 'building.....'
 			}
 	
-			 stage('Test') {
-				sh 'mvn clean install'
+			stage('Test') {
+				echo 'Test.....'
 			}
 			
 			stage('Execute Test') {
-				sh 'mvn clean install'
+				echo 'Execute Test.....'
 			}
 			
 			stage('Pre-Production') {
-				sh 'mvn clean install'
+				echo 'Pre-Production.....'
 			}
 			
 			stage('Production') {
-				sh 'mvn clean install'
+				echo 'Production.....'
 			}
 			
 		
