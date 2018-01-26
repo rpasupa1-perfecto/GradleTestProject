@@ -1,5 +1,6 @@
 import groovy.json.JsonSlurperClassic
 
+def nodeName = 'raj-test-groovy'
 def startTime
 def endTime
 def name = "dfw"
@@ -8,15 +9,19 @@ def VERSION_NUMBER_ANDROID
 
 pipeline {
     
-  //  stages {
-        
-        stage('build') {
-			checkout scm
-            sh 'mvn clean install'
-        }
-
-        
- //   }
+	node() {
+	    stages {
+			
+			try {
+		        stage('Build') {
+					//checkout scm
+		            sh 'mvn clean install'
+		        }
+			} catch (all) {
+				println all
+			}
+		}   
+    }
 
 	
 	
