@@ -9,18 +9,18 @@ def VERSION_NUMBER_ANDROID
 
 pipeline {
     
-	node() {
-	    stages {
-			
-			try {
-		        stage 'Build' {
-					//checkout scm
-		            sh 'mvn clean install'
-		        }
-			} catch (all) {
-				println all
-			}
-		}   
+	
+	stages {
+	
+		try {
+	        stage 'Build' {
+				//checkout scm
+	            sh 'mvn clean install'
+	        }
+		} catch (all) {
+			println all
+		}
+		 
     }
 
 	
