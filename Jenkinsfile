@@ -50,7 +50,7 @@ node {
 	    	
 			stage('Execute Test') {
 				echo 'Execute Test.....'
-				steps {
+				//steps {
 				    parallel(
 				    	a: {
 				    	    echo 'Branch a'
@@ -61,7 +61,7 @@ node {
 				    
 				    )
 				    
-				}
+				//}
 
 			}
 			
