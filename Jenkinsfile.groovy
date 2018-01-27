@@ -150,7 +150,63 @@ node {
 				
 				    	    
 				  
-				    	}
+				    	},
+						deviceC: {			
+							/* Device Start */
+							def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
+							def slurper = new groovy.json.JsonSlurperClassic()
+							def startCommand = slurper.parseText(startResponse.content)
+							def executionID = startCommand.executionId
+							slurper=null
+							println "$executionID}"
+						
+							/* Open Device Connection */
+							try {
+								def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[2]
+								println openResponse
+							} catch (all) {
+								echo 'Failed to Open Device....Catch'
+								println all
+							}
+							
+							/* Set Dynamic Field */
+							try {
+								def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+iOSDeviceList[2]+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
+								println dynamicFiled
+							} catch (all) {
+								echo 'Failed to Set Dynamic Field....Catch'
+								println all
+							}
+						
+							/* Close Device */
+							try {
+								def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + iOSDeviceList[2]
+								println closeResponse
+							} catch (all) {
+								echo 'Failed to Close Device....Catch'
+								println all
+							}
+								
+							/* Destroy Device Object */
+							try {
+								def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
+								println stopResponse
+							} catch (all) {
+								echo 'Failed to QUIT Device....Catch'
+								println all
+							}
+							
+							
+						},
+						deviceD: {
+							
+						},
+						deviceE: {
+							
+						},
+						deviceF: {
+							
+						}
 				    
 				    )
 				    
