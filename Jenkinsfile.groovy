@@ -76,7 +76,7 @@ node {
 			    	    	/* Device Open - Start */
 							def openResponse = httpRequest url: "https://dfw-directv.perfectomobile.com/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[1]
 							println openResponse
-			
+			 
 							/* Set Dynamic Field */
 							def dynamicFiled = httpRequest url:"https://mycloud.perfectomobile.com/services/handsets/iOSDeviceList[1]?operation=update&user=${username}&password=${password}&description=${DynamicFields}"
 						    println dynamicFiled
