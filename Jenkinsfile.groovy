@@ -105,7 +105,7 @@ node {
 					def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
 					println stopResponse
 				} catch (all) {
-					echo 'Failed to Close Device....Catch'
+					echo 'Failed to QUIT Device....Catch'
 					println all
 				}
 
