@@ -58,16 +58,14 @@ node {
 				def cloudUrl = "ps.perfectomobile.com"
 				def	DynamicFields = "Version=ipa-1234-Raj"	
 				def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9","3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3","0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]	
-			
-				
-					
+							
 				def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
 				def slurper = new groovy.json.JsonSlurperClassic()
 				def startCommand = slurper.parseText(startResponse.content)
+			
 				def executionID = startCommand.executionId
-				echo 'ExecutionID: ${executionID}'
-				echo 'Branch a'
-				
+				println "ExecutionID:  ${executionID}"
+						
 				/* Device Open - Start */
 				def openResponse = httpRequest url: "https://dfw-directv.perfectomobile.com/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[1]
 				println openResponse
@@ -80,16 +78,15 @@ node {
 				def stopResponse = httpRequest url: "https://dfw-directv.perfectomobile.com/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
 				println stopResponse
 				
-				
-				
-				    parallel(
+
+				parallel(
 				    	a: {						
 //				    		def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
 //							def slurper = new groovy.json.JsonSlurperClassic()
 //							def startCommand = slurper.parseText(startResponse.content)
 //							def executionID = startCommand.executionId
 //							echo 'ExecutionID: ${executionID}'
-				    	    echo 'Branch a'
+				    	    
 //				    	    
 //			    	    	/* Device Open - Start */
 //							def openResponse = httpRequest url: "https://dfw-directv.perfectomobile.com/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[1]
