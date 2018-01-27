@@ -26,6 +26,7 @@ import groovy.json.JsonSlurperClassic
 def username = "rajp@perfectomobile.com"
 def password = "Perfecto123"
 def cloudUrl = "ps.perfectomobile.com"
+def	DynamicFields = "ipaVersionNumber-Raj"
 
 node {
     try {
@@ -54,7 +55,7 @@ node {
 		stage('Installs BUilds on iOS Perfecto Devices') {
 				echo 'Installs Builds on iOS Perfecto Devices.....'	
 			
-				def	DynamicFields = "ipaVersionNumber-Raj"
+				/* Device Start */
 				def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
 				def slurper = new groovy.json.JsonSlurperClassic()
 				def startCommand = slurper.parseText(startResponse.content)
@@ -63,7 +64,7 @@ node {
 				println "$executionID}"
 				def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9","3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3","0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
 	
-				/* Device Open - Start */
+				/* Device Open */
 				try {
 					def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[1]
 					println openResponse
@@ -72,11 +73,23 @@ node {
 					println all
 				}
 				
+				/* Clean Device */
+				try {
+					def cleanResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=uninstall&param.deviceId=" + iOSdeviceList[i] + "&param.identifier=com.att.mobile.dfw"
+					println cleanResponse
+				} catch (all) {
+					echo 'Failed to Clean Device....Catch'
+					println all
+				}
+				
 				/* Set Dynamic Field */
 				//def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+${iOSDeviceList[1]}+"?operation=update&user=${username}&password=${password}&dynamicField.ipaVersion=${DynamicFields}"
 				//println dynamicFiled
 			
-				/* Device Close - End */
+				def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + iOSdeviceList[i]
+				println closeResponse
+				
+				/* Device Close */
 				try {
 					def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
 					println stopResponse
