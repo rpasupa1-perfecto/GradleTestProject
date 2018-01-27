@@ -53,7 +53,7 @@ node {
 	    }
 	    
 	    	
-		stage('Installs BUilds on iOS Perfecto Devices') {
+		stage('Installs Builds on iOS Perfecto Devices') {
 				echo 'Installs Builds on iOS Perfecto Devices.....'	
 			
 				parallel (
