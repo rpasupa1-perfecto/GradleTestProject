@@ -71,7 +71,7 @@ node {
 				println openResponse
  
 				/* Set Dynamic Field */
-				def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/${iOSDeviceList[1]}?operation=update&user=${username}&password=${password}&description=${DynamicFields}"
+				def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/" + iOSDeviceList[1] + "?operation=update&user=${username}&password=${password}&description=${DynamicFields}"
 				println dynamicFiled
 			
 				/* Device Close - End */
