@@ -30,7 +30,7 @@ node {
     
  		try {
 			stage('Checkout') {
-				//checkout scm
+				checkout scm
 				echo 'Checking Code out.....'
 			}
 		} catch (all) {
