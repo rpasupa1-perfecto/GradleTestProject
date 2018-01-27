@@ -26,7 +26,7 @@ import groovy.json.JsonSlurperClassic
 def username = "rajp@perfectomobile.com"
 def password = "Perfecto123"
 def cloudUrl = "ps.perfectomobile.com"
-def	DynamicFields = "ipaVersionNumber-Raj"
+def	DynamicFields = "Build:ipa-Test-Version-Raj.ipa"
 
 node {
     try {
@@ -83,8 +83,8 @@ node {
 //				}
 				
 				/* Set Dynamic Field */
-				//def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+${iOSDeviceList[1]}+"?operation=update&user=${username}&password=${password}&dynamicField.ipaVersion=${DynamicFields}"
-				//println dynamicFiled
+				def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+iOSDeviceList[1]+"?operation=update&user=${username}&password=${password}&dynamicField.ipaVersion=${DynamicFields}"
+				println dynamicFiled
 			
 				/* Close Device */
 				try {
