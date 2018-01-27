@@ -84,7 +84,7 @@ node {
 				
 				/* Set Dynamic Field */
 				try {
-					def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+iOSDeviceList[1]+"?operation=update&user=${username}&password=${password}&dynamicField=${DynamicFields}"
+					def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+iOSDeviceList[1]+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
 					println dynamicFiled
 				} catch (all) {
 					echo 'Failed to Set Dynamic Field....Catch'
@@ -93,7 +93,7 @@ node {
 			
 				/* Close Device */
 				try {
-					def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId.ipa=" + iOSDeviceList[i]
+					def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + iOSDeviceList[i]
 					println closeResponse
 				} catch (all) {
 					echo 'Failed to Close Device....Catch'
