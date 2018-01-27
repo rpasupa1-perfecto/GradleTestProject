@@ -64,18 +64,18 @@ node {
 				def startCommand = slurper.parseText(startResponse.content)
 			
 				def executionID = startCommand.executionId
-				println "ExecutionID:  ${executionID}"
+				//println "ExecutionID:  ${executionID}"
 						
 				/* Device Open - Start */
-				def openResponse = httpRequest url: "https://dfw-directv.perfectomobile.com/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[1]
+				def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + iOSDeviceList[1]
 				println openResponse
  
 				/* Set Dynamic Field */
-				def dynamicFiled = httpRequest url:"https://mycloud.perfectomobile.com/services/handsets/iOSDeviceList[1]?operation=update&user=${username}&password=${password}&description=${DynamicFields}"
+				def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/${iOSDeviceList[1]}?operation=update&user=${username}&password=${password}&description=${DynamicFields}"
 				println dynamicFiled
 			
 				/* Device Close - End */
-				def stopResponse = httpRequest url: "https://dfw-directv.perfectomobile.com/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
+				def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
 				println stopResponse
 				
 
