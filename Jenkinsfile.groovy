@@ -84,7 +84,7 @@ node {
 				
 				/* Set Dynamic Field */
 				try {
-					def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+iOSDeviceList[1]+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
+					def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+iOSDeviceList[1]+"?operation=update&user=${username}&password=${password}&dynamicField=${DynamicFields}"
 					println dynamicFiled
 				} catch (all) {
 					echo 'Failed to Set Dynamic Field....Catch'
