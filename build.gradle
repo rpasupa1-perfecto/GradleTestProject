@@ -115,7 +115,7 @@ dependencies {
 //    compile 'org.ini4j:ini4j:0.5.4'
     
      /* local project jars */
-	compile fileTree(dir: 'libs', include: '*.jar')    
+	compile fileTree(dir: 'LocalRepo', include: '*.jar')    
 }
 
 
