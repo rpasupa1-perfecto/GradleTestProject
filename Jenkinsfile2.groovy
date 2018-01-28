@@ -55,48 +55,20 @@ node {
 			echo 'Stage Building Project FAILED.....'
 	        println all
 	    }
-	    
-	    	
-		parallel firstBranch: {
-			stage('Installs Builds on IOS Perfecto Devices') {
+	   	
+		stage('Installs iOS Builds on Perfecto Devices') {
+				echo 'Installs Builds on iOS Perfecto Devices.....'		
+					
+				iOSLoad(iosDeviceName)
 				
-				echo 'Running IOS InstallProduction.....'
-				
-			}
-		}, secondBranch: {
-			stage('Installs Builds on Android Perfecto Devices') {
-				
-				echo 'Running Android InstallProduction..........'
-				
-			}
-		}
-		
-		
-		stage('Installs Original Builds') {
-				echo 'Installs Builds on iOS Perfecto Devices.....'			
-				parallel (
-				    	deviceA: {						
-							echo 'Building AProject.....'	
-				    	},
-						deviceB: {
-							echo 'Building B Project.....'	 
-				    	},
-						deviceC: {			
-							echo 'Building C Project.....'		
-						},
-						deviceD: {
-							echo 'Building D Project.....'
-						},
-						deviceE: {
-							echo 'Building E Project.....'
-						},
-						deviceF: {
-							echo 'Building F Project.....'
-						}		    
-				    )
+			
 			}
 			
-	
+			stage('Installs Android Builds on Perfecto Devices') {
+				echo 'Installs Builds on Android Perfecto Devices.....'
+					
+				androidLoad(iosDeviceName)
+			}
 		
 		
     } catch (all) {
@@ -108,9 +80,47 @@ node {
 }
 
 def iOSLoad(iosDeviceName) {
-
+	parallel (
+		deviceA: {
+			echo 'Building AProject.....'
+		},
+		deviceB: {
+			echo 'Building B Project.....'
+		},
+		deviceC: {
+			echo 'Building C Project.....'
+		},
+		deviceD: {
+			echo 'Building D Project.....'
+		},
+		deviceE: {
+			echo 'Building E Project.....'
+		},
+		deviceF: {
+			echo 'Building F Project.....'
+		}
+	)
 }
 
 def androidLoad(iosDeviceName) {
-
+	parallel (
+		deviceA: {
+			echo 'Building AProject.....'
+		},
+		deviceB: {
+			echo 'Building B Project.....'
+		},
+		deviceC: {
+			echo 'Building C Project.....'
+		},
+		deviceD: {
+			echo 'Building D Project.....'
+		},
+		deviceE: {
+			echo 'Building E Project.....'
+		},
+		deviceF: {
+			echo 'Building F Project.....'
+		}
+	)
 }
