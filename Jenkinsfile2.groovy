@@ -163,7 +163,7 @@ def androidLoad() {
 			iosAndroidInstall(androidDeviceList[7])
 		}
 	)
-}
+} 
 
 
 def iosAndroidInstall(deviceList) {
