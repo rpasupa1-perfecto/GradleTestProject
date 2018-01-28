@@ -86,11 +86,12 @@ def iOSLoad() {
 		"3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3",
 		"0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
 	
+	
 	parallel (
-		deviceA: {	
-			def deviceName = iOSDeviceList[0]
-			echo '${deviceName}'
-			iosAndroidInstall(deviceName)
+		"iOS-${iOSDeviceList[0]}": {	
+			//def deviceName = iOSDeviceList[0]
+			println "${iOSDeviceList[0]}"
+			iosAndroidInstall(iOSDeviceList[0])
 		},
 		deviceB: {
 			echo 'Building B Project.....'
