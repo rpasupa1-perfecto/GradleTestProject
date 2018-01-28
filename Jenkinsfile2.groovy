@@ -55,7 +55,7 @@ node {
 	        println all
 	    }
 	   	
-		stage('Installs iOS Builds on Perfecto Devices') {
+		stage('Installing iOS Builds') {
 				echo 'Installs Builds on iOS Perfecto Devices.....'		
 					
 				iOSLoad()
@@ -63,7 +63,7 @@ node {
 			
 			}
 			
-			stage('Installs Android Builds on Perfecto Devices') {
+			stage('Installing Android Builds') {
 				echo 'Installs Builds on Android Perfecto Devices.....'
 					
 				androidLoad()
@@ -79,11 +79,38 @@ node {
 }
 
 def iOSLoad() {
-	def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9","3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3","0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
+	def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9",
+		"3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3",
+		"0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
 	
 	parallel (
 		deviceA: {
 			echo 'Building AProject.....'
+			stage('Device-Start') {
+				checkout scm
+				echo 'Checking Code out.....'
+			}
+			
+			stage('Open-Device') {
+				checkout scm
+				echo 'Checking Code out.....'
+			}
+			
+			stage('SetDynamicField') {
+				checkout scm
+				echo 'Checking Code out.....'
+			}
+			
+			stage('Close-Device') {
+				checkout scm
+				echo 'Checking Code out.....'
+			}
+			
+			stage('Device-End') {
+				checkout scm
+				echo 'Checking Code out.....'
+			}
+			
 		},
 		deviceB: {
 			echo 'Building B Project.....'
