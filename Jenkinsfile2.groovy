@@ -27,10 +27,7 @@ import groovy.json.JsonSlurperClassic
 //def startTime
 //def endTime
 
-def username = "rajp@perfectomobile.com"
-def password = "Perfecto123"
-def cloudUrl = "ps.perfectomobile.com"
-def	DynamicFields = "Test-Version-Raj.ipa"
+
 
 node {
     try {
@@ -90,9 +87,9 @@ def iOSLoad() {
 		"0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
 	
 	parallel (
-		def deviceName = iOSDeviceList[0]
 		deviceA: {	
-			echo 'Building AProject.....'
+			def deviceName = iOSDeviceList[0]
+			echo '${deviceName}'
 			iosAndroidInstall(deviceName)
 		},
 		deviceB: {
@@ -140,6 +137,11 @@ def androidLoad() {
 
 
 def iosAndroidInstall(deviceList) {
+	
+	def username = "rajp@perfectomobile.com"
+	def password = "Perfecto123"
+	def cloudUrl = "ps.perfectomobile.com"
+	def	DynamicFields = "Test-Version-Raj.ipa"
 	
 	/* Device Start */
 	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
