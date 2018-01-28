@@ -104,11 +104,13 @@ node {
     }
 	
 	
-	def iOSLoad(iosDeviceName) {
-		
-	}
-	
-	def androidLoad(iosDeviceName) {
-	
-	}
+
+}
+
+def iOSLoad(iosDeviceName) {
+
+}
+
+def androidLoad(iosDeviceName) {
+
 }
