@@ -91,9 +91,9 @@ def iOSLoad() {
 	
 	parallel (
 		def deviceName = iOSDeviceList[0]
-		deviceName: {	
+		deviceA: {	
 			echo 'Building AProject.....'
-			iosAndroidInstall(iOSDeviceList[0])
+			iosAndroidInstall(deviceName)
 		},
 		deviceB: {
 			echo 'Building B Project.....'
