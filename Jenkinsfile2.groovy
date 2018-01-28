@@ -188,7 +188,7 @@ def iosAndroidInstall(deviceList) {
 	} catch (all) {
 		echo 'Failed to Open Device....Catch'
 		println all
-	}
+	} 
 	
 	/* Set Dynamic Field */
 	try {
