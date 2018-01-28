@@ -55,19 +55,25 @@ node {
 	        println all
 	    }
 	   	
+		
+		
+		
+		
 		stage('Installing iOS Builds') {
 				echo 'Installs Builds on iOS Perfecto Devices.....'		
 					
 				iOSLoad()
 				
 			
-			}
+		}
 			
-			stage('Installing Android Builds') {
-				echo 'Installs Builds on Android Perfecto Devices.....'
-					
-				androidLoad()
-			}
+		
+		
+		stage('Installing Android Builds') {
+			echo 'Installs Builds on Android Perfecto Devices.....'
+				
+			androidLoad()
+		}
 		
 		
     } catch (all) {
@@ -86,30 +92,30 @@ def iOSLoad() {
 	parallel (
 		deviceA: {
 			echo 'Building AProject.....'
-			stage('Device-Start') {
+			deviceStart: ('Device-Start') {
 				checkout scm
 				echo 'Checking Code out.....'
 			}
 			
-			stage('Open-Device') {
-				checkout scm
-				echo 'Checking Code out.....'
-			}
-			
-			stage('SetDynamicField') {
-				checkout scm
-				echo 'Checking Code out.....'
-			}
-			
-			stage('Close-Device') {
-				checkout scm
-				echo 'Checking Code out.....'
-			}
-			
-			stage('Device-End') {
-				checkout scm
-				echo 'Checking Code out.....'
-			}
+//			stage('Open-Device') {
+//				checkout scm
+//				echo 'Checking Code out.....'
+//			}
+//			
+//			stage('SetDynamicField') {
+//				checkout scm
+//				echo 'Checking Code out.....'
+//			}
+//			
+//			stage('Close-Device') {
+//				checkout scm
+//				echo 'Checking Code out.....'
+//			}
+//			
+//			stage('Device-End') {
+//				checkout scm
+//				echo 'Checking Code out.....'
+//			}
 			
 		},
 		deviceB: {
