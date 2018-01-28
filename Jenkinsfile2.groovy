@@ -50,28 +50,44 @@ node {
 		} catch (all) {
 			echo 'Stage Building Project FAILED.....'
 	        println all
-	    }
-	   	
+	    }	
 		
 		
-		
-		
+		/* Install iOS builds & Restart Device */
 		stage('Installing iOS Builds') {
-				echo 'Installs Builds on iOS Perfecto Devices.....'		
-					
+				echo 'Installs Builds on iOS Perfecto Devices.....'			
 				iOSLoad()
-				
-			
 		}
 			
-		
-		
+		/* Install Android builds & Restart Device */
 		stage('Installing Android Builds') {
 			echo 'Installs Builds on Android Perfecto Devices.....'
 				
 			androidLoad()
 		}
 		
+		
+		
+		
+		/* Running Test Cases */
+		try {
+			stage('Execute Test Cases') {
+				echo 'Running Test Cases.....'
+			}
+		} catch (all) {
+			echo 'Stage Running Test Case FAILED.....'
+			println all
+		}
+		
+		/* Publish Test Cases */
+		try {
+			stage('Publish Test Cases') {
+				echo 'Publish Test Cases.....'
+			}
+		} catch (all) {
+			echo 'Stage Publish Test Cases FAILED.....'
+			println all
+		}
 		
     } catch (all) {
         println all
@@ -83,55 +99,68 @@ node {
 
 def iOSLoad() {
 	def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9",
-		"3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3",
-		"0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
-	
+		"3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3"]
 	
 	parallel (
-		"iOS-${iOSDeviceList[0]}": {	
-			//def deviceName = iOSDeviceList[0]
+		"${iOSDeviceList[0]}": {	
 			println "${iOSDeviceList[0]}"
 			iosAndroidInstall(iOSDeviceList[0])
 		},
-		deviceB: {
-			echo 'Building B Project.....'
+		"${iOSDeviceList[1]}": {
+			println "${iOSDeviceList[1]}"
+			iosAndroidInstall(iOSDeviceList[1])
 		},
-		deviceC: {
-			echo 'Building C Project.....'
+		"${iOSDeviceList[2]}": {
+			println "${iOSDeviceList[2]}"
+			iosAndroidInstall(iOSDeviceList[2])
 		},
-		deviceD: {
-			echo 'Building D Project.....'
+		"${iOSDeviceList[3]}": {
+			println "${iOSDeviceList[3]}"
+			iosAndroidInstall(iOSDeviceList[3])
 		},
-		deviceE: {
-			echo 'Building E Project.....'
-		},
-		deviceF: {
-			echo 'Building F Project.....'
+		"${iOSDeviceList[4]}": {
+			println "${iOSDeviceList[4]}"
+			iosAndroidInstall(iOSDeviceList[4])
 		}
 	)
 }
 
 def androidLoad() {
-	def androidDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9","3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3","0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"]
+	def androidDeviceList = ["04157DF4E959AA15","CE091609AB24A50901","1115FBD16FEF0303","04157DF43A656B1A","05157DF5399ED633",
+		"03157DF3800C0537", "30E9D3E3", "LGUS99185B89D4C"]
 	
 	parallel (
-		deviceA: {
-			echo 'Building AProject.....'
+			"${androidDeviceList[0]}": {	
+			println "${androidDeviceList[0]}"
+			iosAndroidInstall(androidDeviceList[0])
 		},
-		deviceB: {
-			echo 'Building B Project.....'
+		"${androidDeviceList[1]}": {
+			println "${androidDeviceList[1]}"
+			iosAndroidInstall(androidDeviceList[1])
 		},
-		deviceC: {
-			echo 'Building C Project.....'
+		"${androidDeviceList[2]}": {
+			println "${androidDeviceList[2]}"
+			iosAndroidInstall(androidDeviceList[2])
 		},
-		deviceD: {
-			echo 'Building D Project.....'
+		"${androidDeviceList[3]}": {
+			println "${androidDeviceList[3]}"
+			iosAndroidInstall(androidDeviceList[3])
 		},
-		deviceE: {
-			echo 'Building E Project.....'
+		"${androidDeviceList[4]}": {
+			println "${androidDeviceList[4]}"
+			iosAndroidInstall(androidDeviceList[4])
 		},
-		deviceF: {
-			echo 'Building F Project.....'
+		"${androidDeviceList[5]}": {
+			println "${androidDeviceList[5]}"
+			iosAndroidInstall(androidDeviceList[5])
+		},
+		"${androidDeviceList[6]}": {
+			println "${androidDeviceList[6]}"
+			iosAndroidInstall(androidDeviceList[6])
+		},
+		"${androidDeviceList[7]}": {
+			println "${androidDeviceList[7]}"
+			iosAndroidInstall(androidDeviceList[7])
 		}
 	)
 }
