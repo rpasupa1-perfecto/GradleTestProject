@@ -39,7 +39,7 @@ node {
 		stage('Installing Android Builds') {
 			echo 'Installs Builds on Android Perfecto Devices.....'
 				
-			androidLoad()
+			//androidLoad()
 		}
 		
 
