@@ -100,7 +100,7 @@ def iOSLoad() {
 }
 
 def androidLoad() {
-	def androidDeviceList = ["04157DF4E959AA15","CE091609AB24A50901","1115FBD16FEF0303","04157DF43A656B1A","05157DF5399ED633",
+	def androidDeviceList = ["CE091609AB24A50901","1115FBD16FEF0303","04157DF43A656B1A","05157DF5399ED633",
 		"03157DF3800C0537", "30E9D3E3", "LGUS99185B89D4C"]
 	
 	parallel (
@@ -147,7 +147,7 @@ def androidInstall(deviceList) {
 	def cloudUrl = "ps.perfectomobile.com"
 	def	DynamicFields = "Test-Version-Raj.ipa"
 	def appID = "com.att.mobile.dfw"
-	def appLocation = "Raj/dfw-1001001108.apk"
+	def appLocation = "Raj/dfw-android-1001001108.apk"
 	
 	/* Device Start */
 	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
@@ -241,7 +241,7 @@ def iosInstall(deviceList) {
 	def cloudUrl = "ps.perfectomobile.com"
 	def	DynamicFields = "Test-Version-Raj.ipa"
 	def appID = "com.att.mobile.dfw"
-	def appLocation = "Raj/dfw-1.0.5647_HockeyAppDebug.ipa"
+	def appLocation = "Raj/dfw-1.0.5647_ios.ipa"
 	
 	/* Device Start */
 	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
@@ -259,7 +259,15 @@ def iosInstall(deviceList) {
 	/* Open Device Connection */
 	try {
 		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList
+		log.info headers["#status#"]
+		assert ['HTTP/1.1 200 OK'] == headers ["#status#"]
+		headers["#status#"] instanceof List
+		def actualStatus = header["#status#"].get(0)
+		def excelExpectedValue = '200 OK'
+		def expectedStatus = 'HTTP/1.1 ' + excelExpectedValue
+		assert expectedStatus == actualStatus
 		println openResponse
+		
 	} catch (all) {
 		echo 'Failed to Open Device....Catch'
 		println all
