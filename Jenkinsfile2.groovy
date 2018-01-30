@@ -76,7 +76,7 @@ def iOSLoad() {
 		"3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3"]
 	
 	parallel (
-		"${iOSDeviceList[0]}": {	
+		"Device: ${iOSDeviceList[0]}": {	
 			println "${iOSDeviceList[0]}"
 			iosInstall(iOSDeviceList[0])
 		},
@@ -165,7 +165,7 @@ def androidInstall(deviceList) {
 	/* Open Device Connection */
 	try {
 		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList
-		println openResponse
+		println openResponse.content
 	} catch (all) {
 		echo 'Failed to Open Device....Catch'
 		println all
@@ -175,7 +175,7 @@ def androidInstall(deviceList) {
 	try {
 		println "Setting Dynamic Field ipa/apk File Name for device:  " + deviceList
 		def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-		println dynamicFiled
+		println dynamicFiled.content
 	} catch (all) {
 		echo 'Failed to Set Dynamic Field....Catch'
 		println all
@@ -259,14 +259,11 @@ def iosInstall(deviceList) {
 	/* Open Device Connection */
 	try {
 		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList
-		log.info headers["#status#"]
-		assert ['HTTP/1.1 200 OK'] == headers ["#status#"]
-		headers["#status#"] instanceof List
-		def actualStatus = header["#status#"].get(0)
-		def excelExpectedValue = '200 OK'
-		def expectedStatus = 'HTTP/1.1 ' + excelExpectedValue
-		assert expectedStatus == actualStatus
-		println openResponse
+		def openDeviceSlurper = new groovy.json.JsonSlurperClassic()
+		def command = openDeviceSlurper.parseText(openResponse.content)
+		def returnStatus = command.status
+		openDevice=null
+		println "${returnStatus}"
 		
 	} catch (all) {
 		echo 'Failed to Open Device....Catch'
@@ -277,7 +274,7 @@ def iosInstall(deviceList) {
 	try {
 		println "Setting Dynamic Field ipa/apk File Name for device:  " + deviceList
 		def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-		println dynamicFiled
+		println dynamicFiled.content
 	} catch (all) {
 		echo 'Failed to Set Dynamic Field....Catch'
 		println all
@@ -304,14 +301,14 @@ def iosInstall(deviceList) {
 	}
 	
 	/* Install Application */
-	try {
-		println "Installing " + "${appLocation}" + " on " + deviceList
-		def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
-		println installResponse
-	} catch (all) {
-		echo 'Failed to Install Application....Catch'
-		println all
-	}
+//	try {
+//		println "Installing " + "${appLocation}" + " on " + deviceList
+//		def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
+//		println installResponse
+//	} catch (all) {
+//		echo 'Failed to Install Application....Catch'
+//		println all
+//	}
 	
 	/* Close Device */
 	try {
