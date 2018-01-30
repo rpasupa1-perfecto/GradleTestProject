@@ -244,7 +244,7 @@ def iosInstall(deviceList) {
 	def startCommand = slurper.parseText(startResponse.content)
 	def executionID = startCommand.executionId
 	slurper=null
-	println "${startCommand.value}"
+	println "${startCommand}"
 
 		
 	/* Make device Reservation */
