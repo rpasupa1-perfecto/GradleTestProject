@@ -241,16 +241,9 @@ def iosInstall(deviceList) {
 	
 	/* Device Start */
 	println "Start Connection with Perfecto"
-	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"
-	
+	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"	
 	def executionID = getExecutionID(startResponse)
-//	def slurper = new groovy.json.JsonSlurperClassic()
-//	def startCommand = slurper.parseText(startResponse.content)
-//	def executionID = startCommand.executionId
-//	slurper=null
-//	println "ResponseMsg:  ${startCommand}"
 
-		
 	/* Make device Reservation */
 	
 	
@@ -260,11 +253,6 @@ def iosInstall(deviceList) {
 		println "Start Device Connection with Perfecto"
 		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList
 		printResponse(openResponse)
-		//	def openDeviceSlurper = new groovy.json.JsonSlurperClassic()
-	//	def command = openDeviceSlurper.parseText(openResponse.content)
-	//	openDeviceSlurper=null
-	//	println "ResponseMsg: ${command}"
-		
 	} catch (all) {
 		echo 'Failed to Open Device....Catch'
 		println all
@@ -274,7 +262,7 @@ def iosInstall(deviceList) {
 	try {
 		println "Setting Dynamic Field for device:  " + deviceList
 		def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-		println dynamicFiled
+		printResponse(dynamicFiled)
 	} catch (all) {
 		echo 'Failed to Set Dynamic Field....Catch'
 		println all
@@ -294,7 +282,7 @@ def iosInstall(deviceList) {
 	try {
 //		println "Rebooting Device:  " + deviceList
 //		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
-//		println rebootResponse
+//		printResponse(rebootResponse)
 	} catch (all) {
 		echo 'Failed to Reboot Phone....Catch'
 		println all
@@ -304,7 +292,7 @@ def iosInstall(deviceList) {
 //	try {
 //		println "Installing " + "${appLocation}" + " on " + deviceList
 //		def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
-//		println installResponse
+//		printResponse(installResponse)
 //	} catch (all) {
 //		echo 'Failed to Install Application....Catch'
 //		println all
@@ -314,7 +302,7 @@ def iosInstall(deviceList) {
 	try {
 		println "Close Device with Perfecto "
 		def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + deviceList
-		println closeResponse
+		printResponse(closeResponse)
 	} catch (all) {
 		echo 'Failed to Close Device....Catch'
 		println all
@@ -324,7 +312,7 @@ def iosInstall(deviceList) {
 	try {
 		println "End Device Driver with Perfecto "
 		def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
-		println stopResponse
+		printResponse(stopResponse)
 	} catch (all) {
 		echo 'Failed to QUIT Device....Catch'
 		println all
@@ -342,6 +330,7 @@ def printResponse (response){
 	def command = Slurper.parseText(response.content)
 	Slurper=null
 	println "ResponseMsg: ${command}"
+	println "StatusCode:  ${response}"
 }
 
 def getExecutionID (response){
@@ -350,5 +339,6 @@ def getExecutionID (response){
 	def executionId = startCommand.executionId
 	slurper=null
 	println "ResponseMsg:  ${startCommand}"
+	println "StatusCode:  ${response}"
 	return executionId
 }
