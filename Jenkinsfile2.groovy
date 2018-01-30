@@ -346,7 +346,7 @@ def printResponse (response){
 
 def getExecutionID (response){
 	def slurper = new groovy.json.JsonSlurperClassic()
-	def startCommand = slurper.parseText(startResponse.content)
+	def startCommand = slurper.parseText(response.content)
 	def executionId = startCommand.executionId
 	slurper=null
 	println "ResponseMsg:  ${startCommand}"
