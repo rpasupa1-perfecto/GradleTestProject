@@ -77,23 +77,18 @@ def iOSLoad() {
 	
 	parallel (
 		"Device: ${iOSDeviceList[0]}": {	
-			println "${iOSDeviceList[0]}"
 			iosInstall(iOSDeviceList[0])
 		},
-		"${iOSDeviceList[1]}": {
-			println "${iOSDeviceList[1]}"
+		"Device: ${iOSDeviceList[1]}": {
 			iosInstall(iOSDeviceList[1])
 		},
-		"${iOSDeviceList[2]}": {
-			println "${iOSDeviceList[2]}"
+		"Device: ${iOSDeviceList[2]}": {
 			iosInstall(iOSDeviceList[2])
 		},
-		"${iOSDeviceList[3]}": {
-			println "${iOSDeviceList[3]}"
+		"Device: ${iOSDeviceList[3]}": {
 			iosInstall(iOSDeviceList[3])
 		},
-		"${iOSDeviceList[4]}": {
-			println "${iOSDeviceList[4]}"
+		"Device: ${iOSDeviceList[4]}": {
 			iosInstall(iOSDeviceList[4])
 		}
 	)
@@ -249,7 +244,7 @@ def iosInstall(deviceList) {
 	def startCommand = slurper.parseText(startResponse.content)
 	def executionID = startCommand.executionId
 	slurper=null
-	println "$executionID}"
+	println "${startCommand.value}"
 
 		
 	/* Make device Reservation */
@@ -274,7 +269,7 @@ def iosInstall(deviceList) {
 	try {
 		println "Setting Dynamic Field ipa/apk File Name for device:  " + deviceList
 		def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-		println dynamicFiled.content
+		println dynamicFiled
 	} catch (all) {
 		echo 'Failed to Set Dynamic Field....Catch'
 		println all
@@ -292,9 +287,9 @@ def iosInstall(deviceList) {
 		
 	/* Reboot Phone */
 	try {
-		println "Rebooting Device:  " + deviceList
-		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
-		println rebootResponse
+//		println "Rebooting Device:  " + deviceList
+//		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
+//		println rebootResponse
 	} catch (all) {
 		echo 'Failed to Reboot Phone....Catch'
 		println all
