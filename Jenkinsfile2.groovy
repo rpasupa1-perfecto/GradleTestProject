@@ -126,10 +126,6 @@ def androidLoad() {
 		"${androidDeviceList[6]}": {
 			println "${androidDeviceList[6]}"
 			androidInstall(androidDeviceList[6])
-		},
-		"${androidDeviceList[7]}": {
-			println "${androidDeviceList[7]}"
-			androidInstall(androidDeviceList[7])
 		}
 	)
 } 
