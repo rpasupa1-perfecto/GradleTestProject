@@ -277,7 +277,7 @@ def iosInstall(deviceList) {
 	
 	
 	/* Open Device Connection */
-	try {
+	try { 
 		println "Start Device Connection with Perfecto"
 		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList
 		printResponse(openResponse)
