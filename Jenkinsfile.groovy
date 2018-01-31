@@ -212,9 +212,9 @@ def androidInstall(deviceList) {
 		
 	/* Reboot Phone */
 	try {
-//		println "Rebooting Device:  " + deviceList
-//		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
-//		printResponse(rebootResponse)
+		println "Rebooting Device:  " + deviceList
+		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
+		printResponse(rebootResponse)
 	} catch (all) {
 		echo 'Failed to Reboot Phone....Catch'
 		println all
@@ -308,9 +308,9 @@ def iosInstall(deviceList) {
 		
 	/* Reboot Phone */
 	try {
-//		println "Rebooting Device:  " + deviceList
-//		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
-//		printResponse(rebootResponse)
+		println "Rebooting Device:  " + deviceList
+		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
+		printResponse(rebootResponse)
 	} catch (all) {
 		echo 'Failed to Reboot Phone....Catch'
 		println all
