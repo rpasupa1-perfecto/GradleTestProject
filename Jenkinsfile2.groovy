@@ -32,14 +32,14 @@ node {
 		/* Install iOS builds & Restart Device */
 		stage('Installing iOS Builds') {
 				echo 'Installs Builds on iOS Perfecto Devices.....'			
-				iOSLoad()
+				iOSLoad() 
 		}
 			
 		/* Install Android builds & Restart Device */
 		stage('Installing Android Builds') {
 			echo 'Installs Builds on Android Perfecto Devices.....'
 				
-			//androidLoad()
+				androidLoad()
 		}
 		
 
