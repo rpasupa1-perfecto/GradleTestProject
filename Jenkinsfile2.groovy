@@ -72,7 +72,7 @@ node {
 }
 
 def iOSLoad() {
-	def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED","1C3B401545D2CDBEC9D323460D914AD7319F31D9",
+	def iOSDeviceList = ["41EEF156EA10EDAB41632651F7AD2A4C4CB502ED",
 		"3133BB296C46FA2250362A227BA462A56ED11A45","DD992AFA0B69A5E2C2006A7A657690476B0086FE","C37BAE1934AE7DD0AE3355F77146C7A65579CAA3"]
 	
 	parallel (
@@ -270,9 +270,9 @@ def iosInstall(deviceList) {
 	
 	/* Uninstall Application */
 	try {
-	//	println "Uninstalling App for device:  " + deviceList
-	//	def uninstallApp = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=uninstall&param.deviceId=" + deviceList + "&param.identifier=${appID}"
-	//	println uninstallApp
+		println "Uninstalling App for device:  " + deviceList
+		def uninstallApp = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=uninstall&param.deviceId=" + deviceList + "&param.identifier=${appID}"
+		printResponse(uninstallApp)
 	} catch (all) {
 		echo 'Failed to Uninstall Application....Catch'
 		println all
@@ -289,14 +289,14 @@ def iosInstall(deviceList) {
 	}
 	
 	/* Install Application */
-//	try {
-//		println "Installing " + "${appLocation}" + " on " + deviceList
-//		def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
-//		printResponse(installResponse)
-//	} catch (all) {
-//		echo 'Failed to Install Application....Catch'
-//		println all
-//	}
+	try {
+		println "Installing " + "${appLocation}" + " on " + deviceList
+		def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
+		printResponse(installResponse)
+	} catch (all) {
+		echo 'Failed to Install Application....Catch'
+		println all
+	}
 	
 	/* Close Device */
 	try {
