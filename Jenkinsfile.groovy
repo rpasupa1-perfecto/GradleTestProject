@@ -275,11 +275,11 @@ def iosInstall(deviceList) {
 	/* Make device Reservation */
 	
 	
-	
+	 
 	/* Open Device Connection */
 	try { 
 		println "Start Device Connection with Perfecto"
-		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList
+		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.timeout=10"
 		printResponse(openResponse)
 	} catch (all) {
 		echo 'Failed to Open Device....Catch'
