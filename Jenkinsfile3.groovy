@@ -37,7 +37,7 @@ node {
 		stage('Installing iOS/Android Builds') {
 	
 				echo 'Installs Builds on iOS Perfecto Devices.....'			
-				iOSAndroidLoad() 
+				iOSLoad()
 		}
 			
 		/* Install Android builds & Restart Device */
