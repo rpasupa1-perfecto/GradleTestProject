@@ -373,9 +373,10 @@ def reportiumStepStart(executionID, stepStartName) {
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
+
 	
 	try {
-		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name=${stepStartName}"
+		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name='${stepStartName}'"
 		println stepStart	
 	} catch (all) {
 		echo 'Failed to Step Start....Catch'
@@ -389,7 +390,7 @@ def reportiumStepEnd(executionID, stepEndName) {
 	def cloudUrl = "ps.perfectomobile.com"
 	
 	try {
-		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=${stepEndName}"
+		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message='${stepEndName}'"
 		println stepEnd
 	} catch (all) {
 		echo 'Failed to Step END....Catch'
