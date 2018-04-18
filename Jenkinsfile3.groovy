@@ -8,8 +8,6 @@ import groovy.json.JsonSlurperClassic
 
 node {
 	
-	
-	
     try {
     
  		try {
@@ -253,6 +251,7 @@ def iosInstall(deviceList) {
 		println all
 	}
 	
+	
 	/* Start Reportium Test Tag */
 	def paramStartTestName = "JenkinsAPIexecutions"
 	def TestTagNames="InstallApplication;${appID};${DynamicFields}"
@@ -261,39 +260,47 @@ def iosInstall(deviceList) {
 		println startReportExec
 	} catch (all) {
 		echo 'Failed to Start Reportium Test....Catch Block !!!!'
-		echo 'Device May be in USE ?? !!!!'
 		println all
 	}
 	
 	/* Make device Reservation */
 		 
-	/* Open Device Connection */
+	/* Open Specific Device Connection */
 	try { 
-		println "Start Device Connection with Perfecto"
-		def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
-		printResponse(openResponse)
+		reportiumStepStart(executionID, "Acquiring Device: " + deviceList)	
+			println "Start Device Connection with Perfecto"
+			def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
+			printResponse(openResponse)
+		reportiumAssert(${executionID}, "Acquired Device", true)
 	} catch (all) {
-		echo 'Failed to Open Device....Catch'
+		reportiumAssert(${executionID}, "Failed to Acquire Device: " + deviceList, false)
+		echo 'Device May be in USE ?? !!!! Failed to Open Device....Catch'
 		println all
 	}
 	
 	/* Set Dynamic Field */
 	try {
-		println "Setting Dynamic Field for device:  " + deviceList
-		def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-		printResponse(dynamicFiled)
+		reportiumStepStart(executionID, "Set Dynamic Field")
+			println "Setting Dynamic Field for device:  " + deviceList		
+			def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
+			printResponse(dynamicFiled)
+		reportiumAssert(${executionID}, "Dynamic Field Set", true)
 	} catch (all) {
+		reportiumAssert(${executionID}, "Failed to Set Dynamic Field for device: " + deviceList, false)
 		echo 'Failed to Set Dynamic Field....Catch'
 		println all
 	}
 	
 	/* Uninstall Application */
 	try {
-		println "Uninstalling App for device:  " + deviceList
-		def uninstallApp = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=uninstall&param.deviceId=" + deviceList + "&param.identifier=${appID}"
-		printResponse(uninstallApp)
+		reportiumStepStart(executionID, "Uninstall Application")
+			println "Uninstalling App for device:  " + deviceList	
+			def uninstallApp = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=uninstall&param.deviceId=" + deviceList + "&param.identifier=${appID}"
+			printResponse(uninstallApp)
+		reportiumAssert(${executionID}, "Uninstalled Application", true)
 	} catch (all) {
-		echo 'Failed to Uninstall Application....Catch'
+		reportiumAssert(${executionID}, "App not Uninstalled on device: " + deviceList, false)
+		echo 'Failed to Uninstall Application..Check if app was installed..Catch Block'
 		println all
 	}
 		
@@ -309,24 +316,43 @@ def iosInstall(deviceList) {
 	
 	/* Install Application */
 	try {
-		println "Installing " + "${appLocation}" + " on " + deviceList
-		def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
-		printResponse(installResponse)
+		reportiumStepStart(executionID, "Install Application")
+			println "Installing " + "${appLocation}" + " on " + deviceList		
+			def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
+			printResponse(installResponse)
+		reportiumAssert(${executionID}, "Installed Application", true)
 	} catch (all) {
-		echo 'Failed to Install Application....Catch'
+		reportiumAssert(${executionID}, "App not installed on device: " + deviceList, false)
+		echo 'Failed to Install Application....Catch Block'
 		println all
 	}
 	
 	/* Close Device */
 	try {
-		println "Close Device with Perfecto "
-		def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + deviceList
-		printResponse(closeResponse)
+		reportiumStepStart(executionID, "Close Device")
+			println "Close Device with Perfecto "		
+			def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + deviceList
+			printResponse(closeResponse)
+		reportiumAssert(${executionID}, "Close Device", true)
 	} catch (all) {
-		echo 'Failed to Close Device....Catch'
+		reportiumAssert(${executionID}, "Device not closed: " + deviceList, false)
+		echo 'Failed to Close Device....Catch Block'
 		println all
 	}
 	
+	
+	/* Destroy Device Object */
+	try {
+		reportiumStepStart(executionID, "Quit Driver")
+			println "End Device Driver with Perfecto "		
+			def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
+			printResponse(stopResponse)
+		reportiumAssert(${executionID}, "Driver Quit/Destroyed", true)
+	} catch (all) {
+		reportiumAssert(${executionID}, "Can't Quit Driver " + deviceList, false)
+		echo 'Failed to QUIT Device....Catch'
+		println all
+	}
 	
 	
 	/* Stop Reportium Test Tag */
@@ -339,25 +365,15 @@ def iosInstall(deviceList) {
 		println all
 	}
 	
-	
-	
-		
-	/* Destroy Device Object */
-	try {
-		println "End Device Driver with Perfecto "
-		def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
-		printResponse(stopResponse)
-	} catch (all) {
-		echo 'Failed to QUIT Device....Catch'
-		println all
-	}
-	
-	
 	/* Delete Reservation */
 	
 }
 
-def reportiumStepStart(cloudUrl, executionID, username, password, stepStartName) {
+def reportiumStepStart(executionID, stepStartName) { 
+	def username = "rajp@perfectomobile.com"
+	def password = "Perfecto123"
+	def cloudUrl = "ps.perfectomobile.com"
+	
 	try {
 		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name="${stepStartName}""
 		println stepStart	
@@ -367,15 +383,35 @@ def reportiumStepStart(cloudUrl, executionID, username, password, stepStartName)
 	}
 }
 
-def reportiumStepEnd(cloudUrl, executionID, username, password, stepEndName) {
+def reportiumStepEnd(executionID, stepEndName) {
+	def username = "rajp@perfectomobile.com"
+	def password = "Perfecto123"
+	def cloudUrl = "ps.perfectomobile.com"
+	
 	try {
-		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message="${stepEndName}""
+		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=${stepEndName}"
 		println stepEnd
 	} catch (all) {
 		echo 'Failed to Step END....Catch'
 		println all
 	}
 }
+
+def reportiumAssert(executionID, message, status) {
+	def username = "rajp@perfectomobile.com"
+	def password = "Perfecto123"
+	def cloudUrl = "ps.perfectomobile.com" 
+	
+	try {
+		def assertStatus = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=status&subcommand=assert&param.message=${message}&param.status=${status}"
+		println assertStatus
+	} catch (all) {
+		echo 'Failed in Assert....Catch'
+		println all
+	}
+}
+
+
 
 def printResponse (response){	
 	def Slurper = new groovy.json.JsonSlurperClassic()
