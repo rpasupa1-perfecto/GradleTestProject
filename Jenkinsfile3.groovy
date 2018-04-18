@@ -376,7 +376,7 @@ def reportiumStepStart(executionID, stepStartName) {
 
 	
 	try {
-		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name="+"${stepStartName}"
+		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name=\\${stepStartName}\\"
 		println stepStart	
 	} catch (all) {
 		echo 'Failed to Step Start....Catch'
@@ -390,7 +390,7 @@ def reportiumStepEnd(executionID, stepEndName) {
 	def cloudUrl = "ps.perfectomobile.com"
 	
 	try {
-		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message="+"${stepEndName}"
+		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\\${stepEndName}\\"
 		println stepEnd
 	} catch (all) {
 		echo 'Failed to Step END....Catch'
@@ -404,7 +404,7 @@ def reportiumAssert(executionID, message, status) {
 	def cloudUrl = "ps.perfectomobile.com" 
 	
 	try {
-		def assertStatus = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=status&subcommand=assert&param.message="+"${message}"+"&param.status=${status}"
+		def assertStatus = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=status&subcommand=assert&param.message=${message}&param.status=${status}"
 		println assertStatus
 	} catch (all) {
 		echo 'Failed in Assert....Catch'
