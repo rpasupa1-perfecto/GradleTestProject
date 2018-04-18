@@ -267,13 +267,13 @@ def iosInstall(deviceList) {
 		 
 	/* Open Specific Device Connection */
 	try { 
-		reportiumStepStart(executionID, "Acquiring Device: " + deviceList)	
+		reportiumStepStart(executionID, "Acquiring Device")	
 			println "Start Device Connection with Perfecto"
 			def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
 			printResponse(openResponse)
 		reportiumAssert(${executionID}, "Acquired Device", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "Failed to Acquire Device: " + deviceList, false)
+		reportiumAssert(${executionID}, "Failed to Acquire Device", false)
 		echo 'Device May be in USE ?? !!!! Failed to Open Device....Catch'
 		println all
 	}
@@ -286,7 +286,7 @@ def iosInstall(deviceList) {
 			printResponse(dynamicFiled)
 		reportiumAssert(${executionID}, "Dynamic Field Set", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "Failed to Set Dynamic Field for device: " + deviceList, false)
+		reportiumAssert(${executionID}, "Failed to Set Dynamic Field for device", false)
 		echo 'Failed to Set Dynamic Field....Catch'
 		println all
 	}
@@ -299,7 +299,7 @@ def iosInstall(deviceList) {
 			printResponse(uninstallApp)
 		reportiumAssert(${executionID}, "Uninstalled Application", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "App not Uninstalled on device: " + deviceList, false)
+		reportiumAssert(${executionID}, "App not Uninstalled on device", false)
 		echo 'Failed to Uninstall Application..Check if app was installed..Catch Block'
 		println all
 	}
@@ -322,7 +322,7 @@ def iosInstall(deviceList) {
 			printResponse(installResponse)
 		reportiumAssert(${executionID}, "Installed Application", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "App not installed on device: " + deviceList, false)
+		reportiumAssert(${executionID}, "App not installed on device", false)
 		echo 'Failed to Install Application....Catch Block'
 		println all
 	}
@@ -335,7 +335,7 @@ def iosInstall(deviceList) {
 			printResponse(closeResponse)
 		reportiumAssert(${executionID}, "Close Device", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "Device not closed: " + deviceList, false)
+		reportiumAssert(${executionID}, "Device not closed", false)
 		echo 'Failed to Close Device....Catch Block'
 		println all
 	}
@@ -349,7 +349,7 @@ def iosInstall(deviceList) {
 			printResponse(stopResponse)
 		reportiumAssert(${executionID}, "Driver Quit/Destroyed", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "Can't Quit Driver " + deviceList, false)
+		reportiumAssert(${executionID}, "Can't Quit Driver", false)
 		echo 'Failed to QUIT Device....Catch'
 		println all
 	}
@@ -376,7 +376,7 @@ def reportiumStepStart(executionID, stepStartName) {
 
 	
 	try {
-		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name='${stepStartName}'"
+		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name=${stepStartName}"
 		println stepStart	
 	} catch (all) {
 		echo 'Failed to Step Start....Catch'
