@@ -332,7 +332,7 @@ def iosInstall(deviceList) {
 	/* Stop Reportium Test Tag */
 	try {
 		def status = "true"
-		def stopReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=end&&param.success=${status}"
+		def stopReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=end&param.success=${status}"
 		println stopReportExec
 	} catch (all) {
 		echo 'Failed to Stop Reportium Test....Catch Block !!!!'
