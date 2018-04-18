@@ -1,6 +1,6 @@
 /* The + sign grabs the latest version of  */
-String perfectoDriverVer = '10.+'
-String perfectoReportiumDriver = '1.1.21'
+String perfectoDriverVer = '18.+'
+String perfectoReportiumDriver = '1.2.0'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
@@ -30,6 +30,7 @@ repositories {
 }
 
 dependencies {
+	
 	/* Types that extend and augment the Java Collections Framework. */
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2+'
    
@@ -46,7 +47,7 @@ dependencies {
      compile 'com.perfecto.reporting-sdk:reportium-testng:' + perfectoReportiumDriver
     
     /* Appium iOS/Android-Driver 4.0.0 - Release: Date May 2016 */
-	compile group: 'io.appium', name: 'java-client', version: '4.1.2'
+	compile group: 'io.appium', name: 'java-client', version: '5.0.4'
 	
     /* httpcore-4.+  & httpclient-4. */
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.+'
@@ -116,6 +117,8 @@ dependencies {
     
      /* local project jars */
 	compile fileTree(dir: 'LocalRepo', include: '*.jar')    
+	
+	compile files('LocalRepo/client-automation-common-0.0.7.jar')
 }
 
 

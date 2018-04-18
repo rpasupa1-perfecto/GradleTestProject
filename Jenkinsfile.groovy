@@ -272,6 +272,11 @@ def iosInstall(deviceList) {
 	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"	
 	def executionID = getExecutionID(startResponse)
 
+
+	def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name="TodayTestRaj"&param.tags="JenkinsExecution""
+	def executionReportID = getExecutionID(startReportExec)
+	
+	
 	/* Make device Reservation */
 	
 	

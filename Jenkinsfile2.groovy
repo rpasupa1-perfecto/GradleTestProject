@@ -1,8 +1,16 @@
 import javax.swing.GroupLayout.ParallelGroup
 
+import org.openqa.selenium.WebElement
 import org.springframework.jmx.export.assembler.MethodNameBasedMBeanInfoAssembler
 
+import com.perfecto.reportium.client.ReportiumClient
+import com.perfecto.reportium.client.ReportiumClientFactory
+import com.perfecto.reportium.model.Job
+import com.perfecto.reportium.model.PerfectoExecutionContext
+import com.perfecto.reportium.model.Project
+
 import groovy.json.JsonSlurperClassic
+import io.appium.java_client.ios.IOSDriver
 
 
 node {
@@ -147,7 +155,8 @@ def androidInstall(deviceList) {
 
 	/* Make device Reservation */
 	
-	
+	//public ReportiumClient reportiumClient
+	//reportiumClient.
 	
 	/* Open Device Connection */
 	try {
@@ -339,3 +348,26 @@ def getExecutionID (response){
 	println "StatusCode:  ${response}"
 	return executionId
 }
+
+
+def createReportium() {
+	public static IOSDriver<WebElement> driverIOS;
+	PerfectoExecutionContext perfectoExecutionContext = null
+	
+	perfectoExecutionContext = new PerfectoExecutionContext.PerfectoExecutionContextBuilder()
+	.withProject(new Project("Jenkins API Project", "1.0"))
+	.withJob(new Job("IOS tests", 45))
+	.withContextTags("Raj")
+	.withWebDriver(driverIOS)
+	.build()
+	
+	
+	
+	reportiumClient = new ReportiumClientFactory().createPerfectoReportiumClient(perfectoExecutionContext);
+}
+
+
+
+
+
+

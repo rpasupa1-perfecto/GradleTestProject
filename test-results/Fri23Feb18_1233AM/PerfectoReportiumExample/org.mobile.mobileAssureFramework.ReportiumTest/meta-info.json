@@ -1,0 +1,68 @@
+{
+  "methods": [
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "SetUp",
+        "name": "setUp",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1519363986867,
+      "duration": 7698,
+      "result": "pass",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "BeforeMethod",
+        "name": "beforeMethod",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1519363994598,
+      "duration": 90,
+      "result": "pass",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "Destroy",
+        "name": "destroy",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1519364003867,
+      "duration": 78,
+      "result": "pass",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "AfterClass",
+        "name": "afterClass",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1519364003963,
+      "duration": 8510,
+      "result": "pass",
+      "passPer": 0.0
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "testList",
+  "status": "unstable",
+  "tests": [
+    "PerfectoReportiumExample"
+  ],
+  "total": 1,
+  "pass": 0,
+  "fail": 0,
+  "skip": 1,
+  "startTime": 1519368436713,
+  "endTime": 1519368438511
+}

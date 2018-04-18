@@ -1,7 +1,5 @@
 package org.mobile.engine;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -20,7 +18,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -56,8 +53,7 @@ import com.perfecto.reportium.test.TestContext;
 import com.perfecto.reportium.test.result.TestResultFactory;
 import com.perfectomobile.selenium.util.EclipseConnector;
 
-import ch.qos.logback.core.util.Duration;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
@@ -72,6 +68,9 @@ public abstract class BaseClass  {
 	public static IOSDriver<WebElement> driverIOS;
 	/* Appium Android Driver */
 	public AndroidDriver<WebElement> driverAndroid;
+	
+	public AppiumDriver<WebElement> appiumDriver;
+	
 	public long defaultTimeout = 60;
 	protected static Properties prop;
 	public static HashMap<String,String> propFile;
@@ -234,7 +233,7 @@ public abstract class BaseClass  {
 						setExecutionIdCapability(capabilitiesIOS, testParams.get("URL"));
 					} //else if (testParams.get("RunMode").equals("Automation")) {
 
-				//	int retry = 60;
+					int retry = 60;
 	  	       //     int interval = 1000;
 					
 
@@ -256,8 +255,8 @@ public abstract class BaseClass  {
 //		  				} catch (Exception e) {
 //		  					/* Decrement Retry */
 //		  					retry--;
-//		  					System.out.println("\nAttempted: " + (60-retry) + ". Failure to Acquire device, Retrying.....\n" + e);
-//		  					sleep(interval);
+		  				//	System.out.println("\nAttempted: " + (60-retry) + ". Failure to Acquire device, Retrying.....\n" + e);
+		  				//	sleep(interval);
 //		  				}
 //	  	            }  
 	  	    //        driverIOS.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -335,6 +334,10 @@ public abstract class BaseClass  {
 		Object result3 = driverIOS.executeScript("mobile:vnetwork:stop", params3);	
 		reportiumClient.stepEnd("StopVNetwork");
 	}
+	
+	
+	
+	
 	
 	  /**
      * @param millis
@@ -635,7 +638,7 @@ public abstract class BaseClass  {
 					    .withProject(new Project("Sample Reportium project", "1.0"))
 					    .withJob(new Job("IOS tests", 45))
 					    .withContextTags("Regression")
-					    .withWebDriver(driver)
+					    .withWebDriver(appiumDriver)
 					    .build();		
 			}
 			
@@ -777,13 +780,14 @@ public abstract class BaseClass  {
 	 * @throws Exception
 	 */
 	public WebElement findElementByXpath(String description, String xpathExpression, long timeOut) throws Exception {
-		long startTime = System.currentTimeMillis();
+		long startTime = 0;
 		long stopTime=0;
 		long totalDuration=0;
 		long totalDurationSec=0;
 		
 		try {
-			reportiumClient.stepStart(description);
+			///reportiumClient.stepStart(description);
+			startTime = System.currentTimeMillis();
 			WebElement webElement = setFluentWaitMethod(By.xpath(xpathExpression), timeOut);
 			if (webElement!=null) {
 				System.out.println("-------------------------- ELEMENT FOUND -----------------------------");
@@ -803,7 +807,7 @@ public abstract class BaseClass  {
 			    totalDurationSec = (totalDuration)/100;
 			    System.out.println("Xpath Not found within allocated timeout!!!: " + xpathExpression);	
 				System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );	
-				reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");
+				///reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");
 				reportiumClient.reportiumAssert("Xpath Not found within allocated timeout: " + xpathExpression, false);
 				System.out.println("--------------------------------------------------------------------------");
 			}		
@@ -814,7 +818,7 @@ public abstract class BaseClass  {
 			totalDuration = stopTime-startTime;
 		    totalDurationSec = (totalDuration)/100;
 		    System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );		    
-			reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");			
+		//	reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");			
 			e.printStackTrace();
 			System.out.println("------------------------------------------------------------------------------");
 		} finally {

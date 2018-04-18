@@ -41,13 +41,13 @@ import com.perfecto.reportium.model.PerfectoExecutionContext;
 import com.perfecto.reportium.test.TestContext;
 import com.perfecto.reportium.test.result.TestResultFactory;
 
-import io.appium.java_client.SwipeElementDirection;
+//import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.HideKeyboardStrategy;
-import net.sf.saxon.expr.sort.IntIterator;
+
 
 
 public class XCUITest extends BaseClass {
@@ -88,7 +88,7 @@ public class XCUITest extends BaseClass {
 		//		 test.click();
 				
 				AndroidElement test33 = (AndroidElement) test;
-				test33.swipe(SwipeElementDirection.UP, 10,-0, 1);
+				//test33.swipe(SwipeElementDirection.UP, 10,-0, 1);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

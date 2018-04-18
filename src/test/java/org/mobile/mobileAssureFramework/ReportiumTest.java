@@ -34,6 +34,7 @@ import com.perfecto.reportium.client.ReportiumClient;
 import com.perfecto.reportium.client.ReportiumClientFactory;
 import com.perfecto.reportium.model.PerfectoExecutionContext;
 import com.perfecto.reportium.test.TestContext;
+import com.perfecto.reportium.test.result.TestResult;
 import com.perfecto.reportium.test.result.TestResultFactory;
 
 import io.appium.java_client.TouchAction;
@@ -58,38 +59,38 @@ public class ReportiumTest extends BaseClass {
 	@Test
 	public void sampleTestCase(ITestContext context) throws MalformedURLException, IOException {
 		
-		try {
-			reportiumClient.testStep("Verify Logo ");	
-			
-			
-			/* handle popups */
-//			//TODO move to Popup Handler() method
-//			try {
-//				findElementByXpath("//*[@text=\"mireya.qa1@gmail.com\"]", 30, "Handle Gmail Popup").click();
-//			} catch (Exception e) {
-//				System.out.println("Popup Gmail didn't show up");
-//			}
-//			try {
-//				findElementByXpath("//*[@resource-id=\"com.google.android.gms:id/close_button\"]", 30, "Handle Popup Close").click();
-//			} catch (Exception e) {
-//				System.out.println("Popup Close didn't show up");
-//			}
-//			
-//			
-//			/* Start Order */
-//			findElementByXpath("//*[@resource-id=\"com.panera.bread.qarc:id/start_order_button\"]",30,"Click Start Order").click();
-//			
-//			/* Verify Rapid Pick-up String */
-//			WebElement VerifyRapidString = findElementByXpath("//*[@resource-id=\"com.panera.bread.qarc:id/rapid_pick_up\"]", 7, "Verify Rapid Pick-up String");
-//			if (VerifyRapidString!=null) {			
-//				System.out.println("Verify Rapid Pick-up String String Found");		 
-//			} else {
-//				/* Add Asserts */
-//				System.out.println("Verify Rapid Pick-up String String NOT Found");		
-//			}
-//			
-//		
-			
+		try {				
+				/* Step Start Message */
+				getReportiumClient().stepStart("StepStart_VerifyUserID");	
+				try {
+					findElementByXpath("Checking_UserID", "//*[@label=\"User ID\"]", 30).click();
+				} catch (Exception e) {
+					System.out.println("UserID didn't show up");
+				}		
+				/* Step End Message */
+				//getReportiumClient().stepEnd("StepEnd_VerifyUserID");
+				
+					
+				/* Step Start Message */
+				getReportiumClient().stepStart("StepStart_VerifyPassword");	
+				
+				try {
+					findElementByXpath("Handle Popup Close", "//*[@label=\"Password\"]", 30).click();
+				} catch (Exception e) {
+					System.out.println("Popup Close didn't show up");
+				}
+				
+				/* Step End without Message */	
+				//getReportiumClient().stepEnd();
+				
+						
+				getReportiumClient().stepStart("StepStart_VerifySignInButton");					
+				try {
+					findElementByXpath("Handle Popup Close", "//*[@label=\"Sign in\"]", 30).click();
+				} catch (Exception e) {
+					System.out.println("Popup Close didn't show up");
+				}
+							
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -99,13 +100,14 @@ public class ReportiumTest extends BaseClass {
 	public void sampleTestCase2(ITestContext context) throws MalformedURLException, IOException {
 		
 		try {
-		
-			reportiumClient.testStep("Verify Logo ");			
+			reportiumClient.stepStart("Verify Logo ");
+			
 			/* Verify Kohl's Logo  */
 			String logo = "//*[@label='kohls logo']";
 			try {
 				WebElement logoMainPage = findElementByXpath(logo, 1);
 				if (logoMainPage!=null) {
+				
 					assertTrue("Logo Loaded !!!", true);
 					//sAssert.assertTrue(false, "Dealer Page NOT Loaded !!!"); 				
 				} else {
@@ -114,9 +116,8 @@ public class ReportiumTest extends BaseClass {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
-			reportiumClient.testStep("Verify Menu");
+
+			reportiumClient.stepStart("Verify Menu");
 			/* Verify Menu  */
 			String menu = "//*[@label='icn menu']";
 			try {
@@ -150,12 +151,9 @@ public class ReportiumTest extends BaseClass {
 	
 	@BeforeMethod(alwaysRun = true) 
 	public void beforeMethod(ITestContext context) {
-		getReportiumClient().testStart(context.getName(), new TestContext());
+		getReportiumClient().testStart("Raj_Test_Start_BeforeMethod", new TestContext());	
 	}
 	
-	
-
-
 
 	@AfterMethod(alwaysRun = true)
 	public void destroy(ITestContext context, ITestResult result) throws Exception {
@@ -163,6 +161,9 @@ public class ReportiumTest extends BaseClass {
                {
 					reportiumClient.testStop( result.getStatus() == ITestResult.SUCCESS ? TestResultFactory.createSuccess() : 
 						TestResultFactory.createFailure( result.getThrowable().getMessage(), result.getThrowable() ) );
+					
+					
+					//reportiumClient.testStop(result.getStatus());
 					
 					 // Print the report url to the console
 				   
@@ -223,7 +224,7 @@ public class ReportiumTest extends BaseClass {
 			
 		}
 		reportURL=reportiumClient.getReportUrl();
-		System.out.println("\n\nPerfectoReportUrl = " + reportiumClient.getReportUrl());
+		System.out.println("\n\nPerfectoReportUrl = \n" + reportiumClient.getReportUrl()+ "\n\n");
 	}
 
 }

@@ -19,55 +19,291 @@ import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class ApiExportCodeSample {
 
     // The Perfecto Continuous Quality Lab you work with
-    public static final String CQL_NAME = "dfw-directv";
+    public static final String CQL_NAME = "ps";
 
     //public static final String REPORTING_SERVER_URL = "https://" + CQL_NAME + ".reporting.perfectomobile.com";
     public static final String REPORTING_SERVER_URL = "https://" + CQL_NAME + ".reporting.perfectomobile.com";
 
     // See http://developers.perfectomobile.com/display/PD/DigitalZoom+Reporting+Public+API on how to obtain a Security Token
-    private static final String PERFECTO_SECUIRTY_TOKEN_KEY = "eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkOTMwMzc4Ny1kNGE4LTRmMzAtODZlNC0wZmRjMzFlM2NhN2UiLCJleHAiOjAsIm5iZiI6MCwiaWF0IjoxNTExMzAzMTY4LCJpc3MiOiJodHRwczovL2F1dGgucGVyZmVjdG9tb2JpbGUuY29tL2F1dGgvcmVhbG1zL2Rmdy1kaXJlY3R2LXBlcmZlY3RvbW9iaWxlLWNvbSIsImF1ZCI6Im9mZmxpbmUtdG9rZW4tZ2VuZXJhdG9yIiwic3ViIjoiODcwZjc5NDktYjM3ZS00OTUxLWI2MjEtMGNiNzZlMTI5N2JjIiwidHlwIjoiT2ZmbGluZSIsImF6cCI6Im9mZmxpbmUtdG9rZW4tZ2VuZXJhdG9yIiwic2Vzc2lvbl9zdGF0ZSI6IjgyYWFiYjBkLTRiOGQtNDUyZC1hMGE0LTMyNmY2ZGVkZWNkNSIsImNsaWVudF9zZXNzaW9uIjoiMzYxNjI4OWYtNDE2OS00OGIyLTkwYmQtMjE3OGM1ZDA5ZTA5IiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX19.WhZ0yOq5DUIAs6xr9gfMtZXwgp9Nm6_FAxTiNj9-yueGGrg7gZcwQHwAA1Jg09YvvIGjC1N8VUZ7oCzC1G6guvq0CvoeSHG1MoqfYQhIwyJlSbHrKtCvMHllLwrPEuE2mGxyI0bTD56NweeZoKlpZj5ORsqM9MOvWfusOZC92YyCSu1CilL-7g6G1zgii5sNJ59eYKRxiqP0_IjGh1cqnRs1FJrJs7Py8FbVruiojqkomOEWDoicZOzJfJH5nXFBXzzgwav1ZdOaPvYAM4y_B5vGYmfaUO6LQ_TAUr6V11OsRD8-hIxZI92cTyzXdDs2V3ifrQxytGjYtlmYlXikqQ";
-    private static final String SECURITY_TOKEN = PERFECTO_SECUIRTY_TOKEN_KEY;
+    public static final String PERFECTO_SECUIRTY_TOKEN_KEY = "eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI4M2MzMTVlNC1kYzUyLTQ5NDQtOGY2MC1lYjA5N2E0NTU2ZTAiLCJleHAiOjAsIm5iZiI6MCwiaWF0IjoxNTIyNzAxOTg3LCJpc3MiOiJodHRwczovL2F1dGgucGVyZmVjdG9tb2JpbGUuY29tL2F1dGgvcmVhbG1zL3BzLXBlcmZlY3RvbW9iaWxlLWNvbSIsImF1ZCI6Im9mZmxpbmUtdG9rZW4tZ2VuZXJhdG9yIiwic3ViIjoiMzkzYjMxYTQtNDJiZS00NmIxLTg5MGUtYmRlNzY3ZWEzYjQ2IiwidHlwIjoiT2ZmbGluZSIsImF6cCI6Im9mZmxpbmUtdG9rZW4tZ2VuZXJhdG9yIiwic2Vzc2lvbl9zdGF0ZSI6IjkxMWY2MjRlLWQ4NjMtNDVmNi1hN2ZmLWY2ZGEzMmQ1YTAwZCIsImNsaWVudF9zZXNzaW9uIjoiYmFkZmFmYzUtMzVkMi00ZjMyLWE4MDUtZDI3MDgyODMzNmYxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX19.RcgVGFGYEU1vBno4La7OaOsha0sJiCiNhkYptWVmiOu0QnRS3C0c9XgEePojCMWu5JOtZKE3tXzFoNBufUE2zr58OieCulhxnl9qDVK5FSrwboW-WyljSBRygJ40oqNKhqHu4CVUUivBSIrPMaHo3kvCBEPCKmbdsigRuaSpZx_dvvjX8YTjzwCmQfV5jypUYwE9s0_4SpLn4-LIOvStJeDVExdXbZ9xzEYQSCOtvzn3WMBk6X-VEoeopMhaEoI4yWMwIbzhxhG_WH_KjLcnb5DW8w_bnMutxRUFCacMXnHAW-NUEA9FAYMnrr4sdO4cqMnx6FiDW07PTyD3oaUnaQ";
+    
+    //  private static final String SECURITY_TOKEN = PERFECTO_SECUIRTY_TOKEN_KEY;
   
     //String executionId = (String) capabilitiesIOS.getCapability("executionId");
+    public static String testId;
+    
+    public static HashMap<String, String> RepMap = new HashMap<String, String>();
+    
+    
     
     public void downloadA() throws Exception {
         // Retrieve a list of the test executions in your lab (as a json)
-        JsonObject executions = retrieveTestExecutions();
-
+    	
+    	/* Execution Reports: https://ps.reporting.perfectomobile.com/test/5a9832e84cedfd0007538861 */	
+    	String reportOutput = "https://ps.reporting.perfectomobile.com/library?tags[0]=68c27644-de42-42b7-9ef3-881a17ea2f39";
+    	JsonObject executions = retrieveTestExecutions("68c27644-de42-42b7-9ef3-881a17ea2f39");
+    	
+    	
+    	String reportURLbase = "https://ps.reporting.perfectomobile.com/test/";
+    	
         JsonArray resources = executions.getAsJsonArray("resources");
+        System.out.println("Resources Size: " + resources.size());
+        
         if (resources.size() == 0) {
-            System.out.println("there are no test executions for that period of time");
+            System.out.println("There are no test executions for that period of time");
         } else {
-            JsonObject testExecution = resources.get(0).getAsJsonObject();
-
-            // Retrieves a list of commands of a single test (as a json)
-            retrieveTestCommands(testExecution);
-
-            // Download video
-           downloadVideo(testExecution);
-
-            // Download attachments such as device logs, vitals or network files (relevant for Mobile tests only)
-            downloadAttachments(testExecution);
+        	
+        	for (int i=0; i<resources.size(); i++) {
+        		
+        		JsonObject testExecution = resources.get(i).getAsJsonObject();
+        		retrieveTestCommands(testExecution);
+		
+        		String testId = testExecution.get("id").getAsString();
+        		String testStatus = testExecution.get("status").getAsString();
+        		String testName = testExecution.get("name").getAsString();
+        		
+        		RepMap.put("TestCase"+i, testName);
+        		RepMap.put("PerfectoReport"+i, reportURLbase+testId);
+        		RepMap.put("Status"+i, testStatus);
+        		 
+        		 
+       
+        		 
+        		 /* Download Console Logs */
+                try {
+                	//updateTAGs(testExecution, i);
+                	
+                	downloadConsoleLogs(testExecution, i);
+                	
+                	downloadNetworkFiles(testExecution, i);
+                	
+                	downloadDeviceLogs(testExecution, i);
+                	
+    	        } catch (Exception e) {
+    				throw e;
+    			}
+        		
+        		
+        	}
+        	
+        	
+//        	
+//        	PerfectoReport: https://ps.reporting.perfectomobile.com/test/5a9832e84cedfd0007538861
+//        		Status: FAILED/PASS
+//        		DeviceId: 41EEF156EA10EDAB41632651F7AD2A4C4CB502ED
+//
+//        		Logs:
+//        		Device_Logs: https://ps.reporting.perfectomobile.com/test-execution-artifacts/device-logs/ps/rajp%40perfectomobile.com_RemoteWebDriver_18-03-01_17_02_18_15/b275298a9cdd41bc9df2e15ba8f3b05a.zip
+//        		Console_Log: https://ps.reporting.perfectomobile.com/test-execution-artifacts/console-log/ps/rajp%40perfectomobile.com_RemoteWebDriver_18-03-01_17_02_18_15/d2cd739b74bf471496ad53110c7ee1a6.log
+//
+//        		VideoLogs:
+//        		VideoStreamURL: https://ps.vod-stream-01.perfectomobile.com/vods3/_definst_/mp4:pm/perfecto-vod-01/ps/ITMS/fe0f1abdeff572563e57abc2c05556853c314a3b15ae22e0713f8757ed4f1a1b.mp4
+//        		VideoDownloadURL: https://ps.vod-download-01.perfectomobile.com/ps/ITMS/fe0f1abdeff572563e57abc2c05556853c314a3b15ae22e0713f8757ed4f1a1b.mp4
+//
+//        		Saved Files:
+//        		1 DeviceLogsLoc: C:\Users\Raj\AppData\Local\Temp\5a9832e84cedfd00075388614612703969346410300.zip
+//        	
+//        	
+        	
+        	//	https://ps.reporting.perfectomobile.com/test/5a9832e84cedfd0007538861
+        	for(int j = 0; j<resources.size(); j++) {
+	    		System.out.println("\n\n-------------------------------------------------------------------------------------");
+	    		System.out.println("TestCase"+j+": "  + RepMap.get("TestCase"+j));
+	    		System.out.println("-------------------------------------------------------------------------------------");
+	    		System.out.println("PerfectoReport: " + RepMap.get("PerfectoReport"+j));
+	    		System.out.println("Status: " + RepMap.get("Status"+j));
+	    		System.out.println("DeviceId: Not Implemented...." +"\n");
+	    		
+	    		System.out.println("Logs:");
+	    		System.out.println("DeviceLogs: " + RepMap.get("DeviceLog"+j));
+	    		System.out.println("ConsoleLog: " + RepMap.get("ConsoleLog"+j));
+	    		System.out.println("NetworkLog: " + RepMap.get("NetworkLog"+j));
+	    		System.out.println("VideoStreamURL: Not Implemented....");
+	    		System.out.println("VideoDownloadURL: Not Implemented");
+	    		
+	    		System.out.println("\nSavedFiles:");
+	    		System.out.println("Location: " + RepMap.get("Location"+j));
+	    		System.out.println("--------------------------------------------------------------------------------------");
+        	}
         }
     }
+    
+    public static void retrieveTestCommands(JsonObject testExecution) throws URISyntaxException, IOException {
+    	
+        String testId = testExecution.get("id").getAsString();
+        HttpGet getCommands = new HttpGet(new URI(REPORTING_SERVER_URL + "/export/api/v1/test-executions/" + testId + "/commands"));
+        
+        addDefaultRequestHeaders(getCommands);
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpResponse getCommandsResponse = httpClient.execute(getCommands);
+        try (InputStreamReader inputStreamReader = new InputStreamReader(getCommandsResponse.getEntity().getContent())) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonObject commands = gson.fromJson(IOUtils.toString(inputStreamReader), JsonObject.class);
+            System.out.println("\nList of commands response:\n" + gson.toJson(commands));
+        }
+    }
+  
+    
+    public static void downloadConsoleLogs(JsonObject testExecution, int count) throws IOException, URISyntaxException {
+        // Example for downloading device logs
+        JsonArray artifacts = testExecution.getAsJsonArray("artifacts");
+        
+        for (JsonElement artifactElement : artifacts) {
+        	
+            JsonObject artifact = artifactElement.getAsJsonObject();
+            String artifactType = artifact.get("type").getAsString();
+                      
+            if (artifactType.equals("CONSOLE_LOG")) {
+                String testId = testExecution.get("id").getAsString();
+                String path = artifact.get("path").getAsString();
+                       
+                RepMap.put("ConsoleLog"+count, path);
+               // downloadLoc.put(description, file.toFile().getAbsolutePath());
+                
+                URIBuilder uriBuilder = new URIBuilder(path);
+                downloadFile(testId, uriBuilder.build(), ".zip", "Console logs", count);
+            }
+        }
+    }
+    
 
-    private static JsonObject retrieveTestExecutions() throws URISyntaxException, IOException {
+    public static void downloadNetworkFiles(JsonObject testExecution, int count) throws IOException, URISyntaxException {
+        // Example for downloading device logs
+        JsonArray artifacts = testExecution.getAsJsonArray("artifacts");
+        
+        for (JsonElement artifactElement : artifacts) {
+        	
+            JsonObject artifact = artifactElement.getAsJsonObject();
+            String artifactType = artifact.get("type").getAsString();
+                
+                       
+            if (artifactType.equals("NETWORK")) {
+                String testId = testExecution.get("id").getAsString();
+                String path = artifact.get("path").getAsString();
+                
+                RepMap.put("NetworkLog"+count, path);
+                
+                URIBuilder uriBuilder = new URIBuilder(path);
+                downloadFile(testId, uriBuilder.build(), ".zip", "Network logs", count);
+            }
+                       
+        }
+    }
+    
+    public static void downloadDeviceLogs(JsonObject testExecution, int count) throws IOException, URISyntaxException {
+        // Example for downloading device logs
+        JsonArray artifacts = testExecution.getAsJsonArray("artifacts");
+        
+        for (JsonElement artifactElement : artifacts) {
+        	
+            JsonObject artifact = artifactElement.getAsJsonObject();
+            String artifactType = artifact.get("type").getAsString();      
+                      
+            if (artifactType.equals("DEVICE_LOGS")) {
+            	
+                testId = testExecution.get("id").getAsString();
+                String path = artifact.get("path").getAsString();
+                
+                RepMap.put("DeviceLog"+count, path);
+                
+                URIBuilder uriBuilder = new URIBuilder(path);
+                downloadFile(testId, uriBuilder.build(), ".zip", "DeviceLogs", count);
+            }
+            
+        }
+    }
+    
+    
+    public static void updateTAGs(JsonObject testExecution, int count) throws IOException, URISyntaxException {
+        // Example for downloading device logs
+        JsonArray tags = testExecution.getAsJsonArray("tags");
+        
+        
+        
+        for (JsonElement artifactElement : tags) {
+        	
+        	
+    //        JsonObject tag = artifactElement.getAsJsonObject();
+           // String TagType = tag.get("type").getAsString();      
+            String output = artifactElement.getAsString();
+            
+            
+            
+            System.out.println("Tags: " + output);
+//            if (artifactType.equals("DEVICE_LOGS")) {
+//            	
+//              
+//                String path = tag.get("path").getAsString();
+//                
+//                downloadLoc.put("Device_Log", path);
+//                
+//                URIBuilder uriBuilder = new URIBuilder(path);
+//                downloadFile(testId, uriBuilder.build(), ".zip", "DeviceLogs");
+//            }
+            
+        }
+    }
+    
+    
+    private static void downloadFile(String fileName, URI uri, String suffix, String description, int count) throws IOException {
+        downloadFileToFS(new HttpGet(uri), fileName, suffix, description, count);
+    }
+
+
+    private static void downloadFileToFS(HttpGet httpGet, String fileName, String suffix, String description, int count) throws IOException {
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpResponse response = httpClient.execute(httpGet);
+        FileOutputStream fileOutputStream = null;
+    
+        try {
+            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+                Path file = Files.createTempFile(fileName, suffix);
+                fileOutputStream = new FileOutputStream(file.toFile());
+                IOUtils.copy(response.getEntity().getContent(), fileOutputStream);
+                System.out.println("\nSaved " + description + " to: " + file.toFile().getAbsolutePath());
+                
+                /* Adding Hash Map */
+                RepMap.put("Location"+count, file.toFile().getAbsolutePath());
+                
+            } else {
+                String errorMsg = IOUtils.toString(response.getEntity().getContent(), Charset.defaultCharset());
+                System.err.println("Error downloading file. Status: " + response.getStatusLine() + ".\nInfo: " + errorMsg);
+            }
+        } finally {
+            EntityUtils.consumeQuietly(response.getEntity());
+            IOUtils.closeQuietly(fileOutputStream);
+           
+        }
+    }
+    
+    
+
+    private static JsonObject retrieveTestExecutions(String tags) throws URISyntaxException, IOException {
+    	//REPORTING_SERVER_URL=https://ps.reporting.perfectomobile.com/export/api/v1/test-executions
         URIBuilder uriBuilder = new URIBuilder(REPORTING_SERVER_URL + "/export/api/v1/test-executions");
 
         // Optional: Filter by range. In this example: retrieve test executions of the past month (result may contain tests of multiple driver executions)
-        uriBuilder.addParameter("startExecutionTime[0]", Long.toString(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(10)));
-        uriBuilder.addParameter("endExecutionTime[0]", Long.toString(System.currentTimeMillis()));
+        //    uriBuilder.addParameter("startExecutionTime[0]", Long.toString(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(10)));
+        //     uriBuilder.addParameter("endExecutionTime[0]", Long.toString(System.currentTimeMillis()));
 
         // Optional: Filter by a specific driver execution ID that you can obtain at script execution
-       //  uriBuilder.addParameter("externalId[0]", executionID);
+        //String executionID = "68c27644-de42-42b7-9ef3-881a17ea2f39";
+       // String tags = "68c27644-de42-42b7-9ef3-881a17ea2f39";
+   
+      //  uriBuilder.addParameter("tags[0]", tags);
+        
+         uriBuilder.addParameter("externalId[0]", "rajp@perfectomobile.com_RemoteWebDriver_18-03-01_17_02_18_15");
 
         HttpGet getExecutions = new HttpGet(uriBuilder.build());
         addDefaultRequestHeaders(getExecutions);
+      
+        
         HttpClient httpClient = HttpClientBuilder.create().build();
 
         HttpResponse getExecutionsResponse = httpClient.execute(getExecutions);
@@ -86,76 +322,48 @@ public class ApiExportCodeSample {
         return executions;
     }
 
-    private static void retrieveTestCommands(JsonObject testExecution) throws URISyntaxException, IOException {
-        String testId = testExecution.get("id").getAsString();
-        HttpGet getCommands = new HttpGet(new URI(REPORTING_SERVER_URL + "/export/api/v1/test-executions/" + testId + "/commands"));
-        addDefaultRequestHeaders(getCommands);
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpResponse getCommandsResponse = httpClient.execute(getCommands);
-        try (InputStreamReader inputStreamReader = new InputStreamReader(getCommandsResponse.getEntity().getContent())) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonObject commands = gson.fromJson(IOUtils.toString(inputStreamReader), JsonObject.class);
-            System.out.println("\nList of commands response:\n" + gson.toJson(commands));
-        }
-    }
 
-    private static void downloadVideo(JsonObject testExecution) throws IOException, URISyntaxException {
+    
+
+    public static void downloadVideo(JsonObject testExecution, int count) throws IOException, URISyntaxException {
         JsonArray videos = testExecution.getAsJsonArray("videos");
         if (videos.size() > 0) {
             JsonObject video = videos.get(0).getAsJsonObject();
             String downloadVideoUrl = video.get("downloadUrl").getAsString();
             String format = "." + video.get("format").getAsString();
             String testId = testExecution.get("id").getAsString();
-            downloadFile(testId, URI.create(downloadVideoUrl), format, "video");
+            downloadFile(testId, URI.create(downloadVideoUrl), format, "video", count);
         } else {
             System.out.println("\nNo videos found for test execution");
         }
     }
 
-    private static void downloadAttachments(JsonObject testExecution) throws IOException, URISyntaxException {
+    public static void downloadAttachments(JsonObject testExecution, int count) throws IOException, URISyntaxException {
         // Example for downloading device logs
         JsonArray artifacts = testExecution.getAsJsonArray("artifacts");
+        
         for (JsonElement artifactElement : artifacts) {
+        	
             JsonObject artifact = artifactElement.getAsJsonObject();
             String artifactType = artifact.get("type").getAsString();
+                              
             if (artifactType.equals("DEVICE_LOGS")) {
                 String testId = testExecution.get("id").getAsString();
                 String path = artifact.get("path").getAsString();
                 URIBuilder uriBuilder = new URIBuilder(path);
-                downloadFile(testId, uriBuilder.build(), ".zip", "device logs");
+                downloadFile(testId, uriBuilder.build(), ".zip", "device logs", count);
             }
+        
         }
     }
-
-
+    
+    
     // Utils
 
-    private static void downloadFile(String fileName, URI uri, String suffix, String description) throws IOException {
-        downloadFileToFS(new HttpGet(uri), fileName, suffix, description);
-    }
-
-    private static void downloadFileToFS(HttpGet httpGet, String fileName, String suffix, String description) throws IOException {
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpResponse response = httpClient.execute(httpGet);
-        FileOutputStream fileOutputStream = null;
-        try {
-            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
-                Path file = Files.createTempFile(fileName, suffix);
-                fileOutputStream = new FileOutputStream(file.toFile());
-                IOUtils.copy(response.getEntity().getContent(), fileOutputStream);
-                System.out.println("\nSaved " + description + " to: " + file.toFile().getAbsolutePath());
-            } else {
-                String errorMsg = IOUtils.toString(response.getEntity().getContent(), Charset.defaultCharset());
-                System.err.println("Error downloading file. Status: " + response.getStatusLine() + ".\nInfo: " + errorMsg);
-            }
-        } finally {
-            EntityUtils.consumeQuietly(response.getEntity());
-            IOUtils.closeQuietly(fileOutputStream);
-        }
-    }
+ 
 
     private static void addDefaultRequestHeaders(HttpRequestBase request) {
-        request.addHeader("PERFECTO_AUTHORIZATION", SECURITY_TOKEN);
+        request.addHeader("PERFECTO_AUTHORIZATION", PERFECTO_SECUIRTY_TOKEN_KEY);
        // request.addHeader("TENANTID", "dfw-directv.reporting.perfectomobile.com");
     }
 }

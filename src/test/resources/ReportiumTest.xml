@@ -10,15 +10,15 @@
 	<parameter name="iOS_XpathPropfile" value="src/test/resources/iOS_Xpath.properties"/>
 	
 	<!-- Automation & Debug -->
-	<parameter name="RunMode"  value="Debug"/>   
+	<parameter name="RunMode"  value="Automation"/>   
 	<parameter name="enableLogs"  value="Enable"/>   	
 	<parameter name="installApp"  value="false"/>   
 	
 	<test name="PerfectoReportiumExample">
 		<!--AppiumAndroid/AppiumIOS/RemoteWebDriver -->
-		<parameter name="deviceName" value="0C2210C8EBD9A1FB421A8D0A692E6C72F85E4C9E"/>
+		<parameter name="deviceName" value="41EEF156EA10EDAB41632651F7AD2A4C4CB502ED"/>
 		<parameter name="driver"  value="AppiumIOS"/>     
-		<parameter name="bundleID"  value="com.example.apple-samplecode.Recipes"/>			
+		<parameter name="bundleID"  value="com.att.mobile.dfw"/>			
 		<classes>
 			<class name="org.mobile.mobileAssureFramework.ReportiumTest" />
 		</classes>

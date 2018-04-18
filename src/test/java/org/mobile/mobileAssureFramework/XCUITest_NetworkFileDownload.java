@@ -46,7 +46,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.HideKeyboardStrategy;
-import net.sf.saxon.expr.sort.IntIterator;
+
 
 
 public class XCUITest_NetworkFileDownload extends BaseClass {
@@ -60,8 +60,7 @@ public class XCUITest_NetworkFileDownload extends BaseClass {
 
 	//protected WebDriver webDriver;
 	
-	SoftAssert sAssert = new SoftAssert();
-	String reportURL;
+
 //	HashMap<Integer,Long> hm1 = new HashMap<Integer,Long>();
 //	HashMap<Integer,Long> hm2 = new HashMap<Integer,Long>();
 //	HashMap<Integer,Long> hm3 = new HashMap<Integer,Long>();
