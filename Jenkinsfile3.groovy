@@ -254,10 +254,10 @@ def iosInstall(deviceList) {
 	}
 	
 	/* Start Reportium Test Tag */
-	def paramTestName = "JenkinsAPIexecutions"
+	def paramStartTestName = "JenkinsAPIexecutions"
 	def TestTagNames="InstallApplication;${appID};${DynamicFields}"
 	try {
-		def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name="${paramTestName}"&param.tags="${TestTagNames}""
+		def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name="${paramStartTestName}"&param.tags="${TestTagNames}""
 		println startReportExec
 	} catch (all) {
 		echo 'Failed to Start Reportium Test....Catch Block !!!!'
@@ -330,8 +330,6 @@ def iosInstall(deviceList) {
 	
 	
 	/* Stop Reportium Test Tag */
-	def paramTestName = "JenkinsAPIexecutions"
-	def TestTagNames="InstallApplication;${appID};${DynamicFields}"
 	try {
 		def stopReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=end&&param.success="true""
 		println stopReportExec
