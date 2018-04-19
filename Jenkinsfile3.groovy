@@ -374,11 +374,12 @@ def reportiumStepStart(executionID, stepStartName) {
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
 
-	 
-	try {
-		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name=\\'${stepStartName}\\'"
+	 def url = "https://"+ ${cloudUrl} + "/services/executions/" + ${executionID} + "?operation=command&user=" + ${username} + "&password=" + ${password} + "&command=test&subcommand=step&param.name=\"" + ${stepStartName} + "\""
+
+	 	try { 
+		def stepStart = httpRequest url: url
 		println stepStart	
-	} catch (all) { 
+	} catch (all) {  
 		echo 'Failed to Step Start....Catch'
 		println all
 	} 
