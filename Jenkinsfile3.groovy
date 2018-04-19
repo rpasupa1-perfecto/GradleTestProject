@@ -267,7 +267,7 @@ def iosInstall(deviceList) {
 		 
 	/* Open Specific Device Connection */
 	try { 
-		reportiumStepStart(executionID, "Acquiring Device")	
+		reportiumStepStart(executionID, "'Acquiring Device'")	
 			println "Start Device Connection with Perfecto"
 			def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
 			printResponse(openResponse)
@@ -374,26 +374,26 @@ def reportiumStepStart(executionID, stepStartName) {
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
 
-	
+	 
 	try {
-		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name=\"${stepStartName}\""
+		def stepStart = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=step&param.name=\\'${stepStartName}\\'"
 		println stepStart	
-	} catch (all) {
+	} catch (all) { 
 		echo 'Failed to Step Start....Catch'
 		println all
-	}
+	} 
 }
-
-def reportiumStepEnd(executionID, stepEndName) {  
+ 
+def reportiumStepEnd(executionID, stepEndName) {   
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
-	
+// 	def url = "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"+ ${stepEndName} + "\""
 	try {
-		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"" + ${stepEndName} +"\""
+		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"${stepEndName}\""
 		println stepEnd
 	} catch (all) {
-		echo 'Failed to Step END....Catch'
+		echo 'Failed to Step END....Catch' 
 		println all
 	}
 }
