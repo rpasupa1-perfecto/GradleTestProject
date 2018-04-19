@@ -267,12 +267,12 @@ def iosInstall(deviceList) {
 		 
 	/* Open Specific Device Connection */
 	try { 
-		reportiumStepStart(executionID, "/Acquiring Device/")	   
+		reportiumStepStart(executionID, "Acquiring Device")	      
 			println "Start Device Connection with Perfecto"
 			def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
 			printResponse(openResponse)
 		reportiumAssert(${executionID}, "Acquired Device", true)
-	} catch (all) {
+	} catch (all) { 
 		reportiumAssert(${executionID}, "Failed to Acquire Device", false)
 		echo 'Device May be in USE ?? !!!! Failed to Open Device....Catch'
 		println all
@@ -375,10 +375,10 @@ def reportiumStepStart(executionID, stepStartName) {
 	def cloudUrl = "ps.perfectomobile.com"
 
 	 	try { 
-		def stepStart = httpRequest url: "https://"+ cloudUrl + "/services/executions/" + executionID + "?operation=command&user=" + username + "&password=" + password + "&command=test&subcommand=step&param.name=" + stepStartName
+		def stepStart = httpRequest url: "https://"+ cloudUrl + "/services/executions/" + executionID + "?operation=command&user=" + username + "&password=" + password + "&command=test&subcommand=step&param.name=\"" + stepStartName + "\""
 		println stepStart	
 	} catch (all) {  
-		echo 'Failed to Step Start....Catch'  
+		echo 'Failed to Step Start....Catch'   
 		println all 
 	} 
 }
