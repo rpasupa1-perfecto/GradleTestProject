@@ -281,17 +281,17 @@ def iosInstall(deviceList) {
 	}
 	
 	/* Set Dynamic Field */
-//	try {
-//		reportiumStepStart(executionID, "Set Dynamic Field")
-//			println "Setting Dynamic Field for device:  " + deviceList		
-//			def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-//			printResponse(dynamicFiled)
-//		reportiumAssert(${executionID}, "Dynamic Field Set", true)
-//	} catch (all) {
-//		reportiumAssert(${executionID}, "Failed to Set Dynamic Field for device", false)
-//		echo 'Failed to Set Dynamic Field....Catch'
-//		println all
-//	}
+	try {
+		reportiumStepStart(executionID, "Set Dynamic Field")
+			println "Setting Dynamic Field for device:  " + deviceList		
+			def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
+			printResponse(dynamicFiled)
+		reportiumAssert(executionID, "Dynamic Field Set", true)
+	} catch (all) {
+		reportiumAssert(executionID, "Failed to Set Dynamic Field for device", false)
+		echo 'Failed to Set Dynamic Field....Catch'
+		println all
+	}
 	
 	/* Uninstall Application */
 	try {
@@ -307,16 +307,18 @@ def iosInstall(deviceList) {
 	}
 		
 	/* Reboot Phone */
+	println "Rebooting Phone"
 	try {
-	//	println "Rebooting Device:  " + deviceList
-	//	def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
-	//	printResponse(rebootResponse)
+		println "Rebooting Device:  " + deviceList
+		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
+		printResponse(rebootResponse)
 	} catch (all) {
 		echo 'Failed to Reboot Phone....Catch'
 		println all
 	}
 	
 	/* Install Application */
+	println "Installing Application"
 	try {
 		reportiumStepStart(executionID, "Install Application")
 			println "Installing " + "${appLocation}" + " on " + deviceList		
@@ -329,41 +331,37 @@ def iosInstall(deviceList) {
 		println all
 	}
 	
-	/* Close Device */
-	try {
-		reportiumStepStart(executionID, "Close Device")
-			println "Close Device with Perfecto "		
-			def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + deviceList
-			printResponse(closeResponse)
-		reportiumAssert(executionID, "Close Device", true)
-	} catch (all) {
-		reportiumAssert(executionID, "Device not closed", false)
-		echo 'Failed to Close Device....Catch Block'
-		println all
-	}
-	
-	
-	/* Destroy Device Object */
-	try {
-		reportiumStepStart(executionID, "Quit Driver")
-			println "End Device Driver with Perfecto "		
-			def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
-			printResponse(stopResponse)
-		reportiumAssert(executionID, "Driver Quit/Destroyed", true)
-	} catch (all) {
-		reportiumAssert(executionID, "Can't Quit Driver", false)
-		echo 'Failed to QUIT Device....Catch'
-		println all
-	}
-	
 	
 	/* Stop Reportium Test Tag */
+	println "Stop Reportium Test Tag"
 	try {
 		def status = "true"
 		def stopReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=end&param.success=${status}"
 		println stopReportExec
 	} catch (all) {
 		echo 'Failed to Stop Reportium Test....Catch Block !!!!'
+		println all
+	}
+	
+	
+	/* Close Device */
+	println "Close Device with Perfecto"
+	try {					
+			def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + deviceList
+			printResponse(closeResponse)
+	 
+	} catch (all) {
+		echo 'Failed to Close Device....Catch Block'
+		println all
+	}
+		
+	/* Destroy Device Object */
+	try {	
+			println "End Device Driver with Perfecto "		
+			def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
+			printResponse(stopResponse)	
+	} catch (all) {	
+		echo 'Failed to QUIT Device....Catch'
 		println all
 	}
 	
