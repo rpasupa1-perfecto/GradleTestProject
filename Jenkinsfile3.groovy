@@ -266,15 +266,15 @@ def iosInstall(deviceList) {
 	/* Make device Reservation */
 		 
 	/* Open Specific Device Connection */
-	try { 
-		reportiumStepStart(executionID, "Acquiring Device")	      
+	try { 		
+			reportiumStepStart(executionID, "Acquiring Device")	      
 			println "Start Device Connection with Perfecto"
 			def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
 			printResponse(openResponse)
 		reportiumAssert(${executionID}, "Acquired Device", true)
 	} catch (all) { 
 		reportiumAssert(${executionID}, "Failed to Acquire Device", false)
-		echo 'Device May be in USE ?? !!!! Failed to Open Device....Catch'
+		echo 'Device May be in USE ?? !!!! Failed to Open Device....Catch Block'
 		println all
 	}
 	
@@ -373,9 +373,10 @@ def reportiumStepStart(executionID, stepStartName) {
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
+	stepStartName = stepStartName.replaceAll(' ', '%20')
 	
 	 	try { 
-			def stepStart = httpRequest url: "https://"+ cloudUrl + "/services/executions/" + executionID + "?operation=command&user=" + username + "&password=" + password + "&param.name=\"" + stepStartName + "\"" + "&command=test&subcommand=step"
+			def stepStart = httpRequest url: "https://"+ cloudUrl + "/services/executions/" + executionID + "?operation=command&user=" + username + "&password=" + password + "&command=test&subcommand=step&param.name=\"" + stepStartName + "\""
 			println stepStart	
 	} catch (all) {  
 		echo 'Failed to Step Start....Catch'   
@@ -387,7 +388,12 @@ def reportiumStepEnd(executionID, stepEndName) {
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
-
+	stepEndName = stepEndName.replaceAll(' ', '%20') 
+	
+	def url = "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"${stepEndName}\""
+	def http = new HTTPBuilder(url);
+	http.request( Method.P)
+	
 	try {
 		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"${stepEndName}\""
 		println stepEnd
@@ -401,6 +407,7 @@ def reportiumAssert(executionID, message, status) {
 	def username = "rajp@perfectomobile.com" 
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com" 
+	message = message.replaceAll(' ', '%20')
 	
 	try {
 		def assertStatus = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=status&subcommand=assert&param.status=${status}&param.message=\"" + ${message} +"\""
