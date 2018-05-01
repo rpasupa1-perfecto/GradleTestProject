@@ -236,7 +236,7 @@ def iosInstall(deviceList) {
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
-	def	DynamicFields = "Test-iOS-Version-Raj.ipa"
+	def	DynamicFields = "Raj.ipa"
 	def appID = "com.att.mobile.dfw"
 	def appLocation = "Raj/dfw-1.0.5647_ios.ipa"
 	def executionID
@@ -309,10 +309,13 @@ def iosInstall(deviceList) {
 	/* Reboot Phone */
 	println "Rebooting Phone"
 	try {
-		println "Rebooting Device:  " + deviceList
-		def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
-		printResponse(rebootResponse)
+		reportiumStepStart(executionID, "Reboot Device")
+			println "Rebooting Device:  " + deviceList
+			def rebootResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=reboot&param.deviceId=" + deviceList
+			printResponse(rebootResponse)
+		reportiumAssert(executionID, "Rebooted Device", true)
 	} catch (all) {
+		reportiumAssert(executionID, "Device Reboot Failed", false)
 		echo 'Failed to Reboot Phone....Catch'
 		println all
 	}
