@@ -376,10 +376,10 @@ def reportiumStepStart(executionID, stepStartName) {
 	stepStartName = stepStartName.replaceAll(' ', '%20')
 	
 	 	try { 
-			def stepStart = httpRequest url: "https://"+ cloudUrl + "/services/executions/" + executionID + "?operation=command&user=" + username + "&password=" + password + "&command=test&subcommand=step&param.name=\"" + stepStartName + "\""
+			def stepStart = httpRequest url: "https://"+ cloudUrl + "/services/executions/" + executionID + "?operation=command&user=" + username + "&password=" + password + "&command=test&subcommand=step&param.name=" + stepStartName
 			println stepStart	
 	} catch (all) {  
-		echo 'Failed to Step Start....Catch'   
+		echo 'Failed to Step Start....Catch'    
 		println all 
 	} 
 }
@@ -388,20 +388,20 @@ def reportiumStepEnd(executionID, stepEndName) {
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
 	def cloudUrl = "ps.perfectomobile.com"
-	stepEndName = stepEndName.replaceAll(' ', '%20') 
-	
+	stepEndName = stepEndName.replaceAll(' ', '%20')  
+	 
 //	def url = "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"${stepEndName}\""
 //	def http = new HTTPBuilder(url);
 	//http.request( Method.P)
 	
 	try {
-		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"${stepEndName}\""
+		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=${stepEndName}"
 		println stepEnd
 	} catch (all) {
 		echo 'Failed to Step END....Catch' 
 		println all
 	}
-}
+} 
 
 def reportiumAssert(executionID, message, status) { 
 	def username = "rajp@perfectomobile.com" 
@@ -410,7 +410,7 @@ def reportiumAssert(executionID, message, status) {
 	message = message.replaceAll(' ', '%20')
 	
 	try {
-		def assertStatus = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=status&subcommand=assert&param.status=${status}&param.message=\"" + ${message} +"\""
+		def assertStatus = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=status&subcommand=assert&param.status=${status}&param.message=${message}"
 		println assertStatus
 	} catch (all) {
 		echo 'Failed in Assert....Catch'
