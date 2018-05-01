@@ -253,6 +253,7 @@ def iosInstall(deviceList) {
 	
 	
 	/* Start Reportium Test Tag */
+	println "Start Reportium Test Tag"
 	def paramStartTestName = "JenkinsAPIexecutions"
 	def TestTagNames="InstallApplication;${appID};${DynamicFields}"
 	try {
@@ -264,16 +265,17 @@ def iosInstall(deviceList) {
 	}
 	
 	/* Make device Reservation */
-		 
+		  
 	/* Open Specific Device Connection */
+	println "Start Device Connection with Perfecto"
 	try { 		
 			reportiumStepStart(executionID, "Acquiring Device")	      
 			println "Start Device Connection with Perfecto"
 			def openResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=open&param.deviceId=" + deviceList + "&param.allocation=nowait"
 			printResponse(openResponse)
-		reportiumAssert(${executionID}, "Acquired Device", true)
+			reportiumAssert(executionID, "Acquired Device", true)
 	} catch (all) { 
-		reportiumAssert(${executionID}, "Failed to Acquire Device", false)
+		reportiumAssert(executionID, "Failed to Acquire Device", false)
 		echo 'Device May be in USE ?? !!!! Failed to Open Device....Catch Block'
 		println all
 	}
@@ -297,9 +299,9 @@ def iosInstall(deviceList) {
 			println "Uninstalling App for device:  " + deviceList	
 			def uninstallApp = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=uninstall&param.deviceId=" + deviceList + "&param.identifier=${appID}"
 			printResponse(uninstallApp)
-		reportiumAssert(${executionID}, "Uninstalled Application", true)
+		reportiumAssert(executionID, "Uninstalled Application", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "App not Uninstalled on device", false)
+		reportiumAssert(executionID, "App not Uninstalled on device", false)
 		echo 'Failed to Uninstall Application..Check if app was installed..Catch Block'
 		println all
 	}
@@ -320,9 +322,9 @@ def iosInstall(deviceList) {
 			println "Installing " + "${appLocation}" + " on " + deviceList		
 			def installResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=application&subcommand=install&param.deviceId=" + deviceList + "&param.file=PUBLIC:${appLocation}&param.instrument=instrument"
 			printResponse(installResponse)
-		reportiumAssert(${executionID}, "Installed Application", true)
+		reportiumAssert(executionID, "Installed Application", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "App not installed on device", false)
+		reportiumAssert(executionID, "App not installed on device", false)
 		echo 'Failed to Install Application....Catch Block'
 		println all
 	}
@@ -333,9 +335,9 @@ def iosInstall(deviceList) {
 			println "Close Device with Perfecto "		
 			def closeResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=device&subcommand=close&param.deviceId=" + deviceList
 			printResponse(closeResponse)
-		reportiumAssert(${executionID}, "Close Device", true)
+		reportiumAssert(executionID, "Close Device", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "Device not closed", false)
+		reportiumAssert(executionID, "Device not closed", false)
 		echo 'Failed to Close Device....Catch Block'
 		println all
 	}
@@ -347,9 +349,9 @@ def iosInstall(deviceList) {
 			println "End Device Driver with Perfecto "		
 			def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
 			printResponse(stopResponse)
-		reportiumAssert(${executionID}, "Driver Quit/Destroyed", true)
+		reportiumAssert(executionID, "Driver Quit/Destroyed", true)
 	} catch (all) {
-		reportiumAssert(${executionID}, "Can't Quit Driver", false)
+		reportiumAssert(executionID, "Can't Quit Driver", false)
 		echo 'Failed to QUIT Device....Catch'
 		println all
 	}
@@ -367,7 +369,7 @@ def iosInstall(deviceList) {
 	
 	/* Delete Reservation */
 	
-}
+} 
 
 def reportiumStepStart(executionID, stepStartName) { 
 	def username = "rajp@perfectomobile.com"
