@@ -279,17 +279,17 @@ def iosInstall(deviceList) {
 	}
 	
 	/* Set Dynamic Field */
-	try {
-		reportiumStepStart(executionID, "Set Dynamic Field")
-			println "Setting Dynamic Field for device:  " + deviceList		
-			def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
-			printResponse(dynamicFiled)
-		reportiumAssert(${executionID}, "Dynamic Field Set", true)
-	} catch (all) {
-		reportiumAssert(${executionID}, "Failed to Set Dynamic Field for device", false)
-		echo 'Failed to Set Dynamic Field....Catch'
-		println all
-	}
+//	try {
+//		reportiumStepStart(executionID, "Set Dynamic Field")
+//			println "Setting Dynamic Field for device:  " + deviceList		
+//			def dynamicFiled = httpRequest url:"https://${cloudUrl}/services/handsets/"+deviceList+"?operation=update&user=${username}&password=${password}&dynamicField.ipa=${DynamicFields}"
+//			printResponse(dynamicFiled)
+//		reportiumAssert(${executionID}, "Dynamic Field Set", true)
+//	} catch (all) {
+//		reportiumAssert(${executionID}, "Failed to Set Dynamic Field for device", false)
+//		echo 'Failed to Set Dynamic Field....Catch'
+//		println all
+//	}
 	
 	/* Uninstall Application */
 	try {
