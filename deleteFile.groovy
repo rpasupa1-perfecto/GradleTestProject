@@ -161,7 +161,7 @@ def deleteFileFromRepository() {
 def reportiumStepStart(executionID, stepStartName) { 
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
-	def cloudUrl = "ps.perfectomobile.com"
+	def cloudUrl = "ultimate.perfectomobile.com"
 	stepStartName = stepStartName.replaceAll(' ', '%20')
 	
 	 	try { 
@@ -176,7 +176,7 @@ def reportiumStepStart(executionID, stepStartName) {
 def reportiumStepEnd(executionID, stepEndName) {   
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
-	def cloudUrl = "ps.perfectomobile.com"
+	def cloudUrl = "ultimate.perfectomobile.com"
 	stepEndName = stepEndName.replaceAll(' ', '%20')  
 	 
 	try {
@@ -191,7 +191,7 @@ def reportiumStepEnd(executionID, stepEndName) {
 def reportiumAssert(executionID, message, status) { 
 	def username = "rajp@perfectomobile.com" 
 	def password = "Perfecto123"
-	def cloudUrl = "ps.perfectomobile.com" 
+	def cloudUrl = "ultimate.perfectomobile.com" 
 	message = message.replaceAll(' ', '%20')
 	
 	try {
