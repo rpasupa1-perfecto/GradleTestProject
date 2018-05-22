@@ -58,7 +58,7 @@ def deleteFileFromRepository() {
 	def media = "PUBLIC"
 	def mediaFolder = "NU"
 	def executionID
-	def responseFileData
+	def responseFileData = []
 
 		
 	/* Device Start */
