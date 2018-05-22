@@ -99,10 +99,12 @@ def deleteFileFromRepository() {
 			println "List of items from Repository App for device:  " + deviceList
 			
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
+			println listItemRepository
 			
 			responseFileData = getFileName(listItemRepository)
+			println responseFileData
 			
-			printResponse(responseFileData)
+			
 	} catch (all) {
 		reportiumAssert(executionID, "List Items from Repository ", false)
 		echo 'List Items from Repository..Catch Block'
@@ -154,7 +156,6 @@ def deleteFileFromRepository() {
 		println all
 	}
 	
-	/* Delete Reservation */
 	
 } 
 
@@ -228,7 +229,7 @@ def getExecutionID (response){
 def getFileName (response) {
 	def slurper = new groovy.json.JsonSlurperClassic()
 	def startCommand = slurper.parseText(response.content)
-	def fileItemList = startCommand.items.PUBLIC
+	def fileItemList = startCommand.items
 	slurper=null
 	println "ResponseMsg:  ${startCommand}"
 	println "ParsedOutput:  ${fileItemList}"
