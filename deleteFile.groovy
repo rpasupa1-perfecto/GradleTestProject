@@ -101,8 +101,11 @@ def deleteFileFromRepository() {
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
 			//printResponse(listItemRepository)
 			
+			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
+			/*  Example: [PUBLIC:NU, PUBLIC:NU/nu-mobile-app.ipa  */
 			responseFileData = getFileName(listItemRepository)
-			println responseFileData
+			println responseFileData[0]
+			println responseFileData[1]
 			
 			
 			
@@ -115,17 +118,17 @@ def deleteFileFromRepository() {
 
 	
 	/* Delete File */
-//	try {
-//		reportiumStepStart(executionID, "Delete File")
-//			println "Uninstalling App for device:  " + deviceList	
-//			def uninstallApp = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
-//			printResponse(uninstallApp)
-//		reportiumAssert(executionID, "Uninstalled Application", true)
-//	} catch (all) {
-//		reportiumAssert(executionID, "App not Uninstalled on device", false)
-//		echo 'Failed to Uninstall Application..Check if app was installed..Catch Block'
-//		println all
-//	}
+	try {
+		//reportiumStepStart(executionID, "Delete File")
+			println "Deleting File "	
+			def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[1]}?operation=delete&user=${username}&password=${password}&admin=true"
+			printResponse(deletefile)
+		//reportiumAssert(executionID, "Uninstalled Application", true)
+	} catch (all) {
+		//reportiumAssert(executionID, "App not Uninstalled on device", false)
+		echo 'Failed to Delete File....Catch Block'
+		println all
+	}
 		
 	
 	
