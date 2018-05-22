@@ -56,7 +56,7 @@ def deleteFileFromRepository() {
 	def password = "Perfecto123"
 	def cloudUrl = "ultimate.perfectomobile.com"
 	def media = "PUBLIC"
-	def mediaFolder = "NU"
+	def mediaFolder = "Personas"
 	def executionID
 	def responseFileData = []
 
@@ -104,11 +104,10 @@ def deleteFileFromRepository() {
 			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
 			/*  Example: [PUBLIC:NU, PUBLIC:NU/nu-mobile-app.ipa  */
 			responseFileData = getFileName(listItemRepository)
-			println responseFileData[0]
-			println responseFileData[1]
+			responseFileData.size()
 			
 			
-			
+					
 	} catch (all) {
 		//reportiumAssert(executionID, "List Items from Repository ", false)
 		echo 'List Items from Repository..Catch Block'
@@ -118,19 +117,20 @@ def deleteFileFromRepository() {
 
 	
 	/* Delete File */
-	try {
-		//reportiumStepStart(executionID, "Delete File")
-			println "Deleting File "	
-			def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[1]}?operation=delete&user=${username}&password=${password}&admin=true"
-			printResponse(deletefile)
-		//reportiumAssert(executionID, "Uninstalled Application", true)
-	} catch (all) {
-		//reportiumAssert(executionID, "App not Uninstalled on device", false)
-		echo 'Failed to Delete File....Catch Block'
-		println all
-	}
+	for (i=1; i<responseFileData.size(); i++) {
+		try {
+			//reportiumStepStart(executionID, "Delete File")
+				println "Deleting File "	
+				def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[i]}?operation=delete&user=${username}&password=${password}&admin=true"
+				printResponse(deletefile)
+			//reportiumAssert(executionID, "Uninstalled Application", true)
+		} catch (all) {
+			//reportiumAssert(executionID, "App not Uninstalled on device", false)
+			echo 'Failed to Delete File....Catch Block'
+			println all
+		}
 		
-	
+	}
 	
 	
 	
