@@ -104,7 +104,7 @@ def deleteFileFromRepository() {
 			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
 			/*  Example: [PUBLIC:NU, PUBLIC:NU/nu-mobile-app.ipa  */
 			responseFileData = getFileName(listItemRepository)
-			responseFileData.size()
+			println responseFileData.size()
 			
 			
 					
@@ -120,7 +120,7 @@ def deleteFileFromRepository() {
 	for (i=1; i<responseFileData.size(); i++) {
 		try {
 			//reportiumStepStart(executionID, "Delete File")
-				println "Deleting File "	
+				println "Deleting File: " +	responseFileData[i]
 				def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[i]}?operation=delete&user=${username}&password=${password}&admin=true"
 				printResponse(deletefile)
 			//reportiumAssert(executionID, "Uninstalled Application", true)
