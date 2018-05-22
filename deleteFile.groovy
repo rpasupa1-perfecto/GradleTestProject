@@ -22,7 +22,7 @@ node {
 	    
 	    try {
 			stage('Gradle Build') {
-			   bat 'gradlew clean build -x test'
+			   bat './gradlew clean build -x test'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
@@ -59,6 +59,7 @@ def deleteFileFromRepository() {
 	def mediaFolder = "NU"
 	def executionID
 	def responseFileData
+
 		
 	/* Device Start */
 	println "Start Connection with Perfecto"
@@ -73,8 +74,8 @@ def deleteFileFromRepository() {
 	
 	/* Start Reportium Test Tag */
 	println "Start Reportium Test Tag"
-	def paramStartTestName = "JenkinsAPIexecutions"
-	def TestTagNames="InstallApplication;${appID};${DynamicFields}"
+	def paramStartTestName = "JenkinsDeleteAPIexecutions"
+	def TestTagNames="DeleteFolderData;${media}:${mediaFolder}"
 	try {
 		def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name=${paramStartTestName}&param.tags=${TestTagNames}"
 		println startReportExec
