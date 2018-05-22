@@ -56,7 +56,7 @@ def deleteFileFromRepository() {
 	def password = "Perfecto123"
 	def cloudUrl = "ultimate.perfectomobile.com"
 	def media = "PUBLIC"
-	def mediaFolder = "builds/ultipro"
+	def mediaFolder = "builds/ultipromobile"
 	def executionID
 	def responseFileData = []
 
