@@ -99,10 +99,11 @@ def deleteFileFromRepository() {
 			println "List of items from Repository App for device:  "
 			
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
-			printResponse(listItemRepository)
+			//printResponse(listItemRepository)
 			
 			responseFileData = getFileName(listItemRepository)
-			println responseFileData
+			println responseFileData.values()
+			
 			
 			
 	} catch (all) {
@@ -227,7 +228,7 @@ def getExecutionID (response){
 def getFileName (response) {
 	def slurper = new groovy.json.JsonSlurperClassic()
 	def startCommand = slurper.parseText(response.content)
-	def fileItemList = startCommand.items
+	def fileItemList = startCommand.items as List
 	slurper=null
 	println "ResponseMsg:  ${startCommand}"
 	println "ParsedOutput:  ${fileItemList}"
