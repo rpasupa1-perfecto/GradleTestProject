@@ -99,7 +99,7 @@ def deleteFileFromRepository() {
 			println "List of items from Repository App for device:  "
 			
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
-			println listItemRepository
+			printResponse(listItemRepository)
 			
 			responseFileData = getFileName(listItemRepository)
 			println responseFileData
@@ -148,7 +148,7 @@ def deleteFileFromRepository() {
 //		
 	/* Destroy Device Object */
 	try {	
-			println "End Device Driver with Perfecto "		
+			println "End Driver with Perfecto "		
 			def stopResponse = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=end&user=${username}&password=${password}"
 			printResponse(stopResponse)	
 	} catch (all) {	
@@ -205,7 +205,13 @@ def reportiumAssert(executionID, message, status) {
 }
 
 
-
+def printResponse (response){
+	def Slurper = new groovy.json.JsonSlurperClassic()
+	def command = Slurper.parseText(response.content)
+	Slurper=null
+	println "ResponseMsg: ${command}"
+	println "StatusCode:  ${response}"
+}
 
 def getExecutionID (response){
 	def slurper = new groovy.json.JsonSlurperClassic()
@@ -221,7 +227,7 @@ def getExecutionID (response){
 def getFileName (response) {
 	def slurper = new groovy.json.JsonSlurperClassic()
 	def startCommand = slurper.parseText(response.content)
-	def fileItemList = startCommand.items
+	def fileItemList = startCommand.items.PUBLIC
 	slurper=null
 	println "ResponseMsg:  ${startCommand}"
 	println "ParsedOutput:  ${fileItemList}"
