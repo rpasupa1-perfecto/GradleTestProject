@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="testList" parallel="tests" thread-count="1">	
+
+	<!-- Global Parameters -->	
+	<parameter name="URL"  value="rbc-us.perfectomobile.com"/>	
+	<parameter name="user" value="rajp@perfectomobile.com"/>
+	<parameter name="pass" value="Perfecto1234"/>
+	<parameter name="iOS_XpathPropfile" value="src/test/resources/iOS_Xpath.properties"/>
+	
+	<!-- Automation & Debug -->
+	<parameter name="RunMode"  value="Debug"/>   
+	<parameter name="enableLogs"  value="Enable"/>   	
+	<parameter name="installApp"  value="false"/>   
+	
+	<test name="PerfectoReportiumExample">		
+		<parameter name="deviceName" value="9889234230374D4F48"/>
+		<!--AppiumAndroid/AppiumIOS/RemoteWebDriver -->
+		<parameter name="driver"  value="AppiumAndroid"/>     
+		<parameter name="bundleID"  value="com.rbc.clientmobility.us.dev"/>			
+		<classes>
+			<class name="org.mobile.mobileAssureFramework.RBCSampleTest" />
+		</classes>
+	</test>
+	
+
+</suite> 
+ 

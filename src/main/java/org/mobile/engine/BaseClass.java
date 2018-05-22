@@ -34,6 +34,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.DriverCommand;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.ITestContext;
@@ -291,17 +293,29 @@ public abstract class BaseClass  {
 
 	}
 
-	public void startapp() {
+	public void startappAndroid(String appName) {
 		Map<String, Object> params1 = new HashMap<>();
-		params1.put("identifier", "com.att.mobile.dfw");
+		params1.put("identifier", appName);
+		Object result1 = driverAndroid.executeScript("mobile:application:open", params1);
+	}
+	
+	public void startappIOS(String appName) {
+		Map<String, Object> params1 = new HashMap<>();
+		params1.put("identifier", appName);
 		Object result1 = driverIOS.executeScript("mobile:application:open", params1);
 	}
 	
-	public void closeApp() {
-		Map<String, Object> params2 = new HashMap<>();
-		params2.put("identifier", "com.att.mobile.dfw");
-		Object result2 = driverIOS.executeScript("mobile:application:close", params2);
+	
+	public void closeAppAndroid(String appName) {
+		Map<String, Object> params1 = new HashMap<>();
+		params1.put("identifier", appName);
+		Object result1 = driverAndroid.executeScript("mobile:application:close", params1);
 	}
+//	public void closeApp() {
+//		Map<String, Object> params2 = new HashMap<>();
+//		params2.put("identifier", "com.att.mobile.dfw");
+//		Object result2 = driverIOS.executeScript("mobile:application:close", params2);
+//	}
 	
 	
 	public Float TotalSum(HashMap<Integer, Long> hm3) {	
@@ -342,7 +356,7 @@ public abstract class BaseClass  {
 	  /**
      * @param millis
      */
-    private static void sleep(long millis) {
+    public static void sleep(long millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
@@ -786,7 +800,7 @@ public abstract class BaseClass  {
 		long totalDurationSec=0;
 		
 		try {
-			///reportiumClient.stepStart(description);
+			reportiumClient.stepStart(description);
 			startTime = System.currentTimeMillis();
 			WebElement webElement = setFluentWaitMethod(By.xpath(xpathExpression), timeOut);
 			if (webElement!=null) {
@@ -973,6 +987,12 @@ public abstract class BaseClass  {
 		}
 	}
 	
+	public void switchToContext(String context) {
+        RemoteExecuteMethod executeMethod = new RemoteExecuteMethod(driverIOS);
+        Map<String,String> params = new HashMap<>();
+        params.put("name", context);
+        executeMethod.execute(DriverCommand.SWITCH_TO_CONTEXT, params);
+    }
 	
 	
 	public void scrollExpiration(String Month, String Year) throws Exception {

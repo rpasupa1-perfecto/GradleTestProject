@@ -59,7 +59,11 @@ public class ReportiumTest extends BaseClass {
 	@Test
 	public void sampleTestCase(ITestContext context) throws MalformedURLException, IOException {
 		
-		try {				
+		try {	
+			
+			
+			
+			
 				/* Step Start Message */
 				getReportiumClient().stepStart("StepStart_VerifyUserID");	
 				try {

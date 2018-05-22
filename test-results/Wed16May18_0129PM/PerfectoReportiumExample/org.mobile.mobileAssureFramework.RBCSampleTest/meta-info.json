@@ -1,0 +1,36 @@
+{
+  "methods": [
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "SetUp",
+        "name": "setUp",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1526495367960,
+      "duration": 3250,
+      "result": "pass",
+      "passPer": 0.0
+    },
+    {
+      "index": 0,
+      "type": "config",
+      "args": [],
+      "metaData": {
+        "resultFileName": "BeforeMethod",
+        "name": "beforeMethod",
+        "groups": [],
+        "description": ""
+      },
+      "dependsOn": [],
+      "startTime": 1526495371257,
+      "duration": 126,
+      "result": "pass",
+      "passPer": 0.0
+    }
+  ]
+}

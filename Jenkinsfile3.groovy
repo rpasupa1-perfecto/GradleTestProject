@@ -231,6 +231,10 @@ def androidInstall(deviceList) {
 }
 
 
+def deleteFileFromRepository() {
+	
+}
+
 def iosInstall(deviceList) {
 	
 	def username = "rajp@perfectomobile.com"
@@ -393,10 +397,6 @@ def reportiumStepEnd(executionID, stepEndName) {
 	def cloudUrl = "ps.perfectomobile.com"
 	stepEndName = stepEndName.replaceAll(' ', '%20')  
 	 
-//	def url = "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=\"${stepEndName}\""
-//	def http = new HTTPBuilder(url);
-	//http.request( Method.P)
-	
 	try {
 		def stepEnd = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=step&subcommand=end&param.message=${stepEndName}"
 		println stepEnd

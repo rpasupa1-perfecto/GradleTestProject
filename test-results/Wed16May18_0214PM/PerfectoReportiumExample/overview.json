@@ -1,0 +1,11 @@
+{
+  "total": 1,
+  "pass": 0,
+  "fail": 0,
+  "skip": 0,
+  "classes": [
+    "org.mobile.mobileAssureFramework.RBCSampleTest"
+  ],
+  "startTime": 1526498091619,
+  "endTime": 1526498091766
+}
