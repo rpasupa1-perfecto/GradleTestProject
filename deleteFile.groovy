@@ -131,7 +131,10 @@ def deleteFileFromRepository() {
 		}
 		
 	}
-	
+	/* Need to Delete the folder */
+	println "Deleting Folder: " +	responseFileData[0]
+	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[0]}?operation=delete&user=${username}&password=${password}&admin=true"
+	printResponse(deletefile)
 	
 	
 	
