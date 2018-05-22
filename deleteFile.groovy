@@ -102,7 +102,7 @@ def deleteFileFromRepository() {
 			//printResponse(listItemRepository)
 			
 			responseFileData = getFileName(listItemRepository)
-			println responseFileData.values()
+			println responseFileData
 			
 			
 			
