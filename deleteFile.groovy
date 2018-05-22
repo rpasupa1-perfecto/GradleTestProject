@@ -22,7 +22,7 @@ node {
 	    
 	    try {
 			stage('Gradle Build') {
-			   bat 'clean build -x test'
+			  // bat './gradlew clean build -x test'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
@@ -34,7 +34,7 @@ node {
 		/* Install iOS builds & Restart Device */
 		stage('Deleting Files from Perfecto Media Repository') {	
 			echo 'Deleting Files from Perfecto Media Repository.....'			
-			//deleteFileFromRepository()
+			deleteFileFromRepository()
 		}
 			
 
