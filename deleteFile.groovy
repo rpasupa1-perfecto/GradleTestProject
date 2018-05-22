@@ -227,7 +227,7 @@ def getExecutionID (response){
 def getFileName (response) {
 	def slurper = new groovy.json.JsonSlurperClassic()
 	def startCommand = slurper.parseText(response.content)
-	def fileItemList = startCommand.items.PUBLIC
+	def fileItemList = startCommand.items
 	slurper=null
 	println "ResponseMsg:  ${startCommand}"
 	println "ParsedOutput:  ${fileItemList}"
