@@ -73,16 +73,16 @@ def deleteFileFromRepository() {
 	
 	
 	/* Start Reportium Test Tag */
-	println "Start Reportium Test Tag"
-	def paramStartTestName = "JenkinsDeleteAPIexecutions"
-	def TestTagNames="DeleteFolderData;${media}:${mediaFolder}"
-	try {
-		def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name=${paramStartTestName}&param.tags=${TestTagNames}"
-		println startReportExec
-	} catch (all) {
-		echo 'Failed to Start Reportium Test....Catch Block !!!!'
-		println all
-	}
+//	println "Start Reportium Test Tag"
+//	def paramStartTestName = "JenkinsDeleteAPIexecutions"
+//	def TestTagNames="DeleteFolderData;${media}:${mediaFolder}"
+//	try {
+//		def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name=${paramStartTestName}&param.tags=${TestTagNames}"
+//		println startReportExec
+//	} catch (all) {
+//		echo 'Failed to Start Reportium Test....Catch Block !!!!'
+//		println all
+//	}
 	
 
 
@@ -95,8 +95,8 @@ def deleteFileFromRepository() {
 	/* IN PROGRESSSS */
 	/* Get List of item from Repository */
 	try {
-		reportiumStepStart(executionID, "Get List of Items from Repository")
-			println "List of items from Repository App for device:  " + deviceList
+		//reportiumStepStart(executionID, "Get List of Items from Repository")
+			println "List of items from Repository App for device:  "
 			
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
 			println listItemRepository
@@ -106,7 +106,7 @@ def deleteFileFromRepository() {
 			
 			
 	} catch (all) {
-		reportiumAssert(executionID, "List Items from Repository ", false)
+		//reportiumAssert(executionID, "List Items from Repository ", false)
 		echo 'List Items from Repository..Catch Block'
 		println all
 	}
@@ -136,16 +136,16 @@ def deleteFileFromRepository() {
 	
 	
 	/* Stop Reportium Test Tag */
-	println "Stop Reportium Test Tag"
-	try {
-		def status = "true"
-		def stopReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=end&param.success=${status}"
-		println stopReportExec
-	} catch (all) {
-		echo 'Failed to Stop Reportium Test....Catch Block !!!!'
-		println all
-	}
-		
+//	println "Stop Reportium Test Tag"
+//	try {
+//		def status = "true"
+//		def stopReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=end&param.success=${status}"
+//		println stopReportExec
+//	} catch (all) {
+//		echo 'Failed to Stop Reportium Test....Catch Block !!!!'
+//		println all
+//	}
+//		
 	/* Destroy Device Object */
 	try {	
 			println "End Device Driver with Perfecto "		
@@ -205,14 +205,6 @@ def reportiumAssert(executionID, message, status) {
 }
 
 
-
-def printResponse (response){	
-	def Slurper = new groovy.json.JsonSlurperClassic()
-	def command = Slurper.parseText(response.content)
-	Slurper=null
-	println "ResponseMsg: ${command}"
-	println "StatusCode:  ${response}"
-}
 
 
 def getExecutionID (response){
