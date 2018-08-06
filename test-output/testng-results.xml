@@ -17,16 +17,16 @@
       <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
     </line>
   </reporter-output>
-  <suite name="testList" duration-ms="37561" started-at="2018-05-16T21:50:01Z" finished-at="2018-05-16T21:50:38Z">
+  <suite name="testList" duration-ms="119730" started-at="2018-06-19T06:00:18Z" finished-at="2018-06-19T06:02:18Z">
     <groups>
     </groups>
-    <test name="PerfectoReportiumExample" duration-ms="37561" started-at="2018-05-16T21:50:01Z" finished-at="2018-05-16T21:50:38Z">
+    <test name="PerfectoReportiumExample" duration-ms="119730" started-at="2018-06-19T06:00:18Z" finished-at="2018-06-19T06:02:18Z">
       <class name="org.mobile.mobileAssureFramework.RBCSampleTest">
-        <test-method status="PASS" signature="setUp(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@6b927fb]" name="setUp" is-config="true" duration-ms="3048" started-at="2018-05-16T21:50:01Z" finished-at="2018-05-16T21:50:04Z">
+        <test-method status="PASS" signature="setUp(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@3a5ecce3]" name="setUp" is-config="true" duration-ms="3361" started-at="2018-06-19T06:00:18Z" finished-at="2018-06-19T06:00:21Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@79469581]]>
+                <![CDATA[org.testng.TestRunner@3ff008d2]]>
               </value>
             </param>
           </params>
@@ -36,11 +36,11 @@
             </line>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="beforeMethod(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@6b927fb]" name="beforeMethod" is-config="true" duration-ms="109" started-at="2018-05-16T21:50:04Z" finished-at="2018-05-16T21:50:04Z">
+        <test-method status="PASS" signature="beforeMethod(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@3a5ecce3]" name="beforeMethod" is-config="true" duration-ms="93" started-at="2018-06-19T06:00:21Z" finished-at="2018-06-19T06:00:21Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@79469581]]>
+                <![CDATA[org.testng.TestRunner@3ff008d2]]>
               </value>
             </param>
           </params>
@@ -50,11 +50,11 @@
             </line>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="sampleTestCase(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@6b927fb]" name="sampleTestCase" duration-ms="25608" started-at="2018-05-16T21:50:04Z" finished-at="2018-05-16T21:50:29Z">
+        <test-method status="PASS" signature="sampleTestCase2(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@3a5ecce3]" name="sampleTestCase2" duration-ms="106579" started-at="2018-06-19T06:00:21Z" finished-at="2018-06-19T06:02:08Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@79469581]]>
+                <![CDATA[org.testng.TestRunner@3ff008d2]]>
               </value>
             </param>
           </params>
@@ -63,17 +63,17 @@
               <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
             </line>
           </reporter-output>
-        </test-method> <!-- sampleTestCase -->
-        <test-method status="PASS" signature="destroy(org.testng.ITestContext, org.testng.ITestResult)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@6b927fb]" name="destroy" is-config="true" duration-ms="93" started-at="2018-05-16T21:50:30Z" finished-at="2018-05-16T21:50:30Z">
+        </test-method> <!-- sampleTestCase2 -->
+        <test-method status="PASS" signature="destroy(org.testng.ITestContext, org.testng.ITestResult)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@3a5ecce3]" name="destroy" is-config="true" duration-ms="312" started-at="2018-06-19T06:02:08Z" finished-at="2018-06-19T06:02:09Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@79469581]]>
+                <![CDATA[org.testng.TestRunner@3ff008d2]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[[TestResult name=sampleTestCase status=SUCCESS method=RBCSampleTest.sampleTestCase(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@6b927fb] output=<div style="display:block;margin-left:10px;"></div>]]]>
+                <![CDATA[[TestResult name=sampleTestCase2 status=SUCCESS method=RBCSampleTest.sampleTestCase2(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@3a5ecce3] output=<div style="display:block;margin-left:10px;"></div>]]]>
               </value>
             </param>
           </params>
@@ -83,7 +83,7 @@
             </line>
           </reporter-output>
         </test-method> <!-- destroy -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@6b927fb]" name="afterClass" is-config="true" duration-ms="8405" started-at="2018-05-16T21:50:30Z" finished-at="2018-05-16T21:50:38Z">
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:org.mobile.mobileAssureFramework.RBCSampleTest@3a5ecce3]" name="afterClass" is-config="true" duration-ms="8955" started-at="2018-06-19T06:02:09Z" finished-at="2018-06-19T06:02:18Z">
           <reporter-output>
             <line>
               <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>

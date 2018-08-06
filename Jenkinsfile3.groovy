@@ -362,6 +362,9 @@ def iosInstall(deviceList) {
 		println all
 	}
 		
+	
+	
+	
 	/* Destroy Device Object */
 	try {	
 			println "End Device Driver with Perfecto "		
@@ -378,7 +381,7 @@ def iosInstall(deviceList) {
 
 def reportiumStepStart(executionID, stepStartName) { 
 	def username = "rajp@perfectomobile.com"
-	def password = "Perfecto123"
+	def password = ""
 	def cloudUrl = "ps.perfectomobile.com"
 	stepStartName = stepStartName.replaceAll(' ', '%20')
 	
@@ -393,7 +396,7 @@ def reportiumStepStart(executionID, stepStartName) {
  
 def reportiumStepEnd(executionID, stepEndName) {   
 	def username = "rajp@perfectomobile.com"
-	def password = "Perfecto123"
+	def password = ""
 	def cloudUrl = "ps.perfectomobile.com"
 	stepEndName = stepEndName.replaceAll(' ', '%20')  
 	 

@@ -244,10 +244,17 @@ def iosInstall(deviceList) {
 	def appID = "com.att.mobile.dfw"
 	def appLocation = "Raj/dfw-1.0.5647_ios.ipa"
 	
+	System.getProperties().put("proxySet", "true");
+	System.getProperties().put("http.proxyHost","webproxy.wlb2.nam.nsroot.net");
+	System.getProperties().put("http.proxyPort","8092");
+	System.getProperties().put("https.proxyHost","bcproxy.sgp.com");
+	System.getProperties().put("https.proxyPort","8080");
 	
+
+	 
 	/* Device Start */
 	println "Start Connection with Perfecto"
-	def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"	
+	def startResponse = HttpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"	
 	def executionID = getExecutionID(startResponse)
 
 	/* Make device Reservation */

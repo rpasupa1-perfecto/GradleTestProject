@@ -62,7 +62,7 @@ public class ReportiumTest extends BaseClass {
 		try {	
 			
 			
-			
+		//	reportiumClient.
 			
 				/* Step Start Message */
 				getReportiumClient().stepStart("StepStart_VerifyUserID");	

@@ -1,6 +1,6 @@
 /* The + sign grabs the latest version of  */
 String perfectoDriverVer = '18.+'
-String perfectoReportiumDriver = '1.2.0'
+String perfectoReportiumDriver = '1.+'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.event.SwingPropertyChangeSupport;
+
 import org.apache.tools.ant.taskdefs.Sleep;
 import org.junit.Assert;
 import org.mobile.engine.BaseClass;
@@ -31,6 +33,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.google.inject.Key;
 import com.perfecto.reportium.client.ReportiumClient;
 import com.perfecto.reportium.client.ReportiumClientFactory;
 import com.perfecto.reportium.model.PerfectoExecutionContext;
@@ -57,7 +60,89 @@ public class RBCSampleTest extends BaseClass {
 	SoftAssert sAssert = new SoftAssert();
 	String reportURL;
 	
+	
+	
+	
+	
 	@Test
+	public void sampleTestCase2(ITestContext context) throws MalformedURLException, IOException {
+		String accountDescriptionName;
+		String accountDescriptionValue;
+		
+		try {				
+				/* Verify RBC Image Logo */			
+				String accountName ="//*[@resource-id='com.rbc.clientmobility.us.dev:id/fragment_account_detail_summary_show_more_list']/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]";
+				String accountValue = "//*[@resource-id='com.rbc.clientmobility.us.dev:id/fragment_account_detail_summary_show_more_list']/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]";
+			
+				HashMap<String, String> AccountDetails = new HashMap<String, String>();
+				
+				try {
+					
+					/* Enables Maximum 6 Account Details */
+					CustomActSwipe();
+					
+					/* Get Elements */
+					List<WebElement> accountNamelist = driverAndroid.findElementsByXPath(accountName);
+					List<WebElement> accountValuelist = driverAndroid.findElementsByXPath(accountValue);
+										
+					if (accountValuelist!=null ) {
+						int Totalsize = accountValuelist.size(); System.out.println("size: " + Totalsize);
+						
+						if (Totalsize > 0) {
+							for (int i=0; i<Totalsize; i++) {
+								
+								accountDescriptionName = accountNamelist.get(i).getText();
+								accountDescriptionValue = accountValuelist.get(i).getText();
+								
+								/* Load Hash Map */
+								AccountDetails.put(accountDescriptionName, accountDescriptionValue);	
+								
+								/* Print Values */
+								//System.out.println("AccountName: "+ accountDescriptionName + " |&&| Value=" + accountDescriptionValue);
+								
+							}
+						} else {
+							System.out.println("\n\nTotal Size is Less than 0, Please Check your xpath......");
+							System.out.println("AccountNameXpath: " + accountName);
+							System.out.println("AccountValueXpath: " + accountValue);
+						}
+			
+					} else if (accountValuelist==null) {
+						assertTrue("Logo Not Loaded !!!", false);
+						System.out.println("Image Not Loaded");
+					}
+					
+					/* Print hashMap Values */
+					System.out.println(AccountDetails);
+					AccountDetails.forEach((key,value) -> System.out.println(key + " : " + value + "\n\n"));
+					
+					System.out.println("Completed");
+				} catch (Exception e) {
+//					assertTrue("Logo Not Loaded !!!", false);
+					e.printStackTrace();
+				}
+				
+				
+
+	
+			
+			
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		
+}
+	
+	public void CustomActSwipe () {
+		
+		TouchAction touchAction17 = new TouchAction(driverAndroid);
+		touchAction17.press(675,2722).moveTo(675,2250).release();
+		driverAndroid.performTouchAction(touchAction17);
+		
+	}
+	
+	
+	//@Test
 	public void sampleTestCase(ITestContext context) throws MalformedURLException, IOException {
 		
 		try {				

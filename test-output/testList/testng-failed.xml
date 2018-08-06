@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="1" guice-stage="DEVELOPMENT" name="Failed suite [testList]" parallel="tests">
   <parameter name="iOS_XpathPropfile" value="src/test/resources/iOS_Xpath.properties"/>
-  <parameter name="pass" value="Perfecto1234"/>
+  <parameter name="pass" value="Perfecto123"/>
   <parameter name="RunMode" value="Debug"/>
   <parameter name="enableLogs" value="Enable"/>
   <parameter name="user" value="rajp@perfectomobile.com"/>
@@ -16,10 +16,10 @@
       <class name="org.mobile.mobileAssureFramework.RBCSampleTest">
         <methods>
           <include name="afterClass"/>
+          <include name="sampleTestCase2" invocation-numbers="0"/>
           <include name="destroy"/>
           <include name="setUp"/>
           <include name="beforeMethod"/>
-          <include name="sampleTestCase"/>
         </methods>
       </class> <!-- org.mobile.mobileAssureFramework.RBCSampleTest -->
     </classes>
