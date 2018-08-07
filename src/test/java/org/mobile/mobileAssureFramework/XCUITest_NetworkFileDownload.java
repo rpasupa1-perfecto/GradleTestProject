@@ -17,7 +17,7 @@ import java.util.Set;
 
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.junit.Assert;
-import org.mobile.engine.ApiExportCodeSample;
+
 import org.mobile.engine.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -76,13 +76,13 @@ public class XCUITest_NetworkFileDownload extends BaseClass {
 	public static void main (String[] args) { 
 		try {
 				long totalDuration;  
-				ApiExportCodeSample apiExportCodeSample = new ApiExportCodeSample();
+			//	ApiExportCodeSample apiExportCodeSample = new ApiExportCodeSample();
 				
 			//	StartVNetwork();
 		
 					
 				//	String executionId = (String) capabilitiesIOS.getCapability("executionId");
-					apiExportCodeSample.downloadA();
+			//		apiExportCodeSample.downloadA();
 					
 					
 				
