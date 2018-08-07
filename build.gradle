@@ -134,8 +134,10 @@ uploadArchives {
 test {
 	useTestNG() {
     	useDefaultListeners = true
-    	suiteXmlFiles << new File("src/test/resources/ReportiumTest.xml")
+    	suiteXmlFiles << new File("src/test/resources/DIRECTVtests.xml")
     	setSuiteXmlFiles (suiteXmlFiles) 
+    	
+    	
     }
 }
 
