@@ -133,9 +133,9 @@ uploadArchives {
 
 test {
 	useTestNG() {
-    	useDefaultListeners = true
+    	//useDefaultListeners = true
     	suiteXmlFiles << new File("src/test/resources/DIRECTVtests.xml")
-    	setSuiteXmlFiles (suiteXmlFiles) 
+    //	setSuiteXmlFiles (suiteXmlFiles) 
     	
     	
     }
