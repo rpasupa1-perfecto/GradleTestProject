@@ -1,0 +1,42 @@
+{
+  "total": 1,
+  "pass": 1,
+  "fail": 0,
+  "skip": 0,
+  "classes": [
+    "org.mobile.mobileAssureFramework.DIRECTtests"
+  ],
+  "envInfo": {
+    "browser-actual-capabilities": {},
+    "isfw-build-info": {
+      "qaf-Type": "core",
+      "qaf-Revision": "14-RC1",
+      "qaf-Version": "2.1",
+      "qaf-Build-Time": "01-Apr-2018 21:59:38"
+    },
+    "run-parameters": {
+      "iOS_XpathPropfile": "src/test/resources/iOS_Xpath.properties",
+      "driver": "AppiumIOS",
+      "pass": "Perfecto123",
+      "RunMode": "Debug",
+      "enableLogs": "Enable",
+      "bundleID": "com.att.mobile.dfw",
+      "user": "rajp@perfectomobile.com",
+      "installApp": "false",
+      "deviceName": "F0B44090A8D97A3FB4DACD5ABF438C56988BA123",
+      "URL": "dfw-directv.perfectomobile.com"
+    },
+    "execution-env-info": {
+      "java.arch": "64",
+      "java.vendor": "Oracle Corporation",
+      "java.version": "1.8.0_91",
+      "os.arch": "amd64",
+      "host": "DESKTOP-REEGCHG",
+      "os.name": "Windows 10",
+      "user.name": "Raj",
+      "os.version": "10.0"
+    }
+  },
+  "startTime": 1533654714700,
+  "endTime": 1533654968890
+}

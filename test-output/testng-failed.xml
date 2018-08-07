@@ -9,19 +9,19 @@
   <parameter name="installApp" value="false"/>
   <parameter name="URL" value="rbc-us.perfectomobile.com"/>
   <test thread-count="1" name="PerfectoReportiumExample(failed)" parallel="tests">
-    <parameter name="driver" value="AppiumAndroid"/>
-    <parameter name="bundleID" value="com.rbc.clientmobility.us.dev"/>
-    <parameter name="deviceName" value="9889234230374D4F48"/>
+    <parameter name="driver" value="AppiumIOS"/>
+    <parameter name="bundleID" value="com.att.mobile.dfw"/>
+    <parameter name="deviceName" value="F0B44090A8D97A3FB4DACD5ABF438C56988BA123"/>
     <classes>
-      <class name="org.mobile.mobileAssureFramework.RBCSampleTest">
+      <class name="org.mobile.mobileAssureFramework.DIRECTtests">
         <methods>
-          <include name="afterClass"/>
-          <include name="sampleTestCase2" invocation-numbers="0"/>
-          <include name="destroy"/>
+          <include name="DIRECTVsampleTestCase"/>
           <include name="setUp"/>
+          <include name="afterClass"/>
           <include name="beforeMethod"/>
+          <include name="destroy"/>
         </methods>
-      </class> <!-- org.mobile.mobileAssureFramework.RBCSampleTest -->
+      </class> <!-- org.mobile.mobileAssureFramework.DIRECTtests -->
     </classes>
   </test> <!-- PerfectoReportiumExample(failed) -->
 </suite> <!-- Failed suite [testList] -->

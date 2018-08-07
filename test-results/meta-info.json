@@ -2,6 +2,21 @@
   "reports": [
     {
       "name": "testList",
+      "dir": "test-results/Tue7Aug18_1104AM",
+      "startTime": 1533657897901
+    },
+    {
+      "name": "testList",
+      "dir": "test-results/Tue7Aug18_1011AM",
+      "startTime": 1533654688730
+    },
+    {
+      "name": "testList",
+      "dir": "test-results/Tue7Aug18_1007AM",
+      "startTime": 1533654438551
+    },
+    {
+      "name": "testList",
       "dir": "test-results/Tue19Jun18_0100AM",
       "startTime": 1529388018389
     },

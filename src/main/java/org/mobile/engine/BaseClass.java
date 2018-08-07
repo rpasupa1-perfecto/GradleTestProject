@@ -107,12 +107,11 @@ public abstract class BaseClass  {
 	
 	@BeforeMethod(alwaysRun = true) 
 	public void beforeMethod(ITestContext context) {
-		getReportiumClient().testStart(context.getName(), new TestContext());
+		System.out.println("ReportName: " + context.getName());
+		getReportiumClient().testStart(testParams.get("PerfectoReportTestCaseName"), new TestContext());
 	}
 	
 	
-
-
 
 	@AfterMethod(alwaysRun = true)
 	public void destroy(ITestContext context, ITestResult result) throws Exception {
