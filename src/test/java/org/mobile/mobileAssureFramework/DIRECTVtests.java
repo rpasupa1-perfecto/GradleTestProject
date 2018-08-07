@@ -48,7 +48,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
 
-public class DIRECTtests extends BaseClass {
+public class DIRECTVtests extends BaseClass {
 	
 	/* RemoteWeb Driver */
 	public RemoteWebDriver driver;
