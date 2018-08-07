@@ -22,7 +22,7 @@
 		<parameter name="driver"  value="AppiumIOS"/>     
 		<parameter name="bundleID"  value="com.att.mobile.dfw"/>			
 		<classes>
-			<class name="org.mobile.mobileAssureFramework.DIRECTtests" />
+			<class name="org.mobile.mobileAssureFramework.DIRECTVtests" />
 		</classes>
 	</test>
 	
