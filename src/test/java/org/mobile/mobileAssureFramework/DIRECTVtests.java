@@ -78,7 +78,9 @@ public class DIRECTVtests extends BaseClass {
 				
 				try {
 					WebElement WatchViewMainPage = findElementByXpath("WatchNowPage.isOnWatchNowPage()-Perfecto", watchViewPage, 30);
+					/* Displayed is only for Screenshots - Can be removed for Script Performance Improvements */
 					WatchViewMainPage.isDisplayed();
+					
 					if (WatchViewMainPage!=null) {
 						assertTrue("WatchView Loaded !!!", true);
 						
@@ -88,12 +90,10 @@ public class DIRECTVtests extends BaseClass {
 						System.out.println("Location: " + location.toString());
 						System.out.println("Size: " + size.toString());
 						
-					} else if (WatchViewMainPage==null) {
-						assertTrue("Page Not Loaded !!!", false);
-						System.out.println("Image Not Loaded");
-					}
+					} 
 				} catch (Exception e) {
-					assertTrue("Logo Not Loaded !!!", false);
+					reportiumClient.reportiumAssert("Xpath Not found within allocated timeout: ", false);
+					assertTrue("Object Not Loaded !!!", false);
 					e.printStackTrace();
 				}
 				

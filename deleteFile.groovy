@@ -22,7 +22,7 @@ node {
 	    
 	    try {
 			stage('Gradle Build') {
-			  // bat './gradlew clean build -x test'
+			   bat './gradlew clean build -x test'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
@@ -54,9 +54,9 @@ def deleteFileFromRepository() {
 	
 	def username = "rajp@perfectomobile.com"
 	def password = "Perfecto123"
-	def cloudUrl = "ultimate.perfectomobile.com"
+	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
-	def mediaFolder = "Samples"
+	def mediaFolder = "Espresso/Raj_AndroidAPK"
 	def executionID
 	def responseFileData = []
 
@@ -70,25 +70,6 @@ def deleteFileFromRepository() {
 		echo 'Failed to Start Connection with Perfecto to obtain Execution ID Test....Catch Block !!!!'
 		println all
 	}
-	
-	
-	/* Start Reportium Test Tag */
-//	println "Start Reportium Test Tag"
-//	def paramStartTestName = "JenkinsDeleteAPIexecutions"
-//	def TestTagNames="DeleteFolderData;${media}:${mediaFolder}"
-//	try {
-//		def startReportExec = httpRequest url: "https://${cloudUrl}/services/executions/${executionID}?operation=command&user=${username}&password=${password}&command=test&subcommand=start&param.name=${paramStartTestName}&param.tags=${TestTagNames}"
-//		println startReportExec
-//	} catch (all) {
-//		echo 'Failed to Start Reportium Test....Catch Block !!!!'
-//		println all
-//	}
-	
-
-
-	
-	
-	
 	
 	
 	

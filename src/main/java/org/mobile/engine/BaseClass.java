@@ -107,7 +107,7 @@ public abstract class BaseClass  {
 	
 	@BeforeMethod(alwaysRun = true) 
 	public void beforeMethod(ITestContext context) {
-		System.out.println("ReportName: " + context.getName());
+		
 		getReportiumClient().testStart(testParams.get("PerfectoReportTestCaseName"), new TestContext());
 	}
 	
@@ -831,7 +831,7 @@ public abstract class BaseClass  {
 			totalDuration = stopTime-startTime;
 		    totalDurationSec = (totalDuration)/100;
 		    System.out.format("Sec = %s, (Start_Milli : %s,  End_Milli : %s) \n", totalDurationSec, startTime, stopTime );		    
-		//	reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");			
+			reportiumClient.stepEnd(description + " : " + totalDurationSec+" s");			
 			e.printStackTrace();
 			System.out.println("------------------------------------------------------------------------------");
 		} finally {
