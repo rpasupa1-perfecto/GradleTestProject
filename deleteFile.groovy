@@ -22,7 +22,7 @@ node {
 	    
 	    try {
 			stage('Gradle Build') {
-			   bat './gradlew clean build -x test'
+			   bat './gradlew clean install -x test'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
