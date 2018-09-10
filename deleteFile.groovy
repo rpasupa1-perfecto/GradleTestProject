@@ -22,7 +22,7 @@ node {
 	    
 	    try {
 			stage('Gradle Build') {
-			   bat './gradlew clean install -x test'
+			   //bat './gradlew clean install -x test'
 				echo 'Building Project.....'
 			}
 		} catch (all) {
@@ -56,7 +56,7 @@ def deleteFileFromRepository() {
 	def password = "Perfecto123"
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
-	def mediaFolder = "iosRaj"   //eg: Esressop/Folder  or iOS
+	def mediaFolder = "andr/krayar/speed"   //eg: Esressop/Folder  or iOS
 	def executionID
 	def responseFileData = []
 
