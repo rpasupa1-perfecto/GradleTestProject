@@ -56,7 +56,7 @@ def deleteFileFromRepository() {
 	def password = "Perfecto123"
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
-	def mediaFolder = "xcTest/ebayMobile-master.ipa"   //eg: Esressop/Folder  or iOS
+	def mediaFolder = "xcTest/eBayMobile-master.ipa"   //eg: Esressop/Folder  or iOS
 	//def mediaFolder = "ertwer/Personas.png"
 	def executionID
 	def responseFileData = []
