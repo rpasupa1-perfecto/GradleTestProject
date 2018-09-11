@@ -56,7 +56,7 @@ def deleteFileFromRepository() {
 	def password = "Perfecto123"
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
-	def mediaFolder = "rajtest"   //eg: Esressop/Folder  or iOS
+	def mediaFolder = "xcTest/aditi"   //eg: Esressop/Folder  or iOS
 	def executionID
 	def responseFileData = []
 
@@ -113,9 +113,9 @@ def deleteFileFromRepository() {
 		
 	}
 	/* Need to Delete the folder */
-	//println "Deleting Folder: " +	responseFileData[0]
-	//def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[0]}?operation=delete&user=${username}&password=${password}&admin=true"
-//	printResponse(deletefile)
+	println "Deleting Folder: " +	responseFileData[0]
+	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[0]}?operation=delete&user=${username}&password=${password}&admin=true"
+	printResponse(deletefile)
 	
 	
 	
