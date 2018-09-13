@@ -57,7 +57,7 @@ def deleteFileFromRepository() {
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
 	//def mediaFolder = "eBayMobile-master-20170224.102121-350-enterprise.ipa"   //eg: Esressop/Folder  or iOS
-	def mediaFolder = "Espresso"
+	def mediaFolder = "gradle_xcui"
 	def executionID
 	def responseFileData = []
 
