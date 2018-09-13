@@ -57,7 +57,7 @@ def deleteFileFromRepository() {
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
 	//def mediaFolder = "eBayMobile-master-20170224.102121-350-enterprise.ipa"   //eg: Esressop/Folder  or iOS
-	def mediaFolder = "testraj"
+	def mediaFolder = "andr"
 	def executionID
 	def responseFileData = []
 
@@ -80,8 +80,7 @@ def deleteFileFromRepository() {
 	/* Get List of item from Repository */
 	try {
 		
-			println "List of items from Repository App for device:  "
-			
+			println "List of items from Repository App for device:  "			
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
 		
 			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
@@ -100,8 +99,8 @@ def deleteFileFromRepository() {
 
 	
 	//	println "Deleting File: " +	responseFileData[i]
-	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
-	printResponse(deletefile)
+//	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
+//	printResponse(deletefile)
 	
 	
 //	/* Delete File */
