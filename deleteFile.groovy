@@ -74,10 +74,7 @@ def deleteFileFromRepository() {
 	
 	
 	
-//	println "Deleting File: " +	responseFileData[i]
-	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
-	printResponse(deletefile)
-	
+
 	
 	/* IN PROGRESSSS */
 	/* Get List of item from Repository */
@@ -101,6 +98,11 @@ def deleteFileFromRepository() {
 	}
 		
 
+	
+	//	println "Deleting File: " +	responseFileData[i]
+	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
+	printResponse(deletefile)
+	
 	
 //	/* Delete File */
 //	for (i=1; i<responseFileData.size(); i++) {
