@@ -57,7 +57,7 @@ def deleteFileFromRepository() {
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
 	//def mediaFolder = "eBayMobile-master-20170224.102121-350-enterprise.ipa"   //eg: Esressop/Folder  or iOS
-	def mediaFolder = "Personas"
+	def mediaFolder = "testraj"
 	def executionID
 	def responseFileData = []
 
@@ -74,15 +74,19 @@ def deleteFileFromRepository() {
 	
 	
 	
+	println "Deleting File: " +	responseFileData[i]
+	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
+	printResponse(deletefile)
+	
+	
 	/* IN PROGRESSSS */
 	/* Get List of item from Repository */
 	try {
-		//reportiumStepStart(executionID, "Get List of Items from Repository")
+		
 			println "List of items from Repository App for device:  "
 			
 			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
-			//printResponse(listItemRepository)
-			
+		
 			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
 			/*  Example: [PUBLIC:NU, PUBLIC:NU/nu-mobile-app.ipa  */
 			responseFileData = getFileName(listItemRepository)
@@ -98,25 +102,25 @@ def deleteFileFromRepository() {
 		
 
 	
-	/* Delete File */
-	for (i=1; i<responseFileData.size(); i++) {
-		try {
-			//reportiumStepStart(executionID, "Delete File")
-				println "Deleting File: " +	responseFileData[i]
-				def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[i]}?operation=delete&user=${username}&password=${password}&admin=true"
-				printResponse(deletefile)
-			//reportiumAssert(executionID, "Uninstalled Application", true)
-		} catch (all) {
-			//reportiumAssert(executionID, "App not Uninstalled on device", false)
-			echo 'Failed to Delete File....Catch Block'
-			println all
-		}
-		
-	}
+//	/* Delete File */
+//	for (i=1; i<responseFileData.size(); i++) {
+//		try {
+//		
+//				println "Deleting File: " +	responseFileData[i]
+//				def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[i]}?operation=delete&user=${username}&password=${password}&admin=true"
+//				printResponse(deletefile)
+//			
+//		} catch (all) {
+//			
+//			echo 'Failed to Delete File....Catch Block'
+//			println all
+//		}
+//		
+//	}
 	/* Need to Delete the folder */
-	println "Deleting Folder: " +	responseFileData[0]
-	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[0]}?operation=delete&user=${username}&password=${password}&admin=true"
-	printResponse(deletefile)
+//	println "Deleting Folder: " +	responseFileData[0]
+//	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${responseFileData[0]}?operation=delete&user=${username}&password=${password}&admin=true"
+//	printResponse(deletefile)
 	
 	
 	
