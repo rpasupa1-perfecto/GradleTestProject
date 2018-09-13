@@ -74,7 +74,7 @@ def deleteFileFromRepository() {
 	
 	
 	
-	println "Deleting File: " +	responseFileData[i]
+//	println "Deleting File: " +	responseFileData[i]
 	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
 	printResponse(deletefile)
 	
