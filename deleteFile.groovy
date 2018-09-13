@@ -57,14 +57,16 @@ def deleteFileFromRepository() {
 	def cloudUrl = "ebay.perfectomobile.com"
 	def media = "PUBLIC"
 	//def mediaFolder = "eBayMobile-master-20170224.102121-350-enterprise.ipa"   //eg: Esressop/Folder  or iOS
-	def mediaFolder = "andr"
+	def mediaFolder = "testRaj"
 	def executionID
 	def responseFileData = []
+	//def testresponseData = ["PUBLIC:andr/eBayMobile-5.12.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.18-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.6-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.17.1.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.15-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.16-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.1.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.2.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.18.2.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.15-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.16-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.17-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.6-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.19.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.15-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.16-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.17-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.18-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.19-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.20-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.20.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.15-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.16-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.17-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.18-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.19-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.21.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.6-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.22.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.16-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.17-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.18-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.6-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.1.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.2.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.23.2.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.14-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.6-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.1.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.2.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.2.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.24.2.7-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.0-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.1-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.10-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.11-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.12-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.13-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.15-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.2-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.3-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.4-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.5-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.6-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.8-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.25.0.9-normal-debug.apk", "PUBLIC:andr/eBayMobile-5.8.0.15-normal-debug.apk", "PUBLIC:andr/eBayMobile-feature_searchxp_speed-20180815.161625-2-normal-debug.apk", "PUBLIC:andr/eBayMobile-feature_searchxp_speed-20180815.161625-2-normal-release.apk", "PUBLIC:andr/eBayMobile-master-20180409.081858-603-normal-debug.apk", "PUBLIC:andr/eBayMobile-master-20180615.082159-652-normal-debug.apk", "PUBLIC:andr/eBayMobile-master-20180618.180107-655-normal-debug.apk", "PUBLIC:andr/eBayMobile-master-20180619.223156-657-normal-debug.apk", "PUBLIC:andr/eBayMobile-master-20180620.082352-658-normal-debug.apk", "PUBLIC:andr/eBayMobile-master-20180621.082420-659-normal-debug.apk", "PUBLIC:andr/eBayMobile-PostFix-normal-debug.apk", "PUBLIC:andr/eBayMobile-PostFix0426-normal-debug.apk", "PUBLIC:andr/eBayMobile-PreFix-normal-debug.apk", "PUBLIC:andr/eBayMobile-PreFix0426-normal-debug.apk", "PUBLIC:andr/eBayMobile-SerDeSerFix-normal-debug.apk"]
 
-		
+	def testresponseData = ["PUBLIC:testRaj/Personas111.png", "Personas12211.png"]
+	
 	/* Device Start */
 	println "Start Connection with Perfecto"
-	try {
+	try { 
 		def startResponse = httpRequest url: "https://${cloudUrl}/services/executions?operation=start&user=${username}&password=${password}"	
 		executionID = getExecutionID(startResponse)
 	} catch (all) {
@@ -74,34 +76,30 @@ def deleteFileFromRepository() {
 	
 	
 	
-
+ 
 	
 	/* IN PROGRESSSS */
 	/* Get List of item from Repository */
-	try {
-		
-			println "List of items from Repository App for device:  "			
-			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
-		
-			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
-			/*  Example: [PUBLIC:NU, PUBLIC:NU/nu-mobile-app.ipa  */
-			responseFileData = getFileName(listItemRepository)
-			println responseFileData.size()
-			
-			
-					
-	} catch (all) {
-		//reportiumAssert(executionID, "List Items from Repository ", false)
-		echo 'List Items from Repository..Catch Block'
-		println all
-	}
+//	try {
+//		
+//			println "List of items from Repository App for device:  "			
+//			def listItemRepository = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=list&user=${username}&password=${password}"
+//		
+//			/* Contains a list of all files & folders in PUBLIC MEDIA */ 
+//			/*  Example: [PUBLIC:NU, PUBLIC:NU/nu-mobile-app.ipa  */
+//			responseFileData = getFileName(listItemRepository)
+//			println responseFileData.size()
+//			
+//			
+//					
+//	} catch (all) {
+//		echo 'List Items from Repository..Catch Block'
+//		println all
+//	}
 		
 
 	
-	//	println "Deleting File: " +	responseFileData[i]
-//	def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${media}:${mediaFolder}?operation=delete&user=${username}&password=${password}&admin=true"
-//	printResponse(deletefile)
-	
+
 	
 //	/* Delete File */
 //	for (i=1; i<responseFileData.size(); i++) {
@@ -125,7 +123,21 @@ def deleteFileFromRepository() {
 	
 	
 	
+		/* Delete File */
+		for (i=1; i<2; i++) {
+			try {
 	
+					println "Deleting File: " +	testresponseData[i]
+					def deletefile = httpRequest url: "https://${cloudUrl}/services/repositories/media/${testresponseData[i]}?operation=delete&user=${username}&password=${password}&admin=true"
+					printResponse(deletefile)
+	
+			} catch (all) {
+	
+				echo 'Failed to Delete File....Catch Block'
+				println all
+			}
+	
+		}
 	
 	
 	
