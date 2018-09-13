@@ -124,7 +124,7 @@ def deleteFileFromRepository() {
 	
 	
 		/* Delete File */
-		for (i=0; i<1; i++) {
+		for (i=0; i<2; i++) {
 			try {
 	
 					println "Deleting File: " +	testresponseData[i]
