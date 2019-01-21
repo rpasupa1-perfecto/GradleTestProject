@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="1" failed="0" ignored="0" total="1" passed="0">
   <reporter-output>
     <line>
       <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
     </line>
     <line>
-      <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+      <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
     </line>
     <line>
-      <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+      <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
     </line>
     <line>
-      <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+      <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
     </line>
     <line>
-      <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+      <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
     </line>
   </reporter-output>
-  <suite name="testList" duration-ms="77786" started-at="2018-08-07T16:04:57Z" finished-at="2018-08-07T16:06:15Z">
+  <suite name="testList" duration-ms="127154" started-at="2018-12-17T13:42:58Z" finished-at="2018-12-17T13:45:05Z">
     <groups>
     </groups>
-    <test name="PerfectoReportiumExample" duration-ms="77786" started-at="2018-08-07T16:04:57Z" finished-at="2018-08-07T16:06:15Z">
-      <class name="org.mobile.mobileAssureFramework.DIRECTtests">
-        <test-method status="PASS" signature="setUp(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.DIRECTtests@4fb61f4a]" name="setUp" is-config="true" duration-ms="24272" started-at="2018-08-07T16:04:57Z" finished-at="2018-08-07T16:05:22Z">
+    <test name="PerfectoReportiumExample" duration-ms="127154" started-at="2018-12-17T13:42:58Z" finished-at="2018-12-17T13:45:05Z">
+      <class name="org.mobile.mobileAssureFramework.metlife">
+        <test-method status="PASS" signature="setUp(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.metlife@71c27ee8]" name="setUp" is-config="true" duration-ms="117980" started-at="2018-12-17T13:42:58Z" finished-at="2018-12-17T13:44:56Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@68c4f0f4]]>
+                <![CDATA[org.testng.TestRunner@5e3b0c78]]>
               </value>
             </param>
           </params>
@@ -36,61 +36,174 @@
             </line>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="beforeMethod(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.DIRECTtests@4fb61f4a]" name="beforeMethod" is-config="true" duration-ms="85" started-at="2018-08-07T16:05:22Z" finished-at="2018-08-07T16:05:22Z">
+        <test-method status="FAIL" signature="beforeMethod(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.metlife@71c27ee8]" name="beforeMethod" is-config="true" duration-ms="5" started-at="2018-12-17T13:44:56Z" finished-at="2018-12-17T13:44:56Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@68c4f0f4]]>
+                <![CDATA[org.testng.TestRunner@5e3b0c78]]>
               </value>
             </param>
           </params>
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+at com.perfecto.reportium.client.PerfectoReportiumClient.testStart(PerfectoReportiumClient.java:53)
+at org.mobile.engine.BaseClass.beforeMethod(BaseClass.java:116)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:523)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.access$000(SuiteRunner.java:40)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:489)
+at org.testng.internal.thread.ThreadUtil$1.call(ThreadUtil.java:52)
+at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+at java.lang.Thread.run(Thread.java:745)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
             <line>
-              <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+              <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
             </line>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="DIRECTVsampleTestCase(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.DIRECTtests@4fb61f4a]" name="DIRECTVsampleTestCase" duration-ms="21682" started-at="2018-08-07T16:05:22Z" finished-at="2018-08-07T16:05:44Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[org.testng.TestRunner@68c4f0f4]]>
-              </value>
-            </param>
-          </params>
+        <test-method status="SKIP" signature="metLifeSampleTestCase(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.metlife@71c27ee8]" name="metLifeSampleTestCase" duration-ms="0" started-at="2018-12-17T13:44:56Z" finished-at="2018-12-17T13:44:56Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+at com.perfecto.reportium.client.PerfectoReportiumClient.testStart(PerfectoReportiumClient.java:53)
+at org.mobile.engine.BaseClass.beforeMethod(BaseClass.java:116)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:523)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.access$000(SuiteRunner.java:40)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:489)
+at org.testng.internal.thread.ThreadUtil$1.call(ThreadUtil.java:52)
+at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+at java.lang.Thread.run(Thread.java:745)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
             <line>
-              <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+              <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
             </line>
           </reporter-output>
-        </test-method> <!-- DIRECTVsampleTestCase -->
-        <test-method status="PASS" signature="destroy(org.testng.ITestContext, org.testng.ITestResult)[pri:0, instance:org.mobile.mobileAssureFramework.DIRECTtests@4fb61f4a]" name="destroy" is-config="true" duration-ms="59" started-at="2018-08-07T16:05:44Z" finished-at="2018-08-07T16:05:44Z">
+        </test-method> <!-- metLifeSampleTestCase -->
+        <test-method status="FAIL" signature="destroy(org.testng.ITestContext, org.testng.ITestResult)[pri:0, instance:org.mobile.mobileAssureFramework.metlife@71c27ee8]" name="destroy" is-config="true" duration-ms="5" started-at="2018-12-17T13:44:56Z" finished-at="2018-12-17T13:44:56Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@68c4f0f4]]>
+                <![CDATA[org.testng.TestRunner@5e3b0c78]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[[TestResult name=DIRECTVsampleTestCase status=SUCCESS method=DIRECTtests.DIRECTVsampleTestCase(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.DIRECTtests@4fb61f4a] output=<div style="display:block;margin-left:10px;"></div>]]]>
+                <![CDATA[[TestResult name={null} status=CREATED method=metlife.metLifeSampleTestCase(org.testng.ITestContext)[pri:0, instance:org.mobile.mobileAssureFramework.metlife@71c27ee8] output={null}]]]>
               </value>
             </param>
           </params>
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+at org.mobile.engine.BaseClass.destroy(BaseClass.java:126)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:536)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.access$000(SuiteRunner.java:40)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:489)
+at org.testng.internal.thread.ThreadUtil$1.call(ThreadUtil.java:52)
+at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+at java.lang.Thread.run(Thread.java:745)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
             <line>
-              <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+              <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
             </line>
           </reporter-output>
         </test-method> <!-- destroy -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:org.mobile.mobileAssureFramework.DIRECTtests@4fb61f4a]" name="afterClass" is-config="true" duration-ms="31349" started-at="2018-08-07T16:05:44Z" finished-at="2018-08-07T16:06:15Z">
+        <test-method status="FAIL" signature="afterClass()[pri:0, instance:org.mobile.mobileAssureFramework.metlife@71c27ee8]" name="afterClass" is-config="true" duration-ms="8438" started-at="2018-12-17T13:44:56Z" finished-at="2018-12-17T13:45:04Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+at org.mobile.engine.BaseClass.afterClass(BaseClass.java:182)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
+at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:214)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.access$000(SuiteRunner.java:40)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:489)
+at org.testng.internal.thread.ThreadUtil$1.call(ThreadUtil.java:52)
+at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+at java.lang.Thread.run(Thread.java:745)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
             <line>
-              <![CDATA[<div style="display:block;margin-left:10px;"></div>]]>
+              <![CDATA[<div style="display:block;margin-left:10px;"><div  class="fail"><span class="fail-label">F </span>java.lang.NullPointerException</div></div>]]>
             </line>
           </reporter-output>
         </test-method> <!-- afterClass -->
-      </class> <!-- org.mobile.mobileAssureFramework.DIRECTtests -->
+      </class> <!-- org.mobile.mobileAssureFramework.metlife -->
     </test> <!-- PerfectoReportiumExample -->
   </suite> <!-- testList -->
 </testng-results>

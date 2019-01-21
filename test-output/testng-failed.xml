@@ -7,21 +7,22 @@
   <parameter name="enableLogs" value="Enable"/>
   <parameter name="user" value="rajp@perfectomobile.com"/>
   <parameter name="installApp" value="false"/>
-  <parameter name="URL" value="rbc-us.perfectomobile.com"/>
+  <parameter name="URL" value="metlife.perfectomobile.com"/>
   <test thread-count="1" name="PerfectoReportiumExample(failed)" parallel="tests">
-    <parameter name="driver" value="AppiumIOS"/>
-    <parameter name="bundleID" value="com.att.mobile.dfw"/>
-    <parameter name="deviceName" value="F0B44090A8D97A3FB4DACD5ABF438C56988BA123"/>
+    <parameter name="PerfectoReportTestCaseName" value="navigateToDownloadsPage-Perfecto"/>
+    <parameter name="driver" value="AppiumDriver"/>
+    <parameter name="bundleID" value="com.android.chrome"/>
+    <parameter name="deviceName" value="CE081718D5CF492802"/>
     <classes>
-      <class name="org.mobile.mobileAssureFramework.DIRECTtests">
+      <class name="org.mobile.mobileAssureFramework.metlife">
         <methods>
-          <include name="DIRECTVsampleTestCase"/>
-          <include name="setUp"/>
           <include name="afterClass"/>
-          <include name="beforeMethod"/>
+          <include name="setUp"/>
+          <include name="metLifeSampleTestCase"/>
           <include name="destroy"/>
+          <include name="beforeMethod"/>
         </methods>
-      </class> <!-- org.mobile.mobileAssureFramework.DIRECTtests -->
+      </class> <!-- org.mobile.mobileAssureFramework.metlife -->
     </classes>
   </test> <!-- PerfectoReportiumExample(failed) -->
 </suite> <!-- Failed suite [testList] -->

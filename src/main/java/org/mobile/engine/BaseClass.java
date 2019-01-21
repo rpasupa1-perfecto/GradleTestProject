@@ -66,13 +66,15 @@ import io.appium.java_client.ios.IOSDriver;
 public abstract class BaseClass  {
 	/* RemoteWeb Driver */
 	public RemoteWebDriver driver;
+
+	/* RemoteWeb Driver */
+	public AppiumDriver<WebElement> appDriver;
+	
 	/* Appium IOS Driver */
 	public static IOSDriver<WebElement> driverIOS;
 	/* Appium Android Driver */
 	public AndroidDriver<WebElement> driverAndroid;
-	
-	public AppiumDriver<WebElement> appiumDriver;
-	
+
 	public long defaultTimeout = 60;
 	protected static Properties prop;
 	public static HashMap<String,String> propFile;
@@ -100,10 +102,13 @@ public abstract class BaseClass  {
 		engineSetup (context);		
 		driver = getDriver();
 		driverIOS = getDriverIOS();
-		driverAndroid = getDriverAndroid();		
+		driverAndroid = getDriverAndroid();	
+		appDriver = getAppDriver();
 		createReportium(context);
 		
 	}
+
+
 	
 	@BeforeMethod(alwaysRun = true) 
 	public void beforeMethod(ITestContext context) {
@@ -154,10 +159,16 @@ public abstract class BaseClass  {
 			//	System.out.println("\n\nReport url = " + reportiumClient.getReportUrl() +"\n\n");
 				 
 			} else if (testParams.get("driver").equals("AppiumAndroid")) {
-				getDriverAndroid().close();
+				driverAndroid.closeApp(); 
+				driverAndroid.close();
+				
 			} else if (testParams.get("driver").equals("RemoteWebDriver")) {			
 				driver.close();					
-			}
+			} else if (testParams.get("driver").equals("AppiumDriver")) {
+				appDriver.closeApp();
+				appDriver.close();	
+			} 
+			
 		} catch (Exception e)  {
 			e.printStackTrace();
 		} finally {
@@ -167,7 +178,11 @@ public abstract class BaseClass  {
 				driverAndroid.quit();
 			} else if (testParams.get("driver").equals("RemoteWebDriver")) {
 				driver.quit();	
-			}
+			} else if (testParams.get("driver").equals("AppiumDriver")) {
+				driver.quit();	
+			} else if (testParams.get("driver").equals("AppiumDriver")) {
+				appDriver.quit();
+			} 
 			
 		}
 		reportURL=reportiumClient.getReportUrl();
@@ -198,7 +213,7 @@ public abstract class BaseClass  {
 					
 					/* Enable Debug Mode */
 					if (testParams.get("RunMode").equals("Debug")) {
-						//setExecutionIdCapability(capabilities, testParams.get("URL"));
+						setExecutionIdCapability(capabilities, testParams.get("URL"));
 					}
 					
 					/* Create RemoteWebDriver Object */
@@ -272,6 +287,8 @@ public abstract class BaseClass  {
 		        	capabilitiesAndroid.setCapability("deviceName", testParams.get("deviceName"));
 		        	/* Application Name */  
 		        	capabilitiesAndroid.setCapability("appPackage", testParams.get("bundleID"));
+		        	
+		        	//capabilitiesAndroid.setCapability("browserName", "Chrome");
 	  	  
 	  		/* Enable Debug Mode */
 					if (testParams.get("RunMode").equals("Debug")) {
@@ -284,7 +301,30 @@ public abstract class BaseClass  {
 					driverAndroid.manage().timeouts().pageLoadTimeout(0, TimeUnit.SECONDS);
 					driverAndroid.manage().timeouts().setScriptTimeout(0, TimeUnit.SECONDS);
 	  	            
-	        } 
+	        }  else if (testParams.get("driver").equals("AppiumDriver")) {
+	        	
+	        	DesiredCapabilities capabilitiesAppium = new DesiredCapabilities();
+	        	capabilitiesAppium.setCapability("user", testParams.get("user"));
+	        	capabilitiesAppium.setCapability("password", testParams.get("pass"));
+	        	capabilitiesAppium.setCapability("deviceName", testParams.get("deviceName"));
+	        	/* Application Name */  
+	        	capabilitiesAppium.setCapability("appPackage", testParams.get("bundleID"));
+  	  
+	        	/* Enable Debug Mode */
+				if (testParams.get("RunMode").equals("Debug")) {
+					setExecutionIdCapability(capabilitiesAppium, testParams.get("URL"));
+				}
+				
+				//capabilities.setCapability("autoWebview", true);
+				//appDriver = new AppiumDriver<WebElement>(new URL("https://" + testParams.get("URL") + "/nexperience/perfectomobile/wd/hub"), capabilitiesAppium);
+						
+				appDriver = new AppiumDriver<WebElement>(new URL("https://" + testParams.get("URL") + "/nexperience/perfectomobile/wd/hub"), capabilitiesAppium);
+				
+				appDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				appDriver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+				appDriver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+  	            
+        } 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -350,6 +390,7 @@ public abstract class BaseClass  {
 	
 	
 	
+
 	
 	
 	  /**
@@ -367,17 +408,17 @@ public abstract class BaseClass  {
 	 * @param timeout
 	 * @description  Waits for objects to load before proceeding !!! 
 	 */
-	private static WebElement fluentWait(final By locator, AndroidDriver driverAndroid, long timeout) {	 
+	private static WebElement fluentWait(final By locator, AndroidDriver driver, long timeout) {	 
 		try {
-			 FluentWait<AndroidDriver> wait = new FluentWait<AndroidDriver>(driverAndroid)
+			 FluentWait<AndroidDriver> wait = new FluentWait<AndroidDriver>(driver)
 			        .withTimeout(timeout, TimeUnit.SECONDS)
 			        .pollingEvery(250, TimeUnit.MILLISECONDS)
 			        .ignoring(Exception.class)
 			        .ignoring(NoSuchElementException.class);
 			       
 				  WebElement webelement = wait.until(new Function<AndroidDriver, WebElement>() {
-					  public WebElement apply(AndroidDriver driverAndroid) {
-			            return driverAndroid.findElement(locator);
+					  public WebElement apply(AndroidDriver driver) {
+			            return driver.findElement(locator);
 					  }
 				  });
 				  return  webelement;
@@ -651,7 +692,14 @@ public abstract class BaseClass  {
 					    .withProject(new Project("Sample Reportium project", "1.0"))
 					    .withJob(new Job("IOS tests", 45))
 					    .withContextTags("Regression")
-					    .withWebDriver(appiumDriver)
+					    .withWebDriver(driver)
+					    .build();		
+			} else if (testParams.get("driver").equals("Appium")) {		
+				perfectoExecutionContext = new PerfectoExecutionContext.PerfectoExecutionContextBuilder()
+					    .withProject(new Project("Sample Reportium project", "1.0"))
+					    .withJob(new Job("IOS tests", 45))
+					    .withContextTags("Regression")
+					    .withWebDriver(appDriver)
 					    .build();		
 			}
 			
@@ -723,16 +771,48 @@ public abstract class BaseClass  {
 		
 	  }
 	
+	/**
+	 * @param locator
+	 * @param driver
+	 * @param timeout
+	 * @description  Waits for objects to load before proceding !!! 
+	 */
+	private static WebElement fluentWait(final By locator, AppiumDriver driver, long timeout) {	 
+		try {
+			 FluentWait<AppiumDriver> wait = new FluentWait<AppiumDriver>(driver)
+			        .withTimeout(timeout, TimeUnit.SECONDS)
+			        .pollingEvery(250, TimeUnit.MILLISECONDS)
+			        .ignoring(Exception.class)
+			        .ignoring(NoSuchElementException.class);
+			       
+				  WebElement webelement = wait.until(new Function<AppiumDriver, WebElement>() {
+					  public WebElement apply(AppiumDriver driver) {
+			            return driver.findElement(locator);
+					  }
+				  });
+				  return  webelement;
+		} catch (Exception e) {
+			return null;
+		}
+		 
+		
+	  }
+	
+
+	
 	
 	private WebElement setFluentWaitMethod(final By locator) {
 		WebElement webElement = null;
 		
-		if(testParams.get("driver").equals("AppiumIOS")) {
+		if (testParams.get("driver").equals("AppiumIOS")) {
 			webElement = fluentWait(locator, getDriverIOS(), this.defaultTimeout);
 		} else if (testParams.get("driver").equals("AppiumAndroid")) {
-			webElement = fluentWait(locator, getDriverAndroid(), this.defaultTimeout);
+			webElement = fluentWait(locator, driverAndroid, this.defaultTimeout);
 		} else if (testParams.get("driver").equals("RemoteWebDriver")) {
 			webElement = fluentWait(locator, getDriver(), this.defaultTimeout);
+		} else if (testParams.get("driver").equals("AppiumDriver")) {
+			//appDriver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			webElement = fluentWait(locator, appDriver, this.defaultTimeout);
 		}
 		return webElement;
 	}
@@ -740,15 +820,22 @@ public abstract class BaseClass  {
 	private WebElement setFluentWaitMethod(final By locator, long timeOut) {
 		WebElement webElement = null;
 		
-		if(testParams.get("driver").equals("AppiumIOS")) {
+		if (testParams.get("driver").equals("AppiumIOS")) {
 			getDriverIOS().manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 			webElement = fluentWait(locator, getDriverIOS(), timeOut);
-		} else if (testParams.get("driver").equals("AppiumAndroid")) {
+		} 
+		
+		else if (testParams.get("driver").equals("AppiumAndroid")) {
 			getDriverAndroid().manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 			webElement = fluentWait(locator, getDriverAndroid(), timeOut);
-		} else if (testParams.get("driver").equals("RemoteWebDriver")) {
+		}
+		
+		else if (testParams.get("driver").equals("RemoteWebDriver")) {
 			getDriver().manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 			webElement = fluentWait(locator, getDriver(), timeOut);
+		} else if (testParams.get("driver").equals("AppiumDriver")) {
+			appDriver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			webElement = fluentWait(locator, appDriver, timeOut);
 		}
 		return webElement;
 	}
@@ -1345,6 +1432,13 @@ public abstract class BaseClass  {
 	}
 	public void setReportiumClient(ReportiumClient reportiumClient) {
 		this.reportiumClient = reportiumClient;
+	}
+	public AppiumDriver<WebElement> getAppDriver() {
+		return appDriver;
+	}
+
+	public void setAppDriver(AppiumDriver<WebElement> appDriver) {
+		this.appDriver = appDriver;
 	}
 	
 }

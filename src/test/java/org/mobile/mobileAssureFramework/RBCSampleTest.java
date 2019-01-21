@@ -136,7 +136,7 @@ public class RBCSampleTest extends BaseClass {
 	public void CustomActSwipe () {
 		
 		TouchAction touchAction17 = new TouchAction(driverAndroid);
-		touchAction17.press(675,2722).moveTo(675,2250).release();
+		//touchAction17.press(675,2722).moveTo(675,2250).release();
 		driverAndroid.performTouchAction(touchAction17);
 		
 	}
